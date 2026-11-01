@@ -1,0 +1,962 @@
+[
+  {
+    "key": "g5-001",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Very hot days",
+    "illustrationKey": "scene-g5-hot-sun",
+    "resultAnimationKey": "heat-wilt",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants lose more water",
+        "iconKey": "result-plants-lose-water"
+      },
+      {
+        "key": "b",
+        "label": "Plants grow faster",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "c",
+        "label": "Soil washes away",
+        "iconKey": "result-soil-washes-away"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Heat makes plants lose water faster.",
+    "collectionItem": {
+      "key": "sticker-hot-sun",
+      "label": "Hot Sun",
+      "iconKey": "sticker-hot-sun"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-002",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Little rain for weeks",
+    "illustrationKey": "scene-g5-dry-spell",
+    "resultAnimationKey": "dry-soil",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets wetter than usual",
+        "iconKey": "result-wet-soil"
+      },
+      {
+        "key": "b",
+        "label": "Soil gets drier than usual",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "c",
+        "label": "Plants turn greener",
+        "iconKey": "result-greener-plants"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Without rain, soil moisture keeps dropping.",
+    "collectionItem": {
+      "key": "sticker-dry-spell",
+      "label": "Dry Spell",
+      "iconKey": "sticker-dry-spell"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-003",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Heavy rain on bare soil",
+    "illustrationKey": "scene-g5-heavy-rain",
+    "resultAnimationKey": "wash-away",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets richer",
+        "iconKey": "result-rich-soil"
+      },
+      {
+        "key": "b",
+        "label": "Plants grow faster",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "c",
+        "label": "Soil may wash away",
+        "iconKey": "result-soil-washes-away"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Bare soil has no roots to hold it in place.",
+    "collectionItem": {
+      "key": "sticker-heavy-rain",
+      "label": "Heavy Rain",
+      "iconKey": "sticker-heavy-rain"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-004",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A late freezing night in spring",
+    "illustrationKey": "scene-g5-frost",
+    "resultAnimationKey": "frost-damage",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Young plants can be damaged",
+        "iconKey": "result-frost-damage"
+      },
+      {
+        "key": "b",
+        "label": "Plants grow faster",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "c",
+        "label": "Soil gets wetter",
+        "iconKey": "result-wet-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Frost can hurt tender young plants.",
+    "collectionItem": {
+      "key": "sticker-frost",
+      "label": "Frost",
+      "iconKey": "sticker-frost"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-005",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Strong sun and wind on bare soil",
+    "illustrationKey": "scene-g5-wind",
+    "resultAnimationKey": "evaporate",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets wetter",
+        "iconKey": "result-wet-soil"
+      },
+      {
+        "key": "b",
+        "label": "Water evaporates faster",
+        "iconKey": "result-evaporation"
+      },
+      {
+        "key": "c",
+        "label": "Soil gets richer",
+        "iconKey": "result-rich-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Bare soil dries out quickly in sun and wind.",
+    "collectionItem": {
+      "key": "sticker-wind",
+      "label": "Wind",
+      "iconKey": "sticker-wind"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-006",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Steady rain and mild weather",
+    "illustrationKey": "scene-g5-mild-days",
+    "resultAnimationKey": "healthy-growth",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants lose more water",
+        "iconKey": "result-plants-lose-water"
+      },
+      {
+        "key": "b",
+        "label": "Young plants freeze",
+        "iconKey": "result-frost-damage"
+      },
+      {
+        "key": "c",
+        "label": "Plants grow green and healthy",
+        "iconKey": "result-greener-plants"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Enough water and mild temperatures help plants thrive.",
+    "collectionItem": {
+      "key": "sticker-mild-days",
+      "label": "Mild Days",
+      "iconKey": "sticker-mild-days"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-007",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A heat wave while plants are flowering",
+    "illustrationKey": "scene-g5-heat-wave",
+    "resultAnimationKey": "heat-wilt",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Fewer seeds or fruits may form",
+        "iconKey": "result-fewer-fruits"
+      },
+      {
+        "key": "b",
+        "label": "The harvest gets bigger",
+        "iconKey": "result-bigger-harvest"
+      },
+      {
+        "key": "c",
+        "label": "Soil gets wetter",
+        "iconKey": "result-wet-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Too much heat can stop flowers from setting fruit.",
+    "collectionItem": {
+      "key": "sticker-heat-wave",
+      "label": "Heat Wave",
+      "iconKey": "sticker-heat-wave"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-008",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Many cloudy days in a row",
+    "illustrationKey": "scene-g5-cloudy-days",
+    "resultAnimationKey": "slow-growth",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants lose much more water",
+        "iconKey": "result-plants-lose-water"
+      },
+      {
+        "key": "b",
+        "label": "Plants get less sunlight to grow",
+        "iconKey": "result-less-sunlight"
+      },
+      {
+        "key": "c",
+        "label": "Soil dries out faster",
+        "iconKey": "result-dry-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Plants need sunlight to make their food.",
+    "collectionItem": {
+      "key": "sticker-cloudy-days",
+      "label": "Cloudy Days",
+      "iconKey": "sticker-cloudy-days"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-009",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Very heavy rain in one day",
+    "illustrationKey": "scene-g5-flash-rain",
+    "resultAnimationKey": "flood",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets drier",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "b",
+        "label": "Plants start to wilt",
+        "iconKey": "result-wilting"
+      },
+      {
+        "key": "c",
+        "label": "Water runs off and floods low spots",
+        "iconKey": "result-flood"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Soil cannot soak up water that fast.",
+    "collectionItem": {
+      "key": "sticker-flash-rain",
+      "label": "Flash Rain",
+      "iconKey": "sticker-flash-rain"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-010",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Heavy rain right after planting seeds",
+    "illustrationKey": "scene-g5-wash-away",
+    "resultAnimationKey": "wash-away",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Seeds can be washed away",
+        "iconKey": "result-seeds-washed"
+      },
+      {
+        "key": "b",
+        "label": "Seeds grow faster",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "c",
+        "label": "The soil dries out",
+        "iconKey": "result-dry-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Strong rain can move seeds and soil.",
+    "collectionItem": {
+      "key": "sticker-wash-away",
+      "label": "Wash Away",
+      "iconKey": "sticker-wash-away"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-011",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Cool, damp weather for a long time",
+    "illustrationKey": "scene-g5-damp-days",
+    "resultAnimationKey": "disease-spread",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets drier",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "b",
+        "label": "Plant diseases spread more easily",
+        "iconKey": "result-disease"
+      },
+      {
+        "key": "c",
+        "label": "Plants lose more water",
+        "iconKey": "result-plants-lose-water"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Damp leaves help fungus grow.",
+    "collectionItem": {
+      "key": "sticker-damp-days",
+      "label": "Damp Days",
+      "iconKey": "sticker-damp-days"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-012",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Cool nights after hot days",
+    "illustrationKey": "scene-g5-cool-nights",
+    "resultAnimationKey": "recover",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants wilt faster",
+        "iconKey": "result-wilting"
+      },
+      {
+        "key": "b",
+        "label": "Soil gets drier",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "c",
+        "label": "Plants rest and lose less water",
+        "iconKey": "result-cool-rest"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Cooler air pulls less water from plants.",
+    "collectionItem": {
+      "key": "sticker-cool-nights",
+      "label": "Cool Nights",
+      "iconKey": "sticker-cool-nights"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-013",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Rain for many days in a row",
+    "illustrationKey": "scene-g5-soggy-soil",
+    "resultAnimationKey": "flood",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil can become waterlogged",
+        "iconKey": "result-waterlogged"
+      },
+      {
+        "key": "b",
+        "label": "Soil gets much drier",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "c",
+        "label": "Plants lose more water",
+        "iconKey": "result-plants-lose-water"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Too much water pushes the air out of the soil.",
+    "collectionItem": {
+      "key": "sticker-soggy-soil",
+      "label": "Soggy Soil",
+      "iconKey": "sticker-soggy-soil"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-014",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A hail storm",
+    "illustrationKey": "scene-g5-hail",
+    "resultAnimationKey": "wind-damage",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants grow taller",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "b",
+        "label": "Leaves and young plants can be torn",
+        "iconKey": "result-torn-leaves"
+      },
+      {
+        "key": "c",
+        "label": "Soil gets drier",
+        "iconKey": "result-dry-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Hail hits plants hard.",
+    "collectionItem": {
+      "key": "sticker-hail",
+      "label": "Hail",
+      "iconKey": "sticker-hail"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-015",
+    "gameSlug": "weather-and-crops",
+    "prompt": "No rain for months in the dry season",
+    "illustrationKey": "scene-g5-low-water",
+    "resultAnimationKey": "dry-soil",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Fields get wetter",
+        "iconKey": "result-wet-soil"
+      },
+      {
+        "key": "b",
+        "label": "Plants grow faster",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "c",
+        "label": "Wells and canals may run low",
+        "iconKey": "result-low-water-supply"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Less water comes in, so water supplies shrink.",
+    "collectionItem": {
+      "key": "sticker-low-water",
+      "label": "Low Water",
+      "iconKey": "sticker-low-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-016",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Hot days with no rain",
+    "illustrationKey": "scene-g5-water-balance",
+    "resultAnimationKey": "evaporate",
+    "choices": [
+      {
+        "key": "a",
+        "label": "More water goes out than comes in",
+        "iconKey": "result-water-out"
+      },
+      {
+        "key": "b",
+        "label": "Soil gets wetter",
+        "iconKey": "result-wet-soil"
+      },
+      {
+        "key": "c",
+        "label": "More water comes in than goes out",
+        "iconKey": "result-water-in"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Heat takes water out and no rain puts none back.",
+    "collectionItem": {
+      "key": "sticker-water-balance",
+      "label": "Water Balance",
+      "iconKey": "sticker-water-balance"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-017",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A gentle rain after dry weeks",
+    "illustrationKey": "scene-g5-welcome-rain",
+    "resultAnimationKey": "recover",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets even drier",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "b",
+        "label": "Soil moisture starts to recover",
+        "iconKey": "result-moisture-recover"
+      },
+      {
+        "key": "c",
+        "label": "Plants wilt more",
+        "iconKey": "result-wilting"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Slow rain soaks into the soil.",
+    "collectionItem": {
+      "key": "sticker-welcome-rain",
+      "label": "Welcome Rain",
+      "iconKey": "sticker-welcome-rain"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-018",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Strong winds during a storm",
+    "illustrationKey": "scene-g5-strong-wind",
+    "resultAnimationKey": "wind-damage",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets wetter",
+        "iconKey": "result-wet-soil"
+      },
+      {
+        "key": "b",
+        "label": "Plants grow faster",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "c",
+        "label": "Tall plants can bend or break",
+        "iconKey": "result-bending-plants"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Wind can knock down tall crops.",
+    "collectionItem": {
+      "key": "sticker-strong-wind",
+      "label": "Strong Wind",
+      "iconKey": "sticker-strong-wind"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-019",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Cold nights in autumn",
+    "illustrationKey": "scene-g5-cool-autumn",
+    "resultAnimationKey": "slow-growth",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant growth slows down",
+        "iconKey": "result-slow-growth"
+      },
+      {
+        "key": "b",
+        "label": "Plants grow faster",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "c",
+        "label": "Soil gets wetter",
+        "iconKey": "result-wet-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Plants grow best when it is warm.",
+    "collectionItem": {
+      "key": "sticker-cool-autumn",
+      "label": "Cool Autumn",
+      "iconKey": "sticker-cool-autumn"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-020",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A very warm winter",
+    "illustrationKey": "scene-g5-warm-winter",
+    "resultAnimationKey": "disease-spread",
+    "choices": [
+      {
+        "key": "a",
+        "label": "There are fewer pests",
+        "iconKey": "result-fewer-pests"
+      },
+      {
+        "key": "b",
+        "label": "Some pests survive more easily",
+        "iconKey": "result-pests"
+      },
+      {
+        "key": "c",
+        "label": "The soil freezes deeper",
+        "iconKey": "result-frozen-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Cold normally keeps pests in check.",
+    "collectionItem": {
+      "key": "sticker-warm-winter",
+      "label": "Warm Winter",
+      "iconKey": "sticker-warm-winter"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-021",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A sudden freeze after warm days",
+    "illustrationKey": "scene-g5-cold-snap",
+    "resultAnimationKey": "frost-damage",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants get stronger",
+        "iconKey": "result-stronger-plants"
+      },
+      {
+        "key": "b",
+        "label": "Soil gets richer",
+        "iconKey": "result-rich-soil"
+      },
+      {
+        "key": "c",
+        "label": "Plants can be caught by surprise and damaged",
+        "iconKey": "result-frost-damage"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Plants that started growing are not ready for cold.",
+    "collectionItem": {
+      "key": "sticker-cold-snap",
+      "label": "Cold Snap",
+      "iconKey": "sticker-cold-snap"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-022",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Hot sun right after rain",
+    "illustrationKey": "scene-g5-sun-after-rain",
+    "resultAnimationKey": "evaporate",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Water evaporates quickly",
+        "iconKey": "result-evaporation"
+      },
+      {
+        "key": "b",
+        "label": "Soil stays wet longer",
+        "iconKey": "result-wet-soil"
+      },
+      {
+        "key": "c",
+        "label": "Plants get colder",
+        "iconKey": "result-cold-plants"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Heat pulls the new water back into the air.",
+    "collectionItem": {
+      "key": "sticker-sun-after-rain",
+      "label": "Sun After Rain",
+      "iconKey": "sticker-sun-after-rain"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-023",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Dry, windy, dusty weather",
+    "illustrationKey": "scene-g5-dust-wind",
+    "resultAnimationKey": "wind-damage",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Soil gets richer",
+        "iconKey": "result-rich-soil"
+      },
+      {
+        "key": "b",
+        "label": "Dry soil can blow away",
+        "iconKey": "result-wind-erosion"
+      },
+      {
+        "key": "c",
+        "label": "Soil gets wetter",
+        "iconKey": "result-wet-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Wind carries away loose, dry soil.",
+    "collectionItem": {
+      "key": "sticker-dust-wind",
+      "label": "Dust Wind",
+      "iconKey": "sticker-dust-wind"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-024",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A rainy week at harvest time",
+    "illustrationKey": "scene-g5-rainy-harvest",
+    "resultAnimationKey": "spoil",
+    "choices": [
+      {
+        "key": "a",
+        "label": "The harvest gets easier",
+        "iconKey": "result-bigger-harvest"
+      },
+      {
+        "key": "b",
+        "label": "Crops dry faster",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "c",
+        "label": "Grain or fruit can spoil",
+        "iconKey": "result-spoiled-harvest"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Wet crops rot and mold easily.",
+    "collectionItem": {
+      "key": "sticker-rainy-harvest",
+      "label": "Rainy Harvest",
+      "iconKey": "sticker-rainy-harvest"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-025",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Rain on a field covered with plants",
+    "illustrationKey": "scene-g5-covered-soil",
+    "resultAnimationKey": "healthy-growth",
+    "choices": [
+      {
+        "key": "a",
+        "label": "More water soaks into the soil",
+        "iconKey": "result-soaks-in"
+      },
+      {
+        "key": "b",
+        "label": "Water runs off faster",
+        "iconKey": "result-runoff"
+      },
+      {
+        "key": "c",
+        "label": "The soil gets drier",
+        "iconKey": "result-dry-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Plants and roots slow the water down so it soaks in.",
+    "collectionItem": {
+      "key": "sticker-covered-soil",
+      "label": "Covered Soil",
+      "iconKey": "sticker-covered-soil"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-026",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A dry winter",
+    "illustrationKey": "scene-g5-dry-winter",
+    "resultAnimationKey": "dry-soil",
+    "choices": [
+      {
+        "key": "a",
+        "label": "The soil starts wetter",
+        "iconKey": "result-wet-soil"
+      },
+      {
+        "key": "b",
+        "label": "The next season starts with less soil water",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "c",
+        "label": "Plants grow faster",
+        "iconKey": "result-plants-grow-faster"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Less rain means less stored water.",
+    "collectionItem": {
+      "key": "sticker-dry-winter",
+      "label": "Dry Winter",
+      "iconKey": "sticker-dry-winter"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-027",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Fog and mist for many mornings",
+    "illustrationKey": "scene-g5-foggy-days",
+    "resultAnimationKey": "disease-spread",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants lose more water",
+        "iconKey": "result-plants-lose-water"
+      },
+      {
+        "key": "b",
+        "label": "Soil gets drier",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "c",
+        "label": "Leaves stay wet and fungus can spread",
+        "iconKey": "result-disease"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Wet leaves invite fungus.",
+    "collectionItem": {
+      "key": "sticker-foggy-days",
+      "label": "Foggy Days",
+      "iconKey": "sticker-foggy-days"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-028",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Sunny days with enough water",
+    "illustrationKey": "scene-g5-sunny-growth",
+    "resultAnimationKey": "healthy-growth",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants grow fast",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "b",
+        "label": "Plants stop growing",
+        "iconKey": "result-slow-growth"
+      },
+      {
+        "key": "c",
+        "label": "Soil washes away",
+        "iconKey": "result-soil-washes-away"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Sunlight and water are what plants need.",
+    "collectionItem": {
+      "key": "sticker-sunny-growth",
+      "label": "Sunny Growth",
+      "iconKey": "sticker-sunny-growth"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-029",
+    "gameSlug": "weather-and-crops",
+    "prompt": "Warm, humid nights",
+    "illustrationKey": "scene-g5-humid-nights",
+    "resultAnimationKey": "disease-spread",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Pests disappear",
+        "iconKey": "result-fewer-pests"
+      },
+      {
+        "key": "b",
+        "label": "Insects and fungus can grow faster",
+        "iconKey": "result-pests"
+      },
+      {
+        "key": "c",
+        "label": "Plants freeze",
+        "iconKey": "result-frost-damage"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Warmth and moisture help pests and fungus.",
+    "collectionItem": {
+      "key": "sticker-humid-nights",
+      "label": "Humid Nights",
+      "iconKey": "sticker-humid-nights"
+    },
+    "active": true
+  },
+  {
+    "key": "g5-030",
+    "gameSlug": "weather-and-crops",
+    "prompt": "A long cold spell in winter",
+    "illustrationKey": "scene-g5-cold-spell",
+    "resultAnimationKey": "slow-growth",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plants grow fastest",
+        "iconKey": "result-plants-grow-faster"
+      },
+      {
+        "key": "b",
+        "label": "The soil dries out",
+        "iconKey": "result-dry-soil"
+      },
+      {
+        "key": "c",
+        "label": "Growth pauses until it warms up",
+        "iconKey": "result-slow-growth"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Many crops rest in the cold.",
+    "collectionItem": {
+      "key": "sticker-cold-spell",
+      "label": "Cold Spell",
+      "iconKey": "sticker-cold-spell"
+    },
+    "active": true
+  }
+]

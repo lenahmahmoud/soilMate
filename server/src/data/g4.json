@@ -1,0 +1,962 @@
+[
+  {
+    "key": "g4-001",
+    "gameSlug": "fix-the-field",
+    "prompt": "Bare soil after harvest",
+    "illustrationKey": "scene-g4-cover-crop-problem",
+    "illustrationFixedKey": "scene-g4-cover-crop-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant a cover crop",
+        "iconKey": "fix-cover-crop"
+      },
+      {
+        "key": "b",
+        "label": "Add more water",
+        "iconKey": "fix-add-water"
+      },
+      {
+        "key": "c",
+        "label": "Plow it again",
+        "iconKey": "fix-plow"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Cover crops protect bare soil between seasons.",
+    "collectionItem": {
+      "key": "tile-cover-crop",
+      "label": "Cover Crop",
+      "iconKey": "tile-cover-crop"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-002",
+    "gameSlug": "fix-the-field",
+    "prompt": "Soil washing away on a slope",
+    "illustrationKey": "scene-g4-held-soil-problem",
+    "illustrationFixedKey": "scene-g4-held-soil-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Leave the soil bare",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "b",
+        "label": "Keep plants covering the ground",
+        "iconKey": "fix-ground-cover"
+      },
+      {
+        "key": "c",
+        "label": "Plow up and down the slope",
+        "iconKey": "fix-plow"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Plants and roots hold the soil in place when it rains.",
+    "collectionItem": {
+      "key": "tile-held-soil",
+      "label": "Held Soil",
+      "iconKey": "tile-held-soil"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-003",
+    "gameSlug": "fix-the-field",
+    "prompt": "Soil is low in nitrogen",
+    "illustrationKey": "scene-g4-nitrogen-problem",
+    "illustrationFixedKey": "scene-g4-nitrogen-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Grow the same crop again",
+        "iconKey": "fix-same-crop"
+      },
+      {
+        "key": "b",
+        "label": "Leave the field empty",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "c",
+        "label": "Grow legumes",
+        "iconKey": "fix-legumes"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Legumes add nitrogen to the soil naturally.",
+    "collectionItem": {
+      "key": "tile-nitrogen",
+      "label": "Nitrogen",
+      "iconKey": "tile-nitrogen"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-004",
+    "gameSlug": "fix-the-field",
+    "prompt": "The same pest comes back every year",
+    "illustrationKey": "scene-g4-rotation-problem",
+    "illustrationFixedKey": "scene-g4-rotation-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Rotate to a different crop",
+        "iconKey": "fix-rotate-crops"
+      },
+      {
+        "key": "b",
+        "label": "Plant the same crop again",
+        "iconKey": "fix-same-crop"
+      },
+      {
+        "key": "c",
+        "label": "Add more water",
+        "iconKey": "fix-add-water"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Changing crops breaks the pest cycle.",
+    "collectionItem": {
+      "key": "tile-rotation",
+      "label": "Rotation",
+      "iconKey": "tile-rotation"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-005",
+    "gameSlug": "fix-the-field",
+    "prompt": "Field dries out too fast",
+    "illustrationKey": "scene-g4-low-water-problem",
+    "illustrationFixedKey": "scene-g4-low-water-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant a thirsty crop",
+        "iconKey": "fix-thirsty-crop"
+      },
+      {
+        "key": "b",
+        "label": "Choose a drought-tolerant crop",
+        "iconKey": "fix-drought-crop"
+      },
+      {
+        "key": "c",
+        "label": "Leave the soil bare",
+        "iconKey": "fix-bare-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "These crops handle dry seasons better.",
+    "collectionItem": {
+      "key": "tile-low-water",
+      "label": "Low Water",
+      "iconKey": "tile-low-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-006",
+    "gameSlug": "fix-the-field",
+    "prompt": "Soil is hard and packed",
+    "illustrationKey": "scene-g4-deep-roots-problem",
+    "illustrationFixedKey": "scene-g4-deep-roots-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Leave the soil bare",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "b",
+        "label": "Plant the same crop again",
+        "iconKey": "fix-same-crop"
+      },
+      {
+        "key": "c",
+        "label": "Grow a deep-rooted crop",
+        "iconKey": "fix-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Deep roots break up packed soil and let water go down.",
+    "collectionItem": {
+      "key": "tile-deep-roots",
+      "label": "Deep Roots",
+      "iconKey": "tile-deep-roots"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-007",
+    "gameSlug": "fix-the-field",
+    "prompt": "Rain runs off instead of soaking in",
+    "illustrationKey": "scene-g4-soak-it-in-problem",
+    "illustrationFixedKey": "scene-g4-soak-it-in-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Add organic matter and keep plants growing",
+        "iconKey": "fix-organic-matter"
+      },
+      {
+        "key": "b",
+        "label": "Remove all the plants",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "c",
+        "label": "Pack the soil down",
+        "iconKey": "fix-pack-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Rich, covered soil soaks up water like a sponge.",
+    "collectionItem": {
+      "key": "tile-soak-it-in",
+      "label": "Soak It In",
+      "iconKey": "tile-soak-it-in"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-008",
+    "gameSlug": "fix-the-field",
+    "prompt": "Weeds take over empty patches",
+    "illustrationKey": "scene-g4-no-gaps-problem",
+    "illustrationFixedKey": "scene-g4-no-gaps-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Leave the patches empty",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "b",
+        "label": "Keep the ground covered with a crop",
+        "iconKey": "fix-ground-cover"
+      },
+      {
+        "key": "c",
+        "label": "Add more water",
+        "iconKey": "fix-add-water"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "A covered field leaves little room for weeds.",
+    "collectionItem": {
+      "key": "tile-no-gaps",
+      "label": "No Gaps",
+      "iconKey": "tile-no-gaps"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-009",
+    "gameSlug": "fix-the-field",
+    "prompt": "Soil is pale with little organic matter",
+    "illustrationKey": "scene-g4-rich-soil-problem",
+    "illustrationFixedKey": "scene-g4-rich-soil-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Burn all the leftovers",
+        "iconKey": "fix-burn"
+      },
+      {
+        "key": "b",
+        "label": "Remove all the roots",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "c",
+        "label": "Add crop leftovers or green manure",
+        "iconKey": "fix-organic-matter"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Plant material rots into dark, rich soil.",
+    "collectionItem": {
+      "key": "tile-rich-soil",
+      "label": "Rich Soil",
+      "iconKey": "tile-rich-soil"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-010",
+    "gameSlug": "fix-the-field",
+    "prompt": "Wind blows dry soil away",
+    "illustrationKey": "scene-g4-windbreak-problem",
+    "illustrationFixedKey": "scene-g4-windbreak-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant a windbreak or a cover crop",
+        "iconKey": "fix-windbreak"
+      },
+      {
+        "key": "b",
+        "label": "Smooth the field flat and bare",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "c",
+        "label": "Leave it bare",
+        "iconKey": "fix-bare-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Plants slow the wind and hold the soil.",
+    "collectionItem": {
+      "key": "tile-windbreak",
+      "label": "Windbreak",
+      "iconKey": "tile-windbreak"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-011",
+    "gameSlug": "fix-the-field",
+    "prompt": "A low corner stays soggy and plants rot",
+    "illustrationKey": "scene-g4-drain-well-problem",
+    "illustrationFixedKey": "scene-g4-drain-well-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Water it more",
+        "iconKey": "fix-add-water"
+      },
+      {
+        "key": "b",
+        "label": "Improve drainage",
+        "iconKey": "fix-drainage"
+      },
+      {
+        "key": "c",
+        "label": "Pack the soil down",
+        "iconKey": "fix-pack-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Roots need air as well as water.",
+    "collectionItem": {
+      "key": "tile-drain-well",
+      "label": "Drain Well",
+      "iconKey": "tile-drain-well"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-012",
+    "gameSlug": "fix-the-field",
+    "prompt": "Frost hurts young plants in spring",
+    "illustrationKey": "scene-g4-frost-safe-problem",
+    "illustrationFixedKey": "scene-g4-frost-safe-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant even earlier",
+        "iconKey": "fix-plant-early"
+      },
+      {
+        "key": "b",
+        "label": "Take off all cover",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "c",
+        "label": "Plant a bit later or choose a frost-tolerant crop",
+        "iconKey": "fix-timing"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Timing and crop choice help plants avoid frost.",
+    "collectionItem": {
+      "key": "tile-frost-safe",
+      "label": "Frost Safe",
+      "iconKey": "tile-frost-safe"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-013",
+    "gameSlug": "fix-the-field",
+    "prompt": "Plants wilt in the midday heat",
+    "illustrationKey": "scene-g4-cool-water-problem",
+    "illustrationFixedKey": "scene-g4-cool-water-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Water in the cool morning or evening",
+        "iconKey": "fix-cool-watering"
+      },
+      {
+        "key": "b",
+        "label": "Water at noon in full sun",
+        "iconKey": "fix-noon-watering"
+      },
+      {
+        "key": "c",
+        "label": "Cut off all the leaves",
+        "iconKey": "fix-cut-leaves"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Cool hours lose less water to the air.",
+    "collectionItem": {
+      "key": "tile-cool-water",
+      "label": "Cool Water",
+      "iconKey": "tile-cool-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-014",
+    "gameSlug": "fix-the-field",
+    "prompt": "The field sits empty for months between crops",
+    "illustrationKey": "scene-g4-fill-the-gap-problem",
+    "illustrationFixedKey": "scene-g4-fill-the-gap-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Leave it empty",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "b",
+        "label": "Plant a short cover crop",
+        "iconKey": "fix-cover-crop"
+      },
+      {
+        "key": "c",
+        "label": "Plow it every week",
+        "iconKey": "fix-plow"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "A short cover crop protects the soil until the next crop.",
+    "collectionItem": {
+      "key": "tile-fill-the-gap",
+      "label": "Fill the Gap",
+      "iconKey": "tile-fill-the-gap"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-015",
+    "gameSlug": "fix-the-field",
+    "prompt": "Fertilizer costs too much",
+    "illustrationKey": "scene-g4-save-money-problem",
+    "illustrationFixedKey": "scene-g4-save-money-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Buy even more fertilizer",
+        "iconKey": "fix-fertilizer"
+      },
+      {
+        "key": "b",
+        "label": "Skip the rotation",
+        "iconKey": "fix-same-crop"
+      },
+      {
+        "key": "c",
+        "label": "Add legumes to the rotation",
+        "iconKey": "fix-legumes"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Legumes make their own nitrogen.",
+    "collectionItem": {
+      "key": "tile-save-money",
+      "label": "Save Money",
+      "iconKey": "tile-save-money"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-016",
+    "gameSlug": "fix-the-field",
+    "prompt": "Water is short this season",
+    "illustrationKey": "scene-g4-save-water-problem",
+    "illustrationFixedKey": "scene-g4-save-water-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Choose crops that need less water",
+        "iconKey": "fix-drought-crop"
+      },
+      {
+        "key": "b",
+        "label": "Plant the thirstiest crop",
+        "iconKey": "fix-thirsty-crop"
+      },
+      {
+        "key": "c",
+        "label": "Water all day long",
+        "iconKey": "fix-add-water"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Matching crops to your water saves it.",
+    "collectionItem": {
+      "key": "tile-save-water",
+      "label": "Save Water",
+      "iconKey": "tile-save-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-017",
+    "gameSlug": "fix-the-field",
+    "prompt": "Rain forms a hard crust on bare soil",
+    "illustrationKey": "scene-g4-soft-cover-problem",
+    "illustrationFixedKey": "scene-g4-soft-cover-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Leave it bare",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "b",
+        "label": "Cover the soil with mulch or plants",
+        "iconKey": "fix-mulch"
+      },
+      {
+        "key": "c",
+        "label": "Press the soil flat",
+        "iconKey": "fix-pack-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Cover softens the rain's hit and keeps soil open.",
+    "collectionItem": {
+      "key": "tile-soft-cover",
+      "label": "Soft Cover",
+      "iconKey": "tile-soft-cover"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-018",
+    "gameSlug": "fix-the-field",
+    "prompt": "Salt shows up on the soil surface",
+    "illustrationKey": "scene-g4-less-salt-problem",
+    "illustrationFixedKey": "scene-g4-less-salt-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Irrigate with salty water",
+        "iconKey": "fix-salty-water"
+      },
+      {
+        "key": "b",
+        "label": "Leave the soil bare",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "c",
+        "label": "Improve drainage and flush with clean water",
+        "iconKey": "fix-drainage"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Good drainage helps wash salt below the roots.",
+    "collectionItem": {
+      "key": "tile-less-salt",
+      "label": "Less Salt",
+      "iconKey": "tile-less-salt"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-019",
+    "gameSlug": "fix-the-field",
+    "prompt": "Rain washes soil into the ditch",
+    "illustrationKey": "scene-g4-grass-strip-problem",
+    "illustrationFixedKey": "scene-g4-grass-strip-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant a grass strip beside the ditch",
+        "iconKey": "fix-grass-strip"
+      },
+      {
+        "key": "b",
+        "label": "Cut the grass strip away",
+        "iconKey": "fix-cut-grass"
+      },
+      {
+        "key": "c",
+        "label": "Make the ditch steeper",
+        "iconKey": "fix-steep-ditch"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Grass strips catch soil before it leaves the field.",
+    "collectionItem": {
+      "key": "tile-grass-strip",
+      "label": "Grass Strip",
+      "iconKey": "tile-grass-strip"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-020",
+    "gameSlug": "fix-the-field",
+    "prompt": "Soil feels lifeless with few worms",
+    "illustrationKey": "scene-g4-alive-soil-problem",
+    "illustrationFixedKey": "scene-g4-alive-soil-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Add nothing",
+        "iconKey": "fix-do-nothing"
+      },
+      {
+        "key": "b",
+        "label": "Add compost and keep roots growing",
+        "iconKey": "fix-compost"
+      },
+      {
+        "key": "c",
+        "label": "Keep the soil bare",
+        "iconKey": "fix-bare-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Living roots and compost feed life in the soil.",
+    "collectionItem": {
+      "key": "tile-alive-soil",
+      "label": "Alive Soil",
+      "iconKey": "tile-alive-soil"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-021",
+    "gameSlug": "fix-the-field",
+    "prompt": "Hot sun bakes the soil surface",
+    "illustrationKey": "scene-g4-cool-soil-problem",
+    "illustrationFixedKey": "scene-g4-cool-soil-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Leave it bare",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "b",
+        "label": "Remove all the plants",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "c",
+        "label": "Cover the soil with mulch",
+        "iconKey": "fix-mulch"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Mulch keeps soil cooler and holds moisture.",
+    "collectionItem": {
+      "key": "tile-cool-soil",
+      "label": "Cool Soil",
+      "iconKey": "tile-cool-soil"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-022",
+    "gameSlug": "fix-the-field",
+    "prompt": "Heavy machines packed the soil",
+    "illustrationKey": "scene-g4-loose-again-problem",
+    "illustrationFixedKey": "scene-g4-loose-again-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Drive less on wet soil and grow deep-rooted crops",
+        "iconKey": "fix-less-traffic"
+      },
+      {
+        "key": "b",
+        "label": "Drive over it when it is wet",
+        "iconKey": "fix-heavy-machinery"
+      },
+      {
+        "key": "c",
+        "label": "Use even heavier machines",
+        "iconKey": "fix-heavy-machinery"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Less pressure and deep roots help soil loosen again.",
+    "collectionItem": {
+      "key": "tile-loose-again",
+      "label": "Loose Again",
+      "iconKey": "tile-loose-again"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-023",
+    "gameSlug": "fix-the-field",
+    "prompt": "Your income depends on only one crop",
+    "illustrationKey": "scene-g4-extra-income-problem",
+    "illustrationFixedKey": "scene-g4-extra-income-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant only that crop",
+        "iconKey": "fix-same-crop"
+      },
+      {
+        "key": "b",
+        "label": "Add a second crop to your rotation",
+        "iconKey": "fix-rotate-crops"
+      },
+      {
+        "key": "c",
+        "label": "Stop planting",
+        "iconKey": "fix-bare-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "A second crop spreads the risk and can add income.",
+    "collectionItem": {
+      "key": "tile-extra-income",
+      "label": "Extra Income",
+      "iconKey": "tile-extra-income"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-024",
+    "gameSlug": "fix-the-field",
+    "prompt": "Animals need feed in the dry months",
+    "illustrationKey": "scene-g4-animal-feed-problem",
+    "illustrationFixedKey": "scene-g4-animal-feed-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plant nothing",
+        "iconKey": "fix-bare-soil"
+      },
+      {
+        "key": "b",
+        "label": "Sell the animals",
+        "iconKey": "fix-sell-animals"
+      },
+      {
+        "key": "c",
+        "label": "Add a forage crop to the rotation",
+        "iconKey": "fix-forage-crop"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Forage crops feed animals and cover the soil.",
+    "collectionItem": {
+      "key": "tile-animal-feed",
+      "label": "Animal Feed",
+      "iconKey": "tile-animal-feed"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-025",
+    "gameSlug": "fix-the-field",
+    "prompt": "Nutrients wash out of sandy soil",
+    "illustrationKey": "scene-g4-hold-nutrients-problem",
+    "illustrationFixedKey": "scene-g4-hold-nutrients-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Add organic matter and keep cover crops",
+        "iconKey": "fix-organic-matter"
+      },
+      {
+        "key": "b",
+        "label": "Add more water",
+        "iconKey": "fix-add-water"
+      },
+      {
+        "key": "c",
+        "label": "Leave it bare",
+        "iconKey": "fix-bare-soil"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Organic matter holds nutrients like a sponge.",
+    "collectionItem": {
+      "key": "tile-hold-nutrients",
+      "label": "Hold Nutrients",
+      "iconKey": "tile-hold-nutrients"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-026",
+    "gameSlug": "fix-the-field",
+    "prompt": "Clay soil dries and cracks",
+    "illustrationKey": "scene-g4-no-cracks-problem",
+    "illustrationFixedKey": "scene-g4-no-cracks-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Plow it when it is dry",
+        "iconKey": "fix-plow"
+      },
+      {
+        "key": "b",
+        "label": "Add organic matter and mulch",
+        "iconKey": "fix-organic-matter"
+      },
+      {
+        "key": "c",
+        "label": "Leave it bare",
+        "iconKey": "fix-bare-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Organic matter and mulch keep clay soft and moist.",
+    "collectionItem": {
+      "key": "tile-no-cracks",
+      "label": "No Cracks",
+      "iconKey": "tile-no-cracks"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-027",
+    "gameSlug": "fix-the-field",
+    "prompt": "A new disease shows on your crop",
+    "illustrationKey": "scene-g4-ask-an-expert-problem",
+    "illustrationFixedKey": "scene-g4-ask-an-expert-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Ignore it",
+        "iconKey": "fix-do-nothing"
+      },
+      {
+        "key": "b",
+        "label": "Plant the same crop again",
+        "iconKey": "fix-same-crop"
+      },
+      {
+        "key": "c",
+        "label": "Ask a local expert and rotate to a different crop",
+        "iconKey": "fix-ask-expert"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Experts know local diseases and the best response.",
+    "collectionItem": {
+      "key": "tile-ask-an-expert",
+      "label": "Ask an Expert",
+      "iconKey": "tile-ask-an-expert"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-028",
+    "gameSlug": "fix-the-field",
+    "prompt": "Part of the field looks less green on the satellite map",
+    "illustrationKey": "scene-g4-check-the-ground-problem",
+    "illustrationFixedKey": "scene-g4-check-the-ground-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Walk the field and check on the ground",
+        "iconKey": "fix-walk-field"
+      },
+      {
+        "key": "b",
+        "label": "Assume it is disease",
+        "iconKey": "fix-assume"
+      },
+      {
+        "key": "c",
+        "label": "Ignore the map",
+        "iconKey": "fix-do-nothing"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "The map shows where. You find out why.",
+    "collectionItem": {
+      "key": "tile-check-the-ground",
+      "label": "Check the Ground",
+      "iconKey": "tile-check-the-ground"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-029",
+    "gameSlug": "fix-the-field",
+    "prompt": "Few flowers and helpful insects in the field",
+    "illustrationKey": "scene-g4-helpful-bugs-problem",
+    "illustrationFixedKey": "scene-g4-helpful-bugs-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Remove all the flowers",
+        "iconKey": "fix-cut-flowers"
+      },
+      {
+        "key": "b",
+        "label": "Plant flowering cover crops",
+        "iconKey": "fix-flowers"
+      },
+      {
+        "key": "c",
+        "label": "Keep the soil bare",
+        "iconKey": "fix-bare-soil"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Flowers bring bees and insects that help crops.",
+    "collectionItem": {
+      "key": "tile-helpful-bugs",
+      "label": "Helpful Bugs",
+      "iconKey": "tile-helpful-bugs"
+    },
+    "active": true
+  },
+  {
+    "key": "g4-030",
+    "gameSlug": "fix-the-field",
+    "prompt": "A neighbor's field looks greener than yours",
+    "illustrationKey": "scene-g4-compare-wisely-problem",
+    "illustrationFixedKey": "scene-g4-compare-wisely-fixed",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Copy their crop exactly",
+        "iconKey": "fix-copy"
+      },
+      {
+        "key": "b",
+        "label": "Ignore your own soil",
+        "iconKey": "fix-do-nothing"
+      },
+      {
+        "key": "c",
+        "label": "Compare soil, water, and crops before copying",
+        "iconKey": "fix-compare"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Every field has its own soil and water.",
+    "collectionItem": {
+      "key": "tile-compare-wisely",
+      "label": "Compare Wisely",
+      "iconKey": "tile-compare-wisely"
+    },
+    "active": true
+  }
+]

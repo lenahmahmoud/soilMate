@@ -1,0 +1,128 @@
+[
+  {
+    "key": "g1-001",
+    "gameSlug": "match-the-word",
+    "prompt": "NDVI",
+    "illustrationKey": "term-ndvi",
+    "choices": [
+      {
+        "key": "g1-001",
+        "label": "How green and healthy plants are",
+        "iconKey": "term-ndvi"
+      }
+    ],
+    "correctChoiceKey": "g1-001",
+    "explanation": "NDVI means: How green and healthy plants are.",
+    "collectionItem": {
+      "key": "term-ndvi",
+      "label": "NDVI",
+      "iconKey": "term-ndvi"
+    },
+    "active": true
+  },
+  {
+    "key": "g1-002",
+    "gameSlug": "match-the-word",
+    "prompt": "Evapotranspiration",
+    "illustrationKey": "term-evapotranspiration",
+    "choices": [
+      {
+        "key": "g1-002",
+        "label": "Water that leaves the soil and plants into the air",
+        "iconKey": "term-evapotranspiration"
+      }
+    ],
+    "correctChoiceKey": "g1-002",
+    "explanation": "Evapotranspiration means: Water that leaves the soil and plants into the air.",
+    "collectionItem": {
+      "key": "term-evapotranspiration",
+      "label": "Evapotranspiration",
+      "iconKey": "term-evapotranspiration"
+    },
+    "active": true
+  },
+  {
+    "key": "g1-003",
+    "gameSlug": "match-the-word",
+    "prompt": "Soil Moisture Anomaly",
+    "illustrationKey": "term-soil-moisture-anomaly",
+    "choices": [
+      {
+        "key": "g1-003",
+        "label": "When soil is wetter or drier than usual",
+        "iconKey": "term-soil-moisture-anomaly"
+      }
+    ],
+    "correctChoiceKey": "g1-003",
+    "explanation": "Soil Moisture Anomaly means: When soil is wetter or drier than usual.",
+    "collectionItem": {
+      "key": "term-soil-moisture-anomaly",
+      "label": "Soil Moisture Anomaly",
+      "iconKey": "term-soil-moisture-anomaly"
+    },
+    "active": true
+  },
+  {
+    "key": "g1-004",
+    "gameSlug": "match-the-word",
+    "prompt": "Frost Risk",
+    "illustrationKey": "term-frost-risk",
+    "choices": [
+      {
+        "key": "g1-004",
+        "label": "Chance of freezing cold that can harm plants",
+        "iconKey": "term-frost-risk"
+      }
+    ],
+    "correctChoiceKey": "g1-004",
+    "explanation": "Frost Risk means: Chance of freezing cold that can harm plants.",
+    "collectionItem": {
+      "key": "term-frost-risk",
+      "label": "Frost Risk",
+      "iconKey": "term-frost-risk"
+    },
+    "active": true
+  },
+  {
+    "key": "g1-005",
+    "gameSlug": "match-the-word",
+    "prompt": "Water Balance",
+    "illustrationKey": "term-water-balance",
+    "choices": [
+      {
+        "key": "g1-005",
+        "label": "Water coming in (rain) versus water going out (heat and plants)",
+        "iconKey": "term-water-balance"
+      }
+    ],
+    "correctChoiceKey": "g1-005",
+    "explanation": "Water Balance means: Water coming in (rain) versus water going out (heat and plants).",
+    "collectionItem": {
+      "key": "term-water-balance",
+      "label": "Water Balance",
+      "iconKey": "term-water-balance"
+    },
+    "active": true
+  },
+  {
+    "key": "g1-006",
+    "gameSlug": "match-the-word",
+    "prompt": "Erosion",
+    "illustrationKey": "term-erosion",
+    "choices": [
+      {
+        "key": "g1-006",
+        "label": "When wind or rain washes the soil away",
+        "iconKey": "term-erosion"
+      }
+    ],
+    "correctChoiceKey": "g1-006",
+    "explanation": "Erosion means: When wind or rain washes the soil away.",
+    "collectionItem": {
+      "key": "term-erosion",
+      "label": "Erosion",
+      "iconKey": "term-erosion"
+    },
+    "active": true
+  }
+]

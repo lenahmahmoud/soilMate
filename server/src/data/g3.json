@@ -1,0 +1,968 @@
+[
+  {
+    "key": "g3-001",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Beans",
+    "illustrationKey": "crop-beans",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      },
+      {
+        "key": "c",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Beans: Adds nitrogen to the soil.",
+    "group": "A",
+    "collectionItem": {
+      "key": "power-nitrogen",
+      "label": "Nitrogen",
+      "iconKey": "power-nitrogen"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-002",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Lentils",
+    "illustrationKey": "crop-lentils",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Lentils: Adds nitrogen to the soil.",
+    "group": "A",
+    "collectionItem": {
+      "key": "power-nitrogen",
+      "label": "Nitrogen",
+      "iconKey": "power-nitrogen"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-003",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Clover",
+    "illustrationKey": "crop-clover",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      },
+      {
+        "key": "b",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "c",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Clover: Adds nitrogen to the soil.",
+    "group": "A",
+    "collectionItem": {
+      "key": "power-nitrogen",
+      "label": "Nitrogen",
+      "iconKey": "power-nitrogen"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-004",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Peas",
+    "illustrationKey": "crop-peas",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Peas: Adds nitrogen to the soil.",
+    "group": "A",
+    "collectionItem": {
+      "key": "power-nitrogen",
+      "label": "Nitrogen",
+      "iconKey": "power-nitrogen"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-005",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Winter rye",
+    "illustrationKey": "crop-winter-rye",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Protects soil from washing away",
+        "iconKey": "power-protector"
+      },
+      {
+        "key": "c",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Winter rye: Protects soil from washing away.",
+    "group": "B",
+    "collectionItem": {
+      "key": "power-protector",
+      "label": "Protector",
+      "iconKey": "power-protector"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-006",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Ryegrass",
+    "illustrationKey": "crop-ryegrass",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      },
+      {
+        "key": "c",
+        "label": "Protects soil from washing away",
+        "iconKey": "power-protector"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Ryegrass: Protects soil from washing away.",
+    "group": "B",
+    "collectionItem": {
+      "key": "power-protector",
+      "label": "Protector",
+      "iconKey": "power-protector"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-007",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Buckwheat",
+    "illustrationKey": "crop-buckwheat",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Protects soil from washing away",
+        "iconKey": "power-protector"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Buckwheat: Protects soil from washing away.",
+    "group": "B",
+    "collectionItem": {
+      "key": "power-protector",
+      "label": "Protector",
+      "iconKey": "power-protector"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-008",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Grass strips",
+    "subtitle": "On slopes",
+    "illustrationKey": "crop-grass-strips",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Protects soil from washing away",
+        "iconKey": "power-protector"
+      },
+      {
+        "key": "c",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Grass strips: Protects soil from washing away.",
+    "group": "B",
+    "collectionItem": {
+      "key": "power-protector",
+      "label": "Protector",
+      "iconKey": "power-protector"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-009",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Tillage radish",
+    "illustrationKey": "crop-tillage-radish",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Tillage radish: Loosens hard soil.",
+    "group": "C",
+    "collectionItem": {
+      "key": "power-deep-roots",
+      "label": "Deep Roots",
+      "iconKey": "power-deep-roots"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-010",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Sunflower",
+    "illustrationKey": "crop-sunflower",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Sunflower: Loosens hard soil.",
+    "group": "C",
+    "collectionItem": {
+      "key": "power-deep-roots",
+      "label": "Deep Roots",
+      "iconKey": "power-deep-roots"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-011",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Chicory",
+    "illustrationKey": "crop-chicory",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      },
+      {
+        "key": "c",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Chicory: Loosens hard soil.",
+    "group": "C",
+    "collectionItem": {
+      "key": "power-deep-roots",
+      "label": "Deep Roots",
+      "iconKey": "power-deep-roots"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-012",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Alfalfa",
+    "illustrationKey": "crop-alfalfa",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "b",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Alfalfa: Loosens hard soil.",
+    "group": "C",
+    "collectionItem": {
+      "key": "power-deep-roots",
+      "label": "Deep Roots",
+      "iconKey": "power-deep-roots"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-013",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Millet",
+    "illustrationKey": "crop-millet",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Millet: Grows with less water.",
+    "group": "D",
+    "collectionItem": {
+      "key": "power-low-water",
+      "label": "Low Water",
+      "iconKey": "power-low-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-014",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Sorghum",
+    "illustrationKey": "crop-sorghum",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      },
+      {
+        "key": "c",
+        "label": "Adds organic matter to the soil",
+        "iconKey": "power-soil-booster"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Sorghum: Grows with less water.",
+    "group": "D",
+    "collectionItem": {
+      "key": "power-low-water",
+      "label": "Low Water",
+      "iconKey": "power-low-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-015",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Barley",
+    "illustrationKey": "crop-barley",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      },
+      {
+        "key": "c",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Barley: Grows with less water.",
+    "group": "D",
+    "collectionItem": {
+      "key": "power-low-water",
+      "label": "Low Water",
+      "iconKey": "power-low-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-016",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Sesame",
+    "illustrationKey": "crop-sesame",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Protects soil from washing away",
+        "iconKey": "power-protector"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Sesame: Grows with less water.",
+    "group": "D",
+    "collectionItem": {
+      "key": "power-low-water",
+      "label": "Low Water",
+      "iconKey": "power-low-water"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-017",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Mustard",
+    "illustrationKey": "crop-mustard",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      },
+      {
+        "key": "c",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Mustard: Breaks pest and disease cycles.",
+    "group": "E",
+    "collectionItem": {
+      "key": "power-pest-breaker",
+      "label": "Pest Breaker",
+      "iconKey": "power-pest-breaker"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-018",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Marigold",
+    "illustrationKey": "crop-marigold",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      },
+      {
+        "key": "b",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      },
+      {
+        "key": "c",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Marigold: Breaks pest and disease cycles.",
+    "group": "E",
+    "collectionItem": {
+      "key": "power-pest-breaker",
+      "label": "Pest Breaker",
+      "iconKey": "power-pest-breaker"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-019",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Wheat",
+    "subtitle": "In a rotation",
+    "illustrationKey": "crop-wheat",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Wheat: Breaks pest and disease cycles.",
+    "group": "E",
+    "collectionItem": {
+      "key": "power-pest-breaker",
+      "label": "Pest Breaker",
+      "iconKey": "power-pest-breaker"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-020",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Maize",
+    "subtitle": "In a rotation",
+    "illustrationKey": "crop-maize",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      },
+      {
+        "key": "c",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Maize: Breaks pest and disease cycles.",
+    "group": "E",
+    "collectionItem": {
+      "key": "power-pest-breaker",
+      "label": "Pest Breaker",
+      "iconKey": "power-pest-breaker"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-021",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Crop leftovers",
+    "subtitle": "Stalks and leaves",
+    "illustrationKey": "crop-crop-leftovers",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Grows with less water",
+        "iconKey": "power-low-water"
+      },
+      {
+        "key": "b",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "c",
+        "label": "Adds organic matter to the soil",
+        "iconKey": "power-soil-booster"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Crop leftovers: Adds organic matter to the soil.",
+    "group": "F",
+    "collectionItem": {
+      "key": "power-soil-booster",
+      "label": "Soil Booster",
+      "iconKey": "power-soil-booster"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-022",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Green manure",
+    "subtitle": "Plants turned into the soil",
+    "illustrationKey": "crop-green-manure",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds organic matter to the soil",
+        "iconKey": "power-soil-booster"
+      },
+      {
+        "key": "b",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "c",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Green manure: Adds organic matter to the soil.",
+    "group": "F",
+    "collectionItem": {
+      "key": "power-soil-booster",
+      "label": "Soil Booster",
+      "iconKey": "power-soil-booster"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-023",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Straw mulch",
+    "illustrationKey": "crop-straw-mulch",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Adds organic matter to the soil",
+        "iconKey": "power-soil-booster"
+      },
+      {
+        "key": "c",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Straw mulch: Adds organic matter to the soil.",
+    "group": "F",
+    "collectionItem": {
+      "key": "power-soil-booster",
+      "label": "Soil Booster",
+      "iconKey": "power-soil-booster"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-024",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Roots left in the ground",
+    "illustrationKey": "crop-roots-left-in-the-ground",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "b",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      },
+      {
+        "key": "c",
+        "label": "Adds organic matter to the soil",
+        "iconKey": "power-soil-booster"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Roots left in the ground: Adds organic matter to the soil.",
+    "group": "F",
+    "collectionItem": {
+      "key": "power-soil-booster",
+      "label": "Soil Booster",
+      "iconKey": "power-soil-booster"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-025",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Fodder maize",
+    "illustrationKey": "crop-fodder-maize",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Fodder maize: Feeds your animals.",
+    "group": "G",
+    "collectionItem": {
+      "key": "power-animal-feed",
+      "label": "Animal Feed",
+      "iconKey": "power-animal-feed"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-026",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Forage grass",
+    "illustrationKey": "crop-forage-grass",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Forage grass: Feeds your animals.",
+    "group": "G",
+    "collectionItem": {
+      "key": "power-animal-feed",
+      "label": "Animal Feed",
+      "iconKey": "power-animal-feed"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-027",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Oat hay",
+    "illustrationKey": "crop-oat-hay",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Breaks pest and disease cycles",
+        "iconKey": "power-pest-breaker"
+      },
+      {
+        "key": "c",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Oat hay: Feeds your animals.",
+    "group": "G",
+    "collectionItem": {
+      "key": "power-animal-feed",
+      "label": "Animal Feed",
+      "iconKey": "power-animal-feed"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-028",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Herbs",
+    "subtitle": "Mint, basil",
+    "illustrationKey": "crop-herbs",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "b",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "c",
+        "label": "Loosens hard soil",
+        "iconKey": "power-deep-roots"
+      }
+    ],
+    "correctChoiceKey": "a",
+    "explanation": "Herbs: Brings extra income.",
+    "group": "H",
+    "collectionItem": {
+      "key": "power-extra-income",
+      "label": "Extra Income",
+      "iconKey": "power-extra-income"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-029",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Garlic",
+    "illustrationKey": "crop-garlic",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      },
+      {
+        "key": "c",
+        "label": "Feeds your animals",
+        "iconKey": "power-animal-feed"
+      }
+    ],
+    "correctChoiceKey": "b",
+    "explanation": "Garlic: Brings extra income.",
+    "group": "H",
+    "collectionItem": {
+      "key": "power-extra-income",
+      "label": "Extra Income",
+      "iconKey": "power-extra-income"
+    },
+    "active": true
+  },
+  {
+    "key": "g3-030",
+    "gameSlug": "crop-superpowers",
+    "prompt": "Peppers",
+    "illustrationKey": "crop-peppers",
+    "choices": [
+      {
+        "key": "a",
+        "label": "Adds nitrogen to the soil",
+        "iconKey": "power-nitrogen"
+      },
+      {
+        "key": "b",
+        "label": "Protects soil from washing away",
+        "iconKey": "power-protector"
+      },
+      {
+        "key": "c",
+        "label": "Brings extra income",
+        "iconKey": "power-extra-income"
+      }
+    ],
+    "correctChoiceKey": "c",
+    "explanation": "Peppers: Brings extra income.",
+    "group": "H",
+    "collectionItem": {
+      "key": "power-extra-income",
+      "label": "Extra Income",
+      "iconKey": "power-extra-income"
+    },
+    "active": true
+  }
+]

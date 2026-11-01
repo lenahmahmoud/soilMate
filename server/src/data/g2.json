@@ -1,0 +1,812 @@
+[
+  {
+    "key": "g2-001",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How green are the plants across a whole region?",
+    "illustrationKey": "scene-g2-green-region",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Satellites see big areas from above.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-002",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How much rain fell over a large area this month?",
+    "illustrationKey": "scene-g2-rain-wide-area",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Satellites track rain over wide areas.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-003",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How hot is the land surface across a big area?",
+    "illustrationKey": "scene-g2-land-heat",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Some satellites measure land temperature from space.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-004",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is a large area wetter or drier than usual?",
+    "illustrationKey": "scene-g2-wet-dry-area",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Satellites measure soil wetness across wide areas.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-005",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How has greenness changed over the last 20 years?",
+    "illustrationKey": "scene-g2-greenness-history",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Satellites have been watching for decades.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-006",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Where are the driest patches across a whole valley?",
+    "illustrationKey": "scene-g2-dry-valley",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Satellites compare large areas at once.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-007",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How much sunlight reached the land last week?",
+    "illustrationKey": "scene-g2-sunlight",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Sunlight is measured from space.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-008",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Which large areas were unusually hot last summer?",
+    "illustrationKey": "scene-g2-hot-regions",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Satellites can compare heat across regions.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-009",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is underground water slowly dropping across a region?",
+    "illustrationKey": "scene-g2-groundwater",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Special satellites sense changes in stored water.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-010",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How steep are the hills across a wide area?",
+    "illustrationKey": "scene-g2-hills-map",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "satellite",
+    "explanation": "Satellites map the shape of the land.",
+    "group": "satellite",
+    "active": true
+  },
+  {
+    "key": "g2-011",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Which pest is eating the leaves in your field?",
+    "illustrationKey": "scene-g2-pest-leaf",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Only you can see the leaves up close.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-012",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How much water did your irrigation really give the field?",
+    "illustrationKey": "scene-g2-irrigation-water",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Only the farmer knows what was applied.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-013",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Which crop did you plant last season?",
+    "illustrationKey": "scene-g2-crops-record",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Your own records know best.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-014",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Does the soil feel sandy, sticky, or soft in your hands?",
+    "illustrationKey": "scene-g2-soil-touch",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Touch tells you what soil you have.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-015",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Did you add fertilizer this year?",
+    "illustrationKey": "scene-g2-fertilizer",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Only you know what you added.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-016",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Do the roots look healthy when you dig up a plant?",
+    "illustrationKey": "scene-g2-roots-dig",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "You have to dig and look.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-017",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "How deep is the well that waters your field?",
+    "illustrationKey": "scene-g2-well-depth",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Only a local check can tell you.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-018",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Which weeds grow in your field?",
+    "illustrationKey": "scene-g2-weeds",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Weeds are too small to see from space.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-019",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "What price will your crop get at the local market?",
+    "illustrationKey": "scene-g2-market-price",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "Local people know local markets.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-020",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is the soil hard when you push a spade in?",
+    "illustrationKey": "scene-g2-spade-soil",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "ground",
+    "explanation": "You feel it with your own hands.",
+    "group": "ground",
+    "active": true
+  },
+  {
+    "key": "g2-021",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is part of your field suffering from drought?",
+    "illustrationKey": "scene-g2-drought-field",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The satellite spots dry areas, and you confirm what is really happening.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-022",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Why did the green color drop in one part of the field?",
+    "illustrationKey": "scene-g2-green-drop",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The satellite shows where it changed, and you know if it was harvest, pests, or water.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-023",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is one corner of your field drying out faster than the rest?",
+    "illustrationKey": "scene-g2-dry-corner",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The satellite shows where, and you check why.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-024",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Where is soil washing away after heavy rain?",
+    "illustrationKey": "scene-g2-washed-slope",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The map shows the slopes, and you see the damage.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-025",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Did last night's frost harm your young plants?",
+    "illustrationKey": "scene-g2-frost-plants",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "Satellite temperatures hint at frost, and you check the plants.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-026",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is your crop struggling because of heat?",
+    "illustrationKey": "scene-g2-heat-crop",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The satellite shows hot zones, and you look at the plants.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-027",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Which part of the field should get water first?",
+    "illustrationKey": "scene-g2-water-first",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The map shows the driest zones, and you know what the crop needs.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-028",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is the field bare for too long between seasons?",
+    "illustrationKey": "scene-g2-bare-season",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The satellite shows bare periods, and you know your plan.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-029",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Did changing your crop make the field greener?",
+    "illustrationKey": "scene-g2-crop-change",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The satellite shows greenness, and you know what changed.",
+    "group": "both",
+    "active": true
+  },
+  {
+    "key": "g2-030",
+    "gameSlug": "satellite-or-ground",
+    "prompt": "Is your field wetter or drier than your neighbor's?",
+    "illustrationKey": "scene-g2-neighbor-field",
+    "choices": [
+      {
+        "key": "satellite",
+        "label": "Satellite",
+        "iconKey": "choice-satellite"
+      },
+      {
+        "key": "both",
+        "label": "Both Together",
+        "iconKey": "choice-both-together"
+      },
+      {
+        "key": "ground",
+        "label": "On the Ground",
+        "iconKey": "choice-on-the-ground"
+      }
+    ],
+    "correctChoiceKey": "both",
+    "explanation": "The satellite compares them, and you know how each is irrigated.",
+    "group": "both",
+    "active": true
+  }
+]
