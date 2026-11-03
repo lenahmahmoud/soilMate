@@ -1,3 +1,4 @@
+// server/src/services/attempt.service.js
 import Attempt from '../models/Attempt.js';
 import Question from '../models/Question.js';
 import QuestionHistory from '../models/QuestionHistory.js';
@@ -52,7 +53,7 @@ function guard(attempt, aq, extra = {}) {
 
 const writeOptions = (aq) => ({
   arrayFilters: [{ 'q.questionId': aq.questionId }],
-  new: true,
+  returnDocument: 'after',
   lean: true,
 });
 
@@ -92,19 +93,18 @@ function correctStep(attempt, aq, now) {
 function wrongStep(attempt, choiceKey, now) {
   const hearts = attempt.hearts - 1;
   const set = { hearts, streak: 0 };
+  const update = {
+    $set: set,
+    $inc: { 'questions.$[q].wrongCount': 1 },
+    $addToSet: { 'questions.$[q].wrongChoiceKeys': choiceKey },
+  };
   if (hearts <= 0) {
+    // Same atomic update: the attempt fails and stops expiring (only active or abandoned expire).
     set.status = 'failed';
     set.finishedAt = now;
+    update.$unset = { expiresAt: '' };
   }
-  return {
-    firstTry: false,
-    pointsEarned: 0,
-    update: {
-      $set: set,
-      $inc: { 'questions.$[q].wrongCount': 1 },
-      $addToSet: { 'questions.$[q].wrongChoiceKeys': choiceKey },
-    },
-  };
+  return { firstTry: false, pointsEarned: 0, update };
 }
 
 export async function answerQuestion({ attemptId, playerId, questionId, choiceKey }) {
