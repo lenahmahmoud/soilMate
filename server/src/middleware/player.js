@@ -1,5 +1,6 @@
 import { v4 as uuidv4, validate as uuidValidate, version as uuidVersion } from 'uuid';
 import Player from '../models/Player.js';
+import { env } from '../config/env.js';
 import { logger } from '../config/logger.js';
 
 export const isUuidV4 = (value) =>
@@ -16,7 +17,11 @@ export async function playerMiddleware(req, res, next) {
     // Creates the player if it does not exist, and updates lastSeenAt if it does.
     await Player.updateOne({ _id: id }, { $set: { lastSeenAt: new Date() } }, { upsert: true });
   } catch (err) {
-    logger.warn({ err, playerId: id }, 'Could not save player');
+    // Never log player ids in production.
+    logger.warn(
+      env.NODE_ENV === 'production' ? { err } : { err, playerId: id },
+      'Could not save player',
+    );
   }
 
   next();
