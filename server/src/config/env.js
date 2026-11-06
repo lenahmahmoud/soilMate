@@ -3,18 +3,46 @@ import { z } from 'zod';
 
 dotenv.config({ quiet: true });
 
-const schema = z.object({
-  PORT: z.coerce.number().int().min(1).max(65535),
-  NODE_ENV: z.enum(['development', 'test', 'production']),
-  MONGO_URI: z
-    .string()
-    .refine((v) => v.startsWith('mongodb://') || v.startsWith('mongodb+srv://'), {
-      message: 'must start with mongodb:// or mongodb+srv://',
-    }),
-  CLIENT_ORIGIN: z.string().url(),
-  NASA_FEATURE: z.enum(['true', 'false']).transform((v) => v === 'true'),
-  ATTEMPT_TTL_DAYS: z.coerce.number().int().min(1),
-});
+const schema = z
+  .object({
+    PORT: z.coerce.number().int().min(1).max(65535),
+    NODE_ENV: z.enum(['development', 'test', 'production']),
+    MONGO_URI: z
+      .string()
+      .refine((v) => v.startsWith('mongodb://') || v.startsWith('mongodb+srv://'), {
+        message: 'must start with mongodb:// or mongodb+srv://',
+      }),
+    CLIENT_ORIGIN: z.string().url(),
+    NASA_FEATURE: z.enum(['true', 'false']).transform((v) => v === 'true'),
+    ATTEMPT_TTL_DAYS: z.coerce.number().int().min(1),
+
+    // SoilMate
+    JWT_SECRET: z.string().min(32, 'must be at least 32 characters'),
+    JWT_EXPIRES_DEFAULT: z.string().default('1d'),
+    JWT_EXPIRES_REMEMBER: z.string().default('30d'),
+    BCRYPT_COST: z.coerce.number().int().min(4).max(15).default(12),
+    PUBLIC_BASE_URL: z.string().url().optional(),
+    SCORING_MODE: z.enum(['mock', 'python']).default('mock'),
+    PYTHON_URL: z.string().url().optional(),
+    PYTHON_TIMEOUT_MS: z.coerce.number().int().min(100).default(5000),
+    LAYER_DATA_DIR: z.string().default('src/data/layers'),
+  })
+  .superRefine((v, ctx) => {
+    if (v.SCORING_MODE === 'python' && !v.PYTHON_URL) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['PYTHON_URL'],
+        message: 'required when SCORING_MODE=python',
+      });
+    }
+    if (v.NODE_ENV === 'production' && !v.PUBLIC_BASE_URL) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['PUBLIC_BASE_URL'],
+        message: 'required in production',
+      });
+    }
+  });
 
 export function parseEnv(source) {
   const result = schema.safeParse(source);
