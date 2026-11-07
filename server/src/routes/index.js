@@ -3,6 +3,7 @@ import gamesRoutes from './gamesRoutes.js';
 import attemptsRoutes from './attemptsRoutes.js';
 import playersRoutes from './playersRoutes.js';
 import authRoutes from './authRoutes.js';
+import meRoutes from './meRoutes.js';
 
 const router = Router();
 
@@ -11,5 +12,6 @@ router.use('/games', gamesRoutes);
 router.use('/attempts', attemptsRoutes);
 router.use('/players', playersRoutes);
 router.use('/auth', authRoutes);
+router.use('/me', meRoutes);
 
 export default router;
