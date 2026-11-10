@@ -6,9 +6,9 @@ import authRoutes from './authRoutes.js';
 import meRoutes from './meRoutes.js';
 import metaRoutes from './metaRoutes.js';
 import cropsRoutes from './cropsRoutes.js';
-
+import exploreRoutes from './exploreRoutes.js';
 const router = Router();
-
+router.use('/', exploreRoutes);
 router.get('/health', (req, res) => res.json({ status: 'ok' }));
 router.use('/games', gamesRoutes);
 router.use('/attempts', attemptsRoutes);
