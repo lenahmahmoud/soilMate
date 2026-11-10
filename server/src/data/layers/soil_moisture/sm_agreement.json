@@ -1,0 +1,41 @@
+[
+ {
+  "center": "baltim",
+  "months": 123,
+  "agree_months": 52,
+  "agree_pct": 42,
+  "opposite_months": 19,
+  "chance_pct": 34,
+  "p_value": 0.04,
+  "rank_correlation": 0.21,
+  "level": "weak",
+  "p_adjusted": 0.1199,
+  "agree_pct_excl_outage": 41.2
+ },
+ {
+  "center": "desouk",
+  "months": 123,
+  "agree_months": 54,
+  "agree_pct": 44,
+  "opposite_months": 25,
+  "chance_pct": 34,
+  "p_value": 0.0205,
+  "rank_correlation": 0.17,
+  "level": "weak",
+  "p_adjusted": 0.0615,
+  "agree_pct_excl_outage": 44.5
+ },
+ {
+  "center": "sidi_salem",
+  "months": 123,
+  "agree_months": 42,
+  "agree_pct": 34,
+  "opposite_months": 27,
+  "chance_pct": 34,
+  "p_value": 0.5272,
+  "rank_correlation": 0.12,
+  "level": "weak",
+  "p_adjusted": 1.0,
+  "agree_pct_excl_outage": 34.5
+ }
+]

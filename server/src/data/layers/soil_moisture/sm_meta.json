@@ -1,0 +1,34 @@
+{
+ "layer": "soil_moisture",
+ "period": "2015-04 to 2025-06",
+ "last_shared_month": "2025-06",
+ "centers": [
+  "baltim",
+  "desouk",
+  "sidi_salem"
+ ],
+ "sources": {
+  "sm_surface": "NASA SMAP L4 SPL4SMGP v007 via Google Earth Engine (NASA/SMAP/SPL4SMGP/007), band sm_surface, 0-5 cm, m3/m3, ~9 km, model that assimilates SMAP observations; monthly mean of 3-hourly values over the center bbox",
+  "soil_wet_surface": "NASA POWER (model estimate)",
+  "soil_wet_root": "NASA POWER (model estimate)"
+ },
+ "method": "State = tercile rank of the month among the same calendar month in other years, per center and per source. Unit-free.",
+ "level_rule": "strong: Bonferroni-adjusted p<0.01 AND agreement>=50% (the 50% is a design choice, not a statistical standard); moderate: adjusted p<0.05; else weak. Adjusted p = p x 3 centers.",
+ "caveats": [
+  "agreement p-values are approximate: neighbouring months are not independent",
+  "~10-11 values per calendar month, so each tercile has 3-4 values",
+  "SMAP L4 is a model + satellite product, not a direct measurement; instrument outages 2019-06-19..07-23 and 2022-08-06..09-20 are model-only",
+  "2015 and 2025 are partial years"
+ ],
+ "state_labels": {
+  "dry": "Drier than usual",
+  "normal": "About usual",
+  "wet": "Wetter than usual",
+  "no_data": "No data"
+ },
+ "agreement_levels": {
+  "strong": "Strong agreement",
+  "moderate": "Moderate agreement",
+  "weak": "Weak agreement"
+ }
+}

@@ -1,0 +1,2906 @@
+{
+ "meta": {
+  "feature": "ndvi_crop_health",
+  "version": "1.0",
+  "generated": "2026-11-03",
+  "period": {
+   "from": "2015-04",
+   "to": "2025-06",
+   "months": 123,
+   "full_years_used": [
+    2016,
+    2024
+   ]
+  },
+  "thresholds": {
+   "bare_below": 0.4,
+   "good_from": 0.6
+  },
+  "sources": [
+   {
+    "id": "ndvi",
+    "icon": "sat",
+    "title": "NDVI — NASA MODIS Terra",
+    "detail": "MOD13Q1 v061 · 16-day · 250 m"
+   },
+   {
+    "id": "lst",
+    "icon": "therm",
+    "title": "Land surface temperature — NASA MODIS",
+    "detail": "MOD11A2 v061 · 8-day · 1 km"
+   },
+   {
+    "id": "crop",
+    "icon": "field",
+    "title": "Cropland mask — ESA WorldCover",
+    "detail": "v200 (2021) · 10 m · class 40 = cropland"
+   },
+   {
+    "id": "proc",
+    "icon": "globe",
+    "title": "Processing — Google Earth Engine",
+    "detail": "Monthly means per center · Apr 2015 – Jun 2025"
+   }
+  ],
+  "disclaimer": "A helper indicator — it does not replace the farmer’s knowledge.",
+  "limits": [
+   "Low NDVI is not proof of crop stress (it can be post-harvest bare soil).",
+   "Correlation with temperature is seasonal, not causal.",
+   "MODIS pixels are 250 m: small fields get mixed together."
+  ]
+ },
+ "ui": {
+  "layer": {
+   "id": "ndvi",
+   "label": "Crop Health (NDVI)"
+  },
+  "steps": [
+   {
+    "id": "summary",
+    "title": "Crop Health"
+   },
+   {
+    "id": "chart_A",
+    "title": "When is it green?",
+    "type": "line"
+   },
+   {
+    "id": "chart_B",
+    "title": "Bare months",
+    "type": "bar"
+   },
+   {
+    "id": "chart_E",
+    "title": "Greener or not?",
+    "type": "line"
+   },
+   {
+    "id": "insights",
+    "title": "Quick insights"
+   }
+  ],
+  "default_center": "Sidi_Salem",
+  "level_colors": {
+   "low": "#ff7a59",
+   "mid": "#ffc83d",
+   "good": "#2fb36d"
+  },
+  "ndvi_color_stops": [
+   [
+    0.2,
+    [
+     196,
+     85,
+     59
+    ]
+   ],
+   [
+    0.4,
+    [
+     224,
+     169,
+     63
+    ]
+   ],
+   [
+    0.6,
+    [
+     143,
+     184,
+     90
+    ]
+   ],
+   [
+    0.9,
+    [
+     31,
+     107,
+     69
+    ]
+   ]
+  ],
+  "chart_axes": {
+   "A": {
+    "y_min": 0.25,
+    "y_max": 0.9
+   },
+   "B": {
+    "y_min": 0,
+    "y_max": 4,
+    "step": 1
+   },
+   "E": {
+    "y_min": 0.4,
+    "y_max": 0.8
+   }
+  }
+ },
+ "tiles": {
+  "centers": 3,
+  "avg_ndvi_latest": 0.565
+ },
+ "charts": {
+  "A": {
+   "title": "The season",
+   "subtitle": "average NDVI per month",
+   "labels": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+   ],
+   "series": {
+    "Desouk": [
+     0.7991,
+     0.8091,
+     0.7358,
+     0.5192,
+     0.3999,
+     0.5637,
+     0.7209,
+     0.646,
+     0.4627,
+     0.558,
+     0.6575,
+     0.7516
+    ],
+    "Sidi_Salem": [
+     0.7808,
+     0.7797,
+     0.6741,
+     0.4431,
+     0.3512,
+     0.5943,
+     0.6949,
+     0.5411,
+     0.396,
+     0.517,
+     0.6523,
+     0.7457
+    ],
+    "Baltim": [
+     0.6264,
+     0.6512,
+     0.6191,
+     0.5143,
+     0.4229,
+     0.4932,
+     0.6017,
+     0.5785,
+     0.4543,
+     0.4351,
+     0.5006,
+     0.5716
+    ]
+   },
+   "bare_line": 0.4
+  },
+  "B": {
+   "title": "Bare land",
+   "subtitle": "months below 0.4",
+   "labels": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "series": {
+    "Desouk": [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     1
+    ],
+    "Sidi_Salem": [
+     3,
+     2,
+     2,
+     2,
+     2,
+     1,
+     2,
+     1,
+     2
+    ],
+    "Baltim": [
+     2,
+     1,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  "E": {
+   "title": "The trend",
+   "subtitle": "yearly average",
+   "labels": [
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+   ],
+   "series": {
+    "Desouk": [
+     0.6355,
+     0.6298,
+     0.6297,
+     0.6465,
+     0.6477,
+     0.6333,
+     0.6263,
+     0.6245,
+     0.6371
+    ],
+    "Sidi_Salem": [
+     0.5839,
+     0.584,
+     0.5895,
+     0.607,
+     0.6072,
+     0.5856,
+     0.5938,
+     0.6036,
+     0.6073
+    ],
+    "Baltim": [
+     0.5202,
+     0.5285,
+     0.5202,
+     0.5425,
+     0.5468,
+     0.539,
+     0.5369,
+     0.5538,
+     0.5593
+    ]
+   },
+   "trend": {
+    "Desouk": {
+     "slope_per_year": -0.00049,
+     "word": "about stable",
+     "line": [
+      0.6365,
+      0.636,
+      0.6355,
+      0.635,
+      0.6345,
+      0.634,
+      0.6335,
+      0.633,
+      0.6325
+     ]
+    },
+    "Sidi_Salem": {
+     "slope_per_year": 0.00233,
+     "word": "about stable",
+     "line": [
+      0.5864,
+      0.5888,
+      0.5911,
+      0.5934,
+      0.5958,
+      0.5981,
+      0.6004,
+      0.6028,
+      0.6051
+     ]
+    },
+    "Baltim": {
+     "slope_per_year": 0.00437,
+     "word": "slight rise",
+     "line": [
+      0.5211,
+      0.5254,
+      0.5298,
+      0.5342,
+      0.5386,
+      0.5429,
+      0.5473,
+      0.5517,
+      0.5561
+     ]
+    }
+   }
+  }
+ },
+ "centers": {
+  "Desouk": {
+   "id": "Desouk",
+   "name": "Desouk",
+   "bbox": [
+    30.55,
+    31.05,
+    30.75,
+    31.25
+   ],
+   "color": "#f2a900",
+   "latest": {
+    "month": "2025-06",
+    "label": "June 2025",
+    "ndvi": 0.562,
+    "level": {
+     "id": "mid",
+     "label": "Moderate green"
+    },
+    "anomaly": -0.0017,
+    "anomaly_word": "about normal",
+    "map_fill_rgb": [
+     158,
+     181,
+     85
+    ],
+    "map_fill_hex": "#9eb555"
+   },
+   "summary_card": {
+    "lowest_month": {
+     "number": 5,
+     "name": "May",
+     "ndvi": 0.3999
+    },
+    "bare_months_per_year": 0.4,
+    "green_pct_last12": 92,
+    "last4": [
+     {
+      "month": "2025-03",
+      "short": "Mar",
+      "ndvi": 0.7884,
+      "fill_hex": "#49884d"
+     },
+     {
+      "month": "2025-04",
+      "short": "Apr",
+      "ndvi": 0.531,
+      "fill_hex": "#abb351"
+     },
+     {
+      "month": "2025-05",
+      "short": "May",
+      "ndvi": 0.3997,
+      "fill_hex": "#e0a93f"
+     },
+     {
+      "month": "2025-06",
+      "short": "Jun",
+      "ndvi": 0.562,
+      "fill_hex": "#9eb555"
+     }
+    ],
+    "rows": [
+     {
+      "icon": "eye",
+      "text": "Greenness is about normal (0.00)"
+     },
+     {
+      "icon": "bulb",
+      "text": "May (0.40) is right at the bare line — likely a gap between crops"
+     },
+     {
+      "icon": "check",
+      "text": "Check against the real crop calendar"
+     }
+    ],
+    "source_tag": "NASA MODIS · 250 m"
+   },
+   "insights": [
+    {
+     "id": "weakest_month",
+     "icon": "warn",
+     "text": "Weakest month: August 2016 (−0.09)"
+    },
+    {
+     "id": "ranking",
+     "icon": "podium",
+     "text": "Ranking: Desouk 0.63 › Sidi Salem 0.59 › Baltim 0.54"
+    },
+    {
+     "id": "least_green",
+     "icon": "cal",
+     "text": "Least green in every center: May"
+    },
+    {
+     "id": "heat_link",
+     "icon": "therm",
+     "text": "Greenness drops with heat (correlation −0.76)"
+    },
+    {
+     "id": "trend",
+     "icon": "trend",
+     "text": "Trend: about stable (0.000 per year)"
+    },
+    {
+     "id": "cover_crop",
+     "icon": "link",
+     "text": "May is a chance for a cover crop"
+    }
+   ],
+   "monthly_series": [
+    {
+     "month": "2015-04",
+     "ndvi": 0.5691,
+     "anomaly": 0.0499,
+     "lst_c": 27.69
+    },
+    {
+     "month": "2015-05",
+     "ndvi": 0.4078,
+     "anomaly": 0.0079,
+     "lst_c": 35.12
+    },
+    {
+     "month": "2015-06",
+     "ndvi": 0.5401,
+     "anomaly": -0.0235,
+     "lst_c": 34.09
+    },
+    {
+     "month": "2015-07",
+     "ndvi": 0.7228,
+     "anomaly": 0.0019,
+     "lst_c": 33.33
+    },
+    {
+     "month": "2015-08",
+     "ndvi": 0.6433,
+     "anomaly": -0.0026,
+     "lst_c": 33.06
+    },
+    {
+     "month": "2015-09",
+     "ndvi": 0.4769,
+     "anomaly": 0.0142,
+     "lst_c": 33.54
+    },
+    {
+     "month": "2015-10",
+     "ndvi": 0.5687,
+     "anomaly": 0.0107,
+     "lst_c": 29.81
+    },
+    {
+     "month": "2015-11",
+     "ndvi": 0.641,
+     "anomaly": -0.0166,
+     "lst_c": 23.35
+    },
+    {
+     "month": "2015-12",
+     "ndvi": 0.7542,
+     "anomaly": 0.0026,
+     "lst_c": 20.2
+    },
+    {
+     "month": "2016-01",
+     "ndvi": 0.8065,
+     "anomaly": 0.0074,
+     "lst_c": 16.77
+    },
+    {
+     "month": "2016-02",
+     "ndvi": 0.8176,
+     "anomaly": 0.0085,
+     "lst_c": 21.1
+    },
+    {
+     "month": "2016-03",
+     "ndvi": 0.7384,
+     "anomaly": 0.0026,
+     "lst_c": 22.7
+    },
+    {
+     "month": "2016-04",
+     "ndvi": 0.5106,
+     "anomaly": -0.0085,
+     "lst_c": 31.21
+    },
+    {
+     "month": "2016-05",
+     "ndvi": 0.3601,
+     "anomaly": -0.0398,
+     "lst_c": 34.32
+    },
+    {
+     "month": "2016-06",
+     "ndvi": 0.6375,
+     "anomaly": 0.0738,
+     "lst_c": 35.21
+    },
+    {
+     "month": "2016-07",
+     "ndvi": 0.7121,
+     "anomaly": -0.0087,
+     "lst_c": 33.01
+    },
+    {
+     "month": "2016-08",
+     "ndvi": 0.5551,
+     "anomaly": -0.0909,
+     "lst_c": 32.4
+    },
+    {
+     "month": "2016-09",
+     "ndvi": 0.44,
+     "anomaly": -0.0227,
+     "lst_c": 34.0
+    },
+    {
+     "month": "2016-10",
+     "ndvi": 0.577,
+     "anomaly": 0.019,
+     "lst_c": 29.76
+    },
+    {
+     "month": "2016-11",
+     "ndvi": 0.6857,
+     "anomaly": 0.0282,
+     "lst_c": 22.7
+    },
+    {
+     "month": "2016-12",
+     "ndvi": 0.7851,
+     "anomaly": 0.0335,
+     "lst_c": 17.25
+    },
+    {
+     "month": "2017-01",
+     "ndvi": 0.8021,
+     "anomaly": 0.0029,
+     "lst_c": 16.16
+    },
+    {
+     "month": "2017-02",
+     "ndvi": 0.8243,
+     "anomaly": 0.0152,
+     "lst_c": 18.52
+    },
+    {
+     "month": "2017-03",
+     "ndvi": 0.734,
+     "anomaly": -0.0017,
+     "lst_c": 22.47
+    },
+    {
+     "month": "2017-04",
+     "ndvi": 0.4832,
+     "anomaly": -0.036,
+     "lst_c": 28.63
+    },
+    {
+     "month": "2017-05",
+     "ndvi": 0.401,
+     "anomaly": 0.0012,
+     "lst_c": 35.45
+    },
+    {
+     "month": "2017-06",
+     "ndvi": 0.5544,
+     "anomaly": -0.0093,
+     "lst_c": 36.01
+    },
+    {
+     "month": "2017-07",
+     "ndvi": 0.7202,
+     "anomaly": -0.0007,
+     "lst_c": 33.25
+    },
+    {
+     "month": "2017-08",
+     "ndvi": 0.6266,
+     "anomaly": -0.0193,
+     "lst_c": 32.67
+    },
+    {
+     "month": "2017-09",
+     "ndvi": 0.4404,
+     "anomaly": -0.0223,
+     "lst_c": 33.34
+    },
+    {
+     "month": "2017-10",
+     "ndvi": 0.5538,
+     "anomaly": -0.0042,
+     "lst_c": 29.14
+    },
+    {
+     "month": "2017-11",
+     "ndvi": 0.6661,
+     "anomaly": 0.0086,
+     "lst_c": 24.13
+    },
+    {
+     "month": "2017-12",
+     "ndvi": 0.7519,
+     "anomaly": 0.0004,
+     "lst_c": 19.92
+    },
+    {
+     "month": "2018-01",
+     "ndvi": 0.802,
+     "anomaly": 0.0029,
+     "lst_c": 17.27
+    },
+    {
+     "month": "2018-02",
+     "ndvi": 0.7986,
+     "anomaly": -0.0105,
+     "lst_c": 19.75
+    },
+    {
+     "month": "2018-03",
+     "ndvi": 0.6983,
+     "anomaly": -0.0375,
+     "lst_c": 24.86
+    },
+    {
+     "month": "2018-04",
+     "ndvi": 0.4683,
+     "anomaly": -0.0509,
+     "lst_c": 31.31
+    },
+    {
+     "month": "2018-05",
+     "ndvi": 0.4007,
+     "anomaly": 0.0009,
+     "lst_c": 34.62
+    },
+    {
+     "month": "2018-06",
+     "ndvi": 0.6029,
+     "anomaly": 0.0392,
+     "lst_c": 35.33
+    },
+    {
+     "month": "2018-07",
+     "ndvi": 0.677,
+     "anomaly": -0.0438,
+     "lst_c": 33.2
+    },
+    {
+     "month": "2018-08",
+     "ndvi": 0.5901,
+     "anomaly": -0.0559,
+     "lst_c": 33.27
+    },
+    {
+     "month": "2018-09",
+     "ndvi": 0.476,
+     "anomaly": 0.0133,
+     "lst_c": 33.27
+    },
+    {
+     "month": "2018-10",
+     "ndvi": 0.6134,
+     "anomaly": 0.0554,
+     "lst_c": 29.18
+    },
+    {
+     "month": "2018-11",
+     "ndvi": 0.6574,
+     "anomaly": -0.0001,
+     "lst_c": 24.98
+    },
+    {
+     "month": "2018-12",
+     "ndvi": 0.7716,
+     "anomaly": 0.02,
+     "lst_c": 18.18
+    },
+    {
+     "month": "2019-01",
+     "ndvi": 0.7965,
+     "anomaly": -0.0026,
+     "lst_c": 15.93
+    },
+    {
+     "month": "2019-02",
+     "ndvi": 0.8102,
+     "anomaly": 0.001,
+     "lst_c": 17.46
+    },
+    {
+     "month": "2019-03",
+     "ndvi": 0.758,
+     "anomaly": 0.0222,
+     "lst_c": 21.41
+    },
+    {
+     "month": "2019-04",
+     "ndvi": 0.5596,
+     "anomaly": 0.0405,
+     "lst_c": 25.9
+    },
+    {
+     "month": "2019-05",
+     "ndvi": 0.4076,
+     "anomaly": 0.0077,
+     "lst_c": 35.87
+    },
+    {
+     "month": "2019-06",
+     "ndvi": 0.5841,
+     "anomaly": 0.0204,
+     "lst_c": 34.97
+    },
+    {
+     "month": "2019-07",
+     "ndvi": 0.7416,
+     "anomaly": 0.0207,
+     "lst_c": 32.9
+    },
+    {
+     "month": "2019-08",
+     "ndvi": 0.674,
+     "anomaly": 0.0281,
+     "lst_c": 33.01
+    },
+    {
+     "month": "2019-09",
+     "ndvi": 0.458,
+     "anomaly": -0.0048,
+     "lst_c": 33.4
+    },
+    {
+     "month": "2019-10",
+     "ndvi": 0.5631,
+     "anomaly": 0.0051,
+     "lst_c": 30.2
+    },
+    {
+     "month": "2019-11",
+     "ndvi": 0.6372,
+     "anomaly": -0.0203,
+     "lst_c": 26.11
+    },
+    {
+     "month": "2019-12",
+     "ndvi": 0.7682,
+     "anomaly": 0.0166,
+     "lst_c": 18.9
+    },
+    {
+     "month": "2020-01",
+     "ndvi": 0.7972,
+     "anomaly": -0.0019,
+     "lst_c": 15.17
+    },
+    {
+     "month": "2020-02",
+     "ndvi": 0.8149,
+     "anomaly": 0.0058,
+     "lst_c": 18.63
+    },
+    {
+     "month": "2020-03",
+     "ndvi": 0.7255,
+     "anomaly": -0.0103,
+     "lst_c": 22.55
+    },
+    {
+     "month": "2020-04",
+     "ndvi": 0.5323,
+     "anomaly": 0.0132,
+     "lst_c": 29.87
+    },
+    {
+     "month": "2020-05",
+     "ndvi": 0.4295,
+     "anomaly": 0.0296,
+     "lst_c": 36.36
+    },
+    {
+     "month": "2020-06",
+     "ndvi": 0.5629,
+     "anomaly": -0.0008,
+     "lst_c": 34.79
+    },
+    {
+     "month": "2020-07",
+     "ndvi": 0.7306,
+     "anomaly": 0.0097,
+     "lst_c": 33.3
+    },
+    {
+     "month": "2020-08",
+     "ndvi": 0.6712,
+     "anomaly": 0.0252,
+     "lst_c": 33.72
+    },
+    {
+     "month": "2020-09",
+     "ndvi": 0.471,
+     "anomaly": 0.0083,
+     "lst_c": 34.8
+    },
+    {
+     "month": "2020-10",
+     "ndvi": 0.585,
+     "anomaly": 0.027,
+     "lst_c": 30.14
+    },
+    {
+     "month": "2020-11",
+     "ndvi": 0.7127,
+     "anomaly": 0.0552,
+     "lst_c": 23.95
+    },
+    {
+     "month": "2020-12",
+     "ndvi": 0.7394,
+     "anomaly": -0.0122,
+     "lst_c": 19.95
+    },
+    {
+     "month": "2021-01",
+     "ndvi": 0.8123,
+     "anomaly": 0.0132,
+     "lst_c": 18.5
+    },
+    {
+     "month": "2021-02",
+     "ndvi": 0.8132,
+     "anomaly": 0.0041,
+     "lst_c": 19.54
+    },
+    {
+     "month": "2021-03",
+     "ndvi": 0.6746,
+     "anomaly": -0.0612,
+     "lst_c": 22.05
+    },
+    {
+     "month": "2021-04",
+     "ndvi": 0.5025,
+     "anomaly": -0.0166,
+     "lst_c": 30.34
+    },
+    {
+     "month": "2021-05",
+     "ndvi": 0.4145,
+     "anomaly": 0.0146,
+     "lst_c": 37.51
+    },
+    {
+     "month": "2021-06",
+     "ndvi": 0.5603,
+     "anomaly": -0.0034,
+     "lst_c": 35.9
+    },
+    {
+     "month": "2021-07",
+     "ndvi": 0.7302,
+     "anomaly": 0.0093,
+     "lst_c": 34.31
+    },
+    {
+     "month": "2021-08",
+     "ndvi": 0.6668,
+     "anomaly": 0.0208,
+     "lst_c": 33.8
+    },
+    {
+     "month": "2021-09",
+     "ndvi": 0.4848,
+     "anomaly": 0.022,
+     "lst_c": 32.69
+    },
+    {
+     "month": "2021-10",
+     "ndvi": 0.5413,
+     "anomaly": -0.0167,
+     "lst_c": 29.91
+    },
+    {
+     "month": "2021-11",
+     "ndvi": 0.6538,
+     "anomaly": -0.0037,
+     "lst_c": 25.99
+    },
+    {
+     "month": "2021-12",
+     "ndvi": 0.7456,
+     "anomaly": -0.006,
+     "lst_c": 17.55
+    },
+    {
+     "month": "2022-01",
+     "ndvi": 0.809,
+     "anomaly": 0.0099,
+     "lst_c": 15.79
+    },
+    {
+     "month": "2022-02",
+     "ndvi": 0.825,
+     "anomaly": 0.0159,
+     "lst_c": 17.74
+    },
+    {
+     "month": "2022-03",
+     "ndvi": 0.7196,
+     "anomaly": -0.0162,
+     "lst_c": 18.98
+    },
+    {
+     "month": "2022-04",
+     "ndvi": 0.5409,
+     "anomaly": 0.0218,
+     "lst_c": 27.54
+    },
+    {
+     "month": "2022-05",
+     "ndvi": 0.3922,
+     "anomaly": -0.0077,
+     "lst_c": 35.0
+    },
+    {
+     "month": "2022-06",
+     "ndvi": 0.5026,
+     "anomaly": -0.0611,
+     "lst_c": 36.86
+    },
+    {
+     "month": "2022-07",
+     "ndvi": 0.7037,
+     "anomaly": -0.0171,
+     "lst_c": 33.89
+    },
+    {
+     "month": "2022-08",
+     "ndvi": 0.6844,
+     "anomaly": 0.0384,
+     "lst_c": 31.08
+    },
+    {
+     "month": "2022-09",
+     "ndvi": 0.4709,
+     "anomaly": 0.0082,
+     "lst_c": 31.97
+    },
+    {
+     "month": "2022-10",
+     "ndvi": 0.4983,
+     "anomaly": -0.0597,
+     "lst_c": 28.0
+    },
+    {
+     "month": "2022-11",
+     "ndvi": 0.6228,
+     "anomaly": -0.0347,
+     "lst_c": 24.97
+    },
+    {
+     "month": "2022-12",
+     "ndvi": 0.7466,
+     "anomaly": -0.005,
+     "lst_c": 20.79
+    },
+    {
+     "month": "2023-01",
+     "ndvi": 0.7946,
+     "anomaly": -0.0045,
+     "lst_c": 17.79
+    },
+    {
+     "month": "2023-02",
+     "ndvi": 0.7822,
+     "anomaly": -0.0269,
+     "lst_c": 17.7
+    },
+    {
+     "month": "2023-03",
+     "ndvi": 0.7726,
+     "anomaly": 0.0368,
+     "lst_c": 23.26
+    },
+    {
+     "month": "2023-04",
+     "ndvi": 0.4858,
+     "anomaly": -0.0333,
+     "lst_c": 27.85
+    },
+    {
+     "month": "2023-05",
+     "ndvi": 0.3971,
+     "anomaly": -0.0028,
+     "lst_c": 33.47
+    },
+    {
+     "month": "2023-06",
+     "ndvi": 0.5548,
+     "anomaly": -0.0089,
+     "lst_c": 34.46
+    },
+    {
+     "month": "2023-07",
+     "ndvi": 0.736,
+     "anomaly": 0.0151,
+     "lst_c": 33.8
+    },
+    {
+     "month": "2023-08",
+     "ndvi": 0.6885,
+     "anomaly": 0.0425,
+     "lst_c": 31.19
+    },
+    {
+     "month": "2023-09",
+     "ndvi": 0.4556,
+     "anomaly": -0.0071,
+     "lst_c": 32.42
+    },
+    {
+     "month": "2023-10",
+     "ndvi": 0.489,
+     "anomaly": -0.069,
+     "lst_c": 29.72
+    },
+    {
+     "month": "2023-11",
+     "ndvi": 0.6259,
+     "anomaly": -0.0316,
+     "lst_c": 25.6
+    },
+    {
+     "month": "2023-12",
+     "ndvi": 0.7117,
+     "anomaly": -0.0399,
+     "lst_c": 20.81
+    },
+    {
+     "month": "2024-01",
+     "ndvi": 0.7758,
+     "anomaly": -0.0234,
+     "lst_c": 16.91
+    },
+    {
+     "month": "2024-02",
+     "ndvi": 0.8141,
+     "anomaly": 0.005,
+     "lst_c": 18.47
+    },
+    {
+     "month": "2024-03",
+     "ndvi": 0.7483,
+     "anomaly": 0.0125,
+     "lst_c": 22.06
+    },
+    {
+     "month": "2024-04",
+     "ndvi": 0.5273,
+     "anomaly": 0.0082,
+     "lst_c": 29.0
+    },
+    {
+     "month": "2024-05",
+     "ndvi": 0.3884,
+     "anomaly": -0.0115,
+     "lst_c": 34.18
+    },
+    {
+     "month": "2024-06",
+     "ndvi": 0.539,
+     "anomaly": -0.0247,
+     "lst_c": 36.81
+    },
+    {
+     "month": "2024-07",
+     "ndvi": 0.7344,
+     "anomaly": 0.0136,
+     "lst_c": 32.98
+    },
+    {
+     "month": "2024-08",
+     "ndvi": 0.6596,
+     "anomaly": 0.0137,
+     "lst_c": 32.36
+    },
+    {
+     "month": "2024-09",
+     "ndvi": 0.4535,
+     "anomaly": -0.0092,
+     "lst_c": 31.96
+    },
+    {
+     "month": "2024-10",
+     "ndvi": 0.5905,
+     "anomaly": 0.0325,
+     "lst_c": 28.03
+    },
+    {
+     "month": "2024-11",
+     "ndvi": 0.6726,
+     "anomaly": 0.015,
+     "lst_c": 22.55
+    },
+    {
+     "month": "2024-12",
+     "ndvi": 0.7415,
+     "anomaly": -0.01,
+     "lst_c": 18.04
+    },
+    {
+     "month": "2025-01",
+     "ndvi": 0.7952,
+     "anomaly": -0.0039,
+     "lst_c": 17.2
+    },
+    {
+     "month": "2025-02",
+     "ndvi": 0.7911,
+     "anomaly": -0.018,
+     "lst_c": 16.03
+    },
+    {
+     "month": "2025-03",
+     "ndvi": 0.7884,
+     "anomaly": 0.0526,
+     "lst_c": 22.45
+    },
+    {
+     "month": "2025-04",
+     "ndvi": 0.531,
+     "anomaly": 0.0118,
+     "lst_c": 25.24
+    },
+    {
+     "month": "2025-05",
+     "ndvi": 0.3997,
+     "anomaly": -0.0002,
+     "lst_c": 32.52
+    },
+    {
+     "month": "2025-06",
+     "ndvi": 0.562,
+     "anomaly": -0.0017,
+     "lst_c": 34.74
+    }
+   ]
+  },
+  "Sidi_Salem": {
+   "id": "Sidi_Salem",
+   "name": "Sidi Salem",
+   "bbox": [
+    30.85,
+    31.15,
+    31.1,
+    31.38
+   ],
+   "color": "#2f8fe0",
+   "latest": {
+    "month": "2025-06",
+    "label": "June 2025",
+    "ndvi": 0.6173,
+    "level": {
+     "id": "good",
+     "label": "Healthy green"
+    },
+    "anomaly": 0.023,
+    "anomaly_word": "about normal",
+    "map_fill_rgb": [
+     137,
+     180,
+     89
+    ],
+    "map_fill_hex": "#89b459"
+   },
+   "summary_card": {
+    "lowest_month": {
+     "number": 5,
+     "name": "May",
+     "ndvi": 0.3512
+    },
+    "bare_months_per_year": 1.9,
+    "green_pct_last12": 83,
+    "last4": [
+     {
+      "month": "2025-03",
+      "short": "Mar",
+      "ndvi": 0.7419,
+      "fill_hex": "#5a9450"
+     },
+     {
+      "month": "2025-04",
+      "short": "Apr",
+      "ndvi": 0.4536,
+      "fill_hex": "#caad46"
+     },
+     {
+      "month": "2025-05",
+      "short": "May",
+      "ndvi": 0.3478,
+      "fill_hex": "#d9933e"
+     },
+     {
+      "month": "2025-06",
+      "short": "Jun",
+      "ndvi": 0.6173,
+      "fill_hex": "#89b459"
+     }
+    ],
+    "rows": [
+     {
+      "icon": "eye",
+      "text": "Greenness is about normal (+0.02)"
+     },
+     {
+      "icon": "bulb",
+      "text": "May below 0.4 — likely a gap between crops"
+     },
+     {
+      "icon": "check",
+      "text": "Check against the real crop calendar"
+     }
+    ],
+    "source_tag": "NASA MODIS · 250 m"
+   },
+   "insights": [
+    {
+     "id": "weakest_month",
+     "icon": "warn",
+     "text": "Weakest month: August 2016 (−0.12)"
+    },
+    {
+     "id": "ranking",
+     "icon": "podium",
+     "text": "Ranking: Desouk 0.63 › Sidi Salem 0.59 › Baltim 0.54"
+    },
+    {
+     "id": "least_green",
+     "icon": "cal",
+     "text": "Least green in every center: May"
+    },
+    {
+     "id": "heat_link",
+     "icon": "therm",
+     "text": "Greenness drops with heat (correlation −0.77)"
+    },
+    {
+     "id": "trend",
+     "icon": "trend",
+     "text": "Trend: about stable (+0.002 per year)"
+    },
+    {
+     "id": "cover_crop",
+     "icon": "link",
+     "text": "May is a chance for a cover crop"
+    }
+   ],
+   "monthly_series": [
+    {
+     "month": "2015-04",
+     "ndvi": 0.4476,
+     "anomaly": 0.0046,
+     "lst_c": 29.9
+    },
+    {
+     "month": "2015-05",
+     "ndvi": 0.3483,
+     "anomaly": -0.0029,
+     "lst_c": 35.24
+    },
+    {
+     "month": "2015-06",
+     "ndvi": 0.5858,
+     "anomaly": -0.0086,
+     "lst_c": 32.86
+    },
+    {
+     "month": "2015-07",
+     "ndvi": 0.6925,
+     "anomaly": -0.0024,
+     "lst_c": 33.64
+    },
+    {
+     "month": "2015-08",
+     "ndvi": 0.5391,
+     "anomaly": -0.0021,
+     "lst_c": 34.45
+    },
+    {
+     "month": "2015-09",
+     "ndvi": 0.4165,
+     "anomaly": 0.0205,
+     "lst_c": 34.65
+    },
+    {
+     "month": "2015-10",
+     "ndvi": 0.5558,
+     "anomaly": 0.0388,
+     "lst_c": 30.44
+    },
+    {
+     "month": "2015-11",
+     "ndvi": 0.66,
+     "anomaly": 0.0077,
+     "lst_c": 23.9
+    },
+    {
+     "month": "2015-12",
+     "ndvi": 0.7437,
+     "anomaly": -0.002,
+     "lst_c": 19.86
+    },
+    {
+     "month": "2016-01",
+     "ndvi": 0.762,
+     "anomaly": -0.0188,
+     "lst_c": 17.02
+    },
+    {
+     "month": "2016-02",
+     "ndvi": 0.7672,
+     "anomaly": -0.0125,
+     "lst_c": 21.98
+    },
+    {
+     "month": "2016-03",
+     "ndvi": 0.6249,
+     "anomaly": -0.0492,
+     "lst_c": 24.89
+    },
+    {
+     "month": "2016-04",
+     "ndvi": 0.3885,
+     "anomaly": -0.0545,
+     "lst_c": 33.07
+    },
+    {
+     "month": "2016-05",
+     "ndvi": 0.3416,
+     "anomaly": -0.0096,
+     "lst_c": 33.19
+    },
+    {
+     "month": "2016-06",
+     "ndvi": 0.6412,
+     "anomaly": 0.0468,
+     "lst_c": 33.98
+    },
+    {
+     "month": "2016-07",
+     "ndvi": 0.6675,
+     "anomaly": -0.0274,
+     "lst_c": 33.22
+    },
+    {
+     "month": "2016-08",
+     "ndvi": 0.4185,
+     "anomaly": -0.1227,
+     "lst_c": 34.06
+    },
+    {
+     "month": "2016-09",
+     "ndvi": 0.373,
+     "anomaly": -0.023,
+     "lst_c": 35.02
+    },
+    {
+     "month": "2016-10",
+     "ndvi": 0.5547,
+     "anomaly": 0.0376,
+     "lst_c": 29.72
+    },
+    {
+     "month": "2016-11",
+     "ndvi": 0.6896,
+     "anomaly": 0.0373,
+     "lst_c": 23.26
+    },
+    {
+     "month": "2016-12",
+     "ndvi": 0.778,
+     "anomaly": 0.0323,
+     "lst_c": 17.28
+    },
+    {
+     "month": "2017-01",
+     "ndvi": 0.7733,
+     "anomaly": -0.0076,
+     "lst_c": 16.39
+    },
+    {
+     "month": "2017-02",
+     "ndvi": 0.7733,
+     "anomaly": -0.0065,
+     "lst_c": 19.14
+    },
+    {
+     "month": "2017-03",
+     "ndvi": 0.6407,
+     "anomaly": -0.0335,
+     "lst_c": 24.2
+    },
+    {
+     "month": "2017-04",
+     "ndvi": 0.4036,
+     "anomaly": -0.0395,
+     "lst_c": 31.24
+    },
+    {
+     "month": "2017-05",
+     "ndvi": 0.3587,
+     "anomaly": 0.0075,
+     "lst_c": 35.03
+    },
+    {
+     "month": "2017-06",
+     "ndvi": 0.5948,
+     "anomaly": 0.0005,
+     "lst_c": 34.74
+    },
+    {
+     "month": "2017-07",
+     "ndvi": 0.682,
+     "anomaly": -0.0129,
+     "lst_c": 33.3
+    },
+    {
+     "month": "2017-08",
+     "ndvi": 0.4988,
+     "anomaly": -0.0423,
+     "lst_c": 34.23
+    },
+    {
+     "month": "2017-09",
+     "ndvi": 0.3639,
+     "anomaly": -0.0321,
+     "lst_c": 34.53
+    },
+    {
+     "month": "2017-10",
+     "ndvi": 0.516,
+     "anomaly": -0.001,
+     "lst_c": 29.33
+    },
+    {
+     "month": "2017-11",
+     "ndvi": 0.6518,
+     "anomaly": -0.0005,
+     "lst_c": 24.02
+    },
+    {
+     "month": "2017-12",
+     "ndvi": 0.7508,
+     "anomaly": 0.0051,
+     "lst_c": 19.55
+    },
+    {
+     "month": "2018-01",
+     "ndvi": 0.7881,
+     "anomaly": 0.0073,
+     "lst_c": 17.37
+    },
+    {
+     "month": "2018-02",
+     "ndvi": 0.7697,
+     "anomaly": -0.0101,
+     "lst_c": 20.37
+    },
+    {
+     "month": "2018-03",
+     "ndvi": 0.6333,
+     "anomaly": -0.0408,
+     "lst_c": 26.87
+    },
+    {
+     "month": "2018-04",
+     "ndvi": 0.3869,
+     "anomaly": -0.0562,
+     "lst_c": 32.23
+    },
+    {
+     "month": "2018-05",
+     "ndvi": 0.3736,
+     "anomaly": 0.0224,
+     "lst_c": 34.27
+    },
+    {
+     "month": "2018-06",
+     "ndvi": 0.6299,
+     "anomaly": 0.0355,
+     "lst_c": 34.02
+    },
+    {
+     "month": "2018-07",
+     "ndvi": 0.6281,
+     "anomaly": -0.0669,
+     "lst_c": 33.25
+    },
+    {
+     "month": "2018-08",
+     "ndvi": 0.4572,
+     "anomaly": -0.0839,
+     "lst_c": 34.5
+    },
+    {
+     "month": "2018-09",
+     "ndvi": 0.4272,
+     "anomaly": 0.0312,
+     "lst_c": 34.38
+    },
+    {
+     "month": "2018-10",
+     "ndvi": 0.5624,
+     "anomaly": 0.0454,
+     "lst_c": 29.33
+    },
+    {
+     "month": "2018-11",
+     "ndvi": 0.6518,
+     "anomaly": -0.0005,
+     "lst_c": 24.44
+    },
+    {
+     "month": "2018-12",
+     "ndvi": 0.7657,
+     "anomaly": 0.02,
+     "lst_c": 18.61
+    },
+    {
+     "month": "2019-01",
+     "ndvi": 0.7741,
+     "anomaly": -0.0068,
+     "lst_c": 16.24
+    },
+    {
+     "month": "2019-02",
+     "ndvi": 0.7707,
+     "anomaly": -0.009,
+     "lst_c": 18.16
+    },
+    {
+     "month": "2019-03",
+     "ndvi": 0.701,
+     "anomaly": 0.0268,
+     "lst_c": 23.01
+    },
+    {
+     "month": "2019-04",
+     "ndvi": 0.4773,
+     "anomaly": 0.0342,
+     "lst_c": 27.47
+    },
+    {
+     "month": "2019-05",
+     "ndvi": 0.34,
+     "anomaly": -0.0112,
+     "lst_c": 35.57
+    },
+    {
+     "month": "2019-06",
+     "ndvi": 0.6198,
+     "anomaly": 0.0255,
+     "lst_c": 34.13
+    },
+    {
+     "month": "2019-07",
+     "ndvi": 0.7219,
+     "anomaly": 0.027,
+     "lst_c": 32.42
+    },
+    {
+     "month": "2019-08",
+     "ndvi": 0.5809,
+     "anomaly": 0.0398,
+     "lst_c": 34.26
+    },
+    {
+     "month": "2019-09",
+     "ndvi": 0.3965,
+     "anomaly": 0.0005,
+     "lst_c": 34.49
+    },
+    {
+     "month": "2019-10",
+     "ndvi": 0.5138,
+     "anomaly": -0.0032,
+     "lst_c": 30.6
+    },
+    {
+     "month": "2019-11",
+     "ndvi": 0.6303,
+     "anomaly": -0.022,
+     "lst_c": 26.05
+    },
+    {
+     "month": "2019-12",
+     "ndvi": 0.7574,
+     "anomaly": 0.0117,
+     "lst_c": 18.85
+    },
+    {
+     "month": "2020-01",
+     "ndvi": 0.7876,
+     "anomaly": 0.0068,
+     "lst_c": 15.63
+    },
+    {
+     "month": "2020-02",
+     "ndvi": 0.7928,
+     "anomaly": 0.0131,
+     "lst_c": 18.99
+    },
+    {
+     "month": "2020-03",
+     "ndvi": 0.691,
+     "anomaly": 0.0169,
+     "lst_c": 23.39
+    },
+    {
+     "month": "2020-04",
+     "ndvi": 0.4526,
+     "anomaly": 0.0095,
+     "lst_c": 31.1
+    },
+    {
+     "month": "2020-05",
+     "ndvi": 0.3573,
+     "anomaly": 0.0062,
+     "lst_c": 35.44
+    },
+    {
+     "month": "2020-06",
+     "ndvi": 0.574,
+     "anomaly": -0.0204,
+     "lst_c": 33.91
+    },
+    {
+     "month": "2020-07",
+     "ndvi": 0.6975,
+     "anomaly": 0.0025,
+     "lst_c": 33.04
+    },
+    {
+     "month": "2020-08",
+     "ndvi": 0.5735,
+     "anomaly": 0.0324,
+     "lst_c": 34.34
+    },
+    {
+     "month": "2020-09",
+     "ndvi": 0.3942,
+     "anomaly": -0.0018,
+     "lst_c": 35.69
+    },
+    {
+     "month": "2020-10",
+     "ndvi": 0.5301,
+     "anomaly": 0.0131,
+     "lst_c": 30.59
+    },
+    {
+     "month": "2020-11",
+     "ndvi": 0.7005,
+     "anomaly": 0.0482,
+     "lst_c": 23.07
+    },
+    {
+     "month": "2020-12",
+     "ndvi": 0.7346,
+     "anomaly": -0.0111,
+     "lst_c": 19.89
+    },
+    {
+     "month": "2021-01",
+     "ndvi": 0.7701,
+     "anomaly": -0.0108,
+     "lst_c": 18.47
+    },
+    {
+     "month": "2021-02",
+     "ndvi": 0.7636,
+     "anomaly": -0.0161,
+     "lst_c": 20.12
+    },
+    {
+     "month": "2021-03",
+     "ndvi": 0.6137,
+     "anomaly": -0.0605,
+     "lst_c": 23.57
+    },
+    {
+     "month": "2021-04",
+     "ndvi": 0.4422,
+     "anomaly": -0.0009,
+     "lst_c": 32.18
+    },
+    {
+     "month": "2021-05",
+     "ndvi": 0.3676,
+     "anomaly": 0.0164,
+     "lst_c": 37.05
+    },
+    {
+     "month": "2021-06",
+     "ndvi": 0.5847,
+     "anomaly": -0.0097,
+     "lst_c": 34.91
+    },
+    {
+     "month": "2021-07",
+     "ndvi": 0.6834,
+     "anomaly": -0.0116,
+     "lst_c": 34.22
+    },
+    {
+     "month": "2021-08",
+     "ndvi": 0.5326,
+     "anomaly": -0.0085,
+     "lst_c": 35.08
+    },
+    {
+     "month": "2021-09",
+     "ndvi": 0.4018,
+     "anomaly": 0.0058,
+     "lst_c": 33.73
+    },
+    {
+     "month": "2021-10",
+     "ndvi": 0.4852,
+     "anomaly": -0.0318,
+     "lst_c": 30.42
+    },
+    {
+     "month": "2021-11",
+     "ndvi": 0.6436,
+     "anomaly": -0.0087,
+     "lst_c": 25.97
+    },
+    {
+     "month": "2021-12",
+     "ndvi": 0.7393,
+     "anomaly": -0.0064,
+     "lst_c": 17.57
+    },
+    {
+     "month": "2022-01",
+     "ndvi": 0.7894,
+     "anomaly": 0.0086,
+     "lst_c": 16.13
+    },
+    {
+     "month": "2022-02",
+     "ndvi": 0.7894,
+     "anomaly": 0.0096,
+     "lst_c": 17.99
+    },
+    {
+     "month": "2022-03",
+     "ndvi": 0.6612,
+     "anomaly": -0.0129,
+     "lst_c": 20.08
+    },
+    {
+     "month": "2022-04",
+     "ndvi": 0.4763,
+     "anomaly": 0.0333,
+     "lst_c": 29.08
+    },
+    {
+     "month": "2022-05",
+     "ndvi": 0.3503,
+     "anomaly": -0.0009,
+     "lst_c": 34.99
+    },
+    {
+     "month": "2022-06",
+     "ndvi": 0.5531,
+     "anomaly": -0.0412,
+     "lst_c": 35.53
+    },
+    {
+     "month": "2022-07",
+     "ndvi": 0.7206,
+     "anomaly": 0.0257,
+     "lst_c": 33.21
+    },
+    {
+     "month": "2022-08",
+     "ndvi": 0.5799,
+     "anomaly": 0.0388,
+     "lst_c": 31.9
+    },
+    {
+     "month": "2022-09",
+     "ndvi": 0.3925,
+     "anomaly": -0.0035,
+     "lst_c": 33.54
+    },
+    {
+     "month": "2022-10",
+     "ndvi": 0.472,
+     "anomaly": -0.045,
+     "lst_c": 28.79
+    },
+    {
+     "month": "2022-11",
+     "ndvi": 0.6056,
+     "anomaly": -0.0467,
+     "lst_c": 24.88
+    },
+    {
+     "month": "2022-12",
+     "ndvi": 0.7357,
+     "anomaly": -0.01,
+     "lst_c": 20.07
+    },
+    {
+     "month": "2023-01",
+     "ndvi": 0.795,
+     "anomaly": 0.0142,
+     "lst_c": 17.83
+    },
+    {
+     "month": "2023-02",
+     "ndvi": 0.7708,
+     "anomaly": -0.0089,
+     "lst_c": 17.86
+    },
+    {
+     "month": "2023-03",
+     "ndvi": 0.742,
+     "anomaly": 0.0678,
+     "lst_c": 23.82
+    },
+    {
+     "month": "2023-04",
+     "ndvi": 0.4594,
+     "anomaly": 0.0164,
+     "lst_c": 29.47
+    },
+    {
+     "month": "2023-05",
+     "ndvi": 0.3421,
+     "anomaly": -0.0091,
+     "lst_c": 33.2
+    },
+    {
+     "month": "2023-06",
+     "ndvi": 0.5589,
+     "anomaly": -0.0355,
+     "lst_c": 33.54
+    },
+    {
+     "month": "2023-07",
+     "ndvi": 0.7283,
+     "anomaly": 0.0333,
+     "lst_c": 33.77
+    },
+    {
+     "month": "2023-08",
+     "ndvi": 0.6445,
+     "anomaly": 0.1034,
+     "lst_c": 31.83
+    },
+    {
+     "month": "2023-09",
+     "ndvi": 0.4017,
+     "anomaly": 0.0057,
+     "lst_c": 33.95
+    },
+    {
+     "month": "2023-10",
+     "ndvi": 0.4515,
+     "anomaly": -0.0655,
+     "lst_c": 30.34
+    },
+    {
+     "month": "2023-11",
+     "ndvi": 0.633,
+     "anomaly": -0.0193,
+     "lst_c": 25.04
+    },
+    {
+     "month": "2023-12",
+     "ndvi": 0.7165,
+     "anomaly": -0.0292,
+     "lst_c": 20.34
+    },
+    {
+     "month": "2024-01",
+     "ndvi": 0.7689,
+     "anomaly": -0.0119,
+     "lst_c": 16.5
+    },
+    {
+     "month": "2024-02",
+     "ndvi": 0.8002,
+     "anomaly": 0.0205,
+     "lst_c": 18.93
+    },
+    {
+     "month": "2024-03",
+     "ndvi": 0.6917,
+     "anomaly": 0.0176,
+     "lst_c": 22.68
+    },
+    {
+     "month": "2024-04",
+     "ndvi": 0.4855,
+     "anomaly": 0.0425,
+     "lst_c": 29.83
+    },
+    {
+     "month": "2024-05",
+     "ndvi": 0.3356,
+     "anomaly": -0.0156,
+     "lst_c": 33.82
+    },
+    {
+     "month": "2024-06",
+     "ndvi": 0.5783,
+     "anomaly": -0.016,
+     "lst_c": 35.6
+    },
+    {
+     "month": "2024-07",
+     "ndvi": 0.7275,
+     "anomaly": 0.0326,
+     "lst_c": 32.8
+    },
+    {
+     "month": "2024-08",
+     "ndvi": 0.5863,
+     "anomaly": 0.0451,
+     "lst_c": 32.93
+    },
+    {
+     "month": "2024-09",
+     "ndvi": 0.3926,
+     "anomaly": -0.0033,
+     "lst_c": 33.03
+    },
+    {
+     "month": "2024-10",
+     "ndvi": 0.5286,
+     "anomaly": 0.0116,
+     "lst_c": 28.43
+    },
+    {
+     "month": "2024-11",
+     "ndvi": 0.6569,
+     "anomaly": 0.0046,
+     "lst_c": 22.53
+    },
+    {
+     "month": "2024-12",
+     "ndvi": 0.7352,
+     "anomaly": -0.0104,
+     "lst_c": 17.76
+    },
+    {
+     "month": "2025-01",
+     "ndvi": 0.7998,
+     "anomaly": 0.019,
+     "lst_c": 17.43
+    },
+    {
+     "month": "2025-02",
+     "ndvi": 0.7997,
+     "anomaly": 0.02,
+     "lst_c": 16.24
+    },
+    {
+     "month": "2025-03",
+     "ndvi": 0.7419,
+     "anomaly": 0.0677,
+     "lst_c": 23.26
+    },
+    {
+     "month": "2025-04",
+     "ndvi": 0.4536,
+     "anomaly": 0.0106,
+     "lst_c": 27.14
+    },
+    {
+     "month": "2025-05",
+     "ndvi": 0.3478,
+     "anomaly": -0.0034,
+     "lst_c": 32.84
+    },
+    {
+     "month": "2025-06",
+     "ndvi": 0.6173,
+     "anomaly": 0.023,
+     "lst_c": 33.51
+    }
+   ]
+  },
+  "Baltim": {
+   "id": "Baltim",
+   "name": "Baltim",
+   "bbox": [
+    30.98,
+    31.45,
+    31.25,
+    31.65
+   ],
+   "color": "#1f9d5b",
+   "latest": {
+    "month": "2025-06",
+    "label": "June 2025",
+    "ndvi": 0.5156,
+    "level": {
+     "id": "mid",
+     "label": "Moderate green"
+    },
+    "anomaly": 0.0225,
+    "anomaly_word": "about normal",
+    "map_fill_rgb": [
+     177,
+     178,
+     79
+    ],
+    "map_fill_hex": "#b1b24f"
+   },
+   "summary_card": {
+    "lowest_month": {
+     "number": 5,
+     "name": "May",
+     "ndvi": 0.4229
+    },
+    "bare_months_per_year": 0.4,
+    "green_pct_last12": 100,
+    "last4": [
+     {
+      "month": "2025-03",
+      "short": "Mar",
+      "ndvi": 0.6397,
+      "fill_hex": "#80ae57"
+     },
+     {
+      "month": "2025-04",
+      "short": "Apr",
+      "ndvi": 0.5216,
+      "fill_hex": "#afb24f"
+     },
+     {
+      "month": "2025-05",
+      "short": "May",
+      "ndvi": 0.4198,
+      "fill_hex": "#d8aa42"
+     },
+     {
+      "month": "2025-06",
+      "short": "Jun",
+      "ndvi": 0.5156,
+      "fill_hex": "#b1b24f"
+     }
+    ],
+    "rows": [
+     {
+      "icon": "eye",
+      "text": "Greenness is about normal (+0.02)"
+     },
+     {
+      "icon": "bulb",
+      "text": "May (0.42) is right at the bare line — likely a gap between crops"
+     },
+     {
+      "icon": "check",
+      "text": "Check against the real crop calendar"
+     }
+    ],
+    "source_tag": "NASA MODIS · 250 m"
+   },
+   "insights": [
+    {
+     "id": "weakest_month",
+     "icon": "warn",
+     "text": "Weakest month: May 2016 (−0.08)"
+    },
+    {
+     "id": "ranking",
+     "icon": "podium",
+     "text": "Ranking: Desouk 0.63 › Sidi Salem 0.59 › Baltim 0.54"
+    },
+    {
+     "id": "least_green",
+     "icon": "cal",
+     "text": "Least green in every center: May"
+    },
+    {
+     "id": "heat_link",
+     "icon": "therm",
+     "text": "Greenness drops with heat (correlation −0.54)"
+    },
+    {
+     "id": "trend",
+     "icon": "trend",
+     "text": "Trend: slight rise (+0.004 per year)"
+    },
+    {
+     "id": "cover_crop",
+     "icon": "link",
+     "text": "May is a chance for a cover crop"
+    }
+   ],
+   "monthly_series": [
+    {
+     "month": "2015-04",
+     "ndvi": 0.5018,
+     "anomaly": -0.0125,
+     "lst_c": 27.43
+    },
+    {
+     "month": "2015-05",
+     "ndvi": 0.4107,
+     "anomaly": -0.0122,
+     "lst_c": 32.76
+    },
+    {
+     "month": "2015-06",
+     "ndvi": 0.4902,
+     "anomaly": -0.003,
+     "lst_c": 33.81
+    },
+    {
+     "month": "2015-07",
+     "ndvi": 0.6084,
+     "anomaly": 0.0067,
+     "lst_c": 35.11
+    },
+    {
+     "month": "2015-08",
+     "ndvi": 0.5772,
+     "anomaly": -0.0014,
+     "lst_c": 34.52
+    },
+    {
+     "month": "2015-09",
+     "ndvi": 0.4351,
+     "anomaly": -0.0192,
+     "lst_c": 33.35
+    },
+    {
+     "month": "2015-10",
+     "ndvi": 0.4501,
+     "anomaly": 0.0151,
+     "lst_c": 30.01
+    },
+    {
+     "month": "2015-11",
+     "ndvi": 0.4915,
+     "anomaly": -0.0091,
+     "lst_c": 24.03
+    },
+    {
+     "month": "2015-12",
+     "ndvi": 0.5943,
+     "anomaly": 0.0227,
+     "lst_c": 19.45
+    },
+    {
+     "month": "2016-01",
+     "ndvi": 0.6443,
+     "anomaly": 0.018,
+     "lst_c": 16.67
+    },
+    {
+     "month": "2016-02",
+     "ndvi": 0.6778,
+     "anomaly": 0.0266,
+     "lst_c": 21.42
+    },
+    {
+     "month": "2016-03",
+     "ndvi": 0.6022,
+     "anomaly": -0.0169,
+     "lst_c": 23.09
+    },
+    {
+     "month": "2016-04",
+     "ndvi": 0.4628,
+     "anomaly": -0.0515,
+     "lst_c": 30.45
+    },
+    {
+     "month": "2016-05",
+     "ndvi": 0.3476,
+     "anomaly": -0.0754,
+     "lst_c": 32.71
+    },
+    {
+     "month": "2016-06",
+     "ndvi": 0.4976,
+     "anomaly": 0.0045,
+     "lst_c": 35.43
+    },
+    {
+     "month": "2016-07",
+     "ndvi": 0.5838,
+     "anomaly": -0.0179,
+     "lst_c": 34.71
+    },
+    {
+     "month": "2016-08",
+     "ndvi": 0.5036,
+     "anomaly": -0.0749,
+     "lst_c": 33.89
+    },
+    {
+     "month": "2016-09",
+     "ndvi": 0.3842,
+     "anomaly": -0.0701,
+     "lst_c": 34.0
+    },
+    {
+     "month": "2016-10",
+     "ndvi": 0.4154,
+     "anomaly": -0.0197,
+     "lst_c": 30.17
+    },
+    {
+     "month": "2016-11",
+     "ndvi": 0.519,
+     "anomaly": 0.0184,
+     "lst_c": 24.11
+    },
+    {
+     "month": "2016-12",
+     "ndvi": 0.6036,
+     "anomaly": 0.032,
+     "lst_c": 17.23
+    },
+    {
+     "month": "2017-01",
+     "ndvi": 0.6368,
+     "anomaly": 0.0104,
+     "lst_c": 16.65
+    },
+    {
+     "month": "2017-02",
+     "ndvi": 0.6685,
+     "anomaly": 0.0174,
+     "lst_c": 19.43
+    },
+    {
+     "month": "2017-03",
+     "ndvi": 0.6457,
+     "anomaly": 0.0266,
+     "lst_c": 23.03
+    },
+    {
+     "month": "2017-04",
+     "ndvi": 0.4833,
+     "anomaly": -0.0311,
+     "lst_c": 28.16
+    },
+    {
+     "month": "2017-05",
+     "ndvi": 0.4,
+     "anomaly": -0.023,
+     "lst_c": 33.59
+    },
+    {
+     "month": "2017-06",
+     "ndvi": 0.5022,
+     "anomaly": 0.009,
+     "lst_c": 36.44
+    },
+    {
+     "month": "2017-07",
+     "ndvi": 0.595,
+     "anomaly": -0.0067,
+     "lst_c": 34.7
+    },
+    {
+     "month": "2017-08",
+     "ndvi": 0.5514,
+     "anomaly": -0.0272,
+     "lst_c": 33.91
+    },
+    {
+     "month": "2017-09",
+     "ndvi": 0.4191,
+     "anomaly": -0.0351,
+     "lst_c": 33.51
+    },
+    {
+     "month": "2017-10",
+     "ndvi": 0.406,
+     "anomaly": -0.029,
+     "lst_c": 29.6
+    },
+    {
+     "month": "2017-11",
+     "ndvi": 0.4683,
+     "anomaly": -0.0323,
+     "lst_c": 24.77
+    },
+    {
+     "month": "2017-12",
+     "ndvi": 0.5652,
+     "anomaly": -0.0063,
+     "lst_c": 20.37
+    },
+    {
+     "month": "2018-01",
+     "ndvi": 0.6188,
+     "anomaly": -0.0076,
+     "lst_c": 17.42
+    },
+    {
+     "month": "2018-02",
+     "ndvi": 0.6289,
+     "anomaly": -0.0223,
+     "lst_c": 20.74
+    },
+    {
+     "month": "2018-03",
+     "ndvi": 0.6067,
+     "anomaly": -0.0124,
+     "lst_c": 26.06
+    },
+    {
+     "month": "2018-04",
+     "ndvi": 0.4823,
+     "anomaly": -0.032,
+     "lst_c": 29.66
+    },
+    {
+     "month": "2018-05",
+     "ndvi": 0.3989,
+     "anomaly": -0.024,
+     "lst_c": 32.37
+    },
+    {
+     "month": "2018-06",
+     "ndvi": 0.5038,
+     "anomaly": 0.0107,
+     "lst_c": 35.56
+    },
+    {
+     "month": "2018-07",
+     "ndvi": 0.5612,
+     "anomaly": -0.0405,
+     "lst_c": 34.33
+    },
+    {
+     "month": "2018-08",
+     "ndvi": 0.5065,
+     "anomaly": -0.0721,
+     "lst_c": 34.0
+    },
+    {
+     "month": "2018-09",
+     "ndvi": 0.4287,
+     "anomaly": -0.0256,
+     "lst_c": 33.68
+    },
+    {
+     "month": "2018-10",
+     "ndvi": 0.4314,
+     "anomaly": -0.0037,
+     "lst_c": 29.68
+    },
+    {
+     "month": "2018-11",
+     "ndvi": 0.4943,
+     "anomaly": -0.0063,
+     "lst_c": 23.74
+    },
+    {
+     "month": "2018-12",
+     "ndvi": 0.5806,
+     "anomaly": 0.009,
+     "lst_c": 18.14
+    },
+    {
+     "month": "2019-01",
+     "ndvi": 0.6068,
+     "anomaly": -0.0195,
+     "lst_c": 16.26
+    },
+    {
+     "month": "2019-02",
+     "ndvi": 0.6213,
+     "anomaly": -0.0298,
+     "lst_c": 18.35
+    },
+    {
+     "month": "2019-03",
+     "ndvi": 0.6294,
+     "anomaly": 0.0102,
+     "lst_c": 22.79
+    },
+    {
+     "month": "2019-04",
+     "ndvi": 0.5458,
+     "anomaly": 0.0315,
+     "lst_c": 25.61
+    },
+    {
+     "month": "2019-05",
+     "ndvi": 0.4646,
+     "anomaly": 0.0416,
+     "lst_c": 32.4
+    },
+    {
+     "month": "2019-06",
+     "ndvi": 0.5201,
+     "anomaly": 0.0269,
+     "lst_c": 35.02
+    },
+    {
+     "month": "2019-07",
+     "ndvi": 0.6091,
+     "anomaly": 0.0074,
+     "lst_c": 34.69
+    },
+    {
+     "month": "2019-08",
+     "ndvi": 0.5864,
+     "anomaly": 0.0079,
+     "lst_c": 34.79
+    },
+    {
+     "month": "2019-09",
+     "ndvi": 0.4431,
+     "anomaly": -0.0112,
+     "lst_c": 33.42
+    },
+    {
+     "month": "2019-10",
+     "ndvi": 0.4163,
+     "anomaly": -0.0188,
+     "lst_c": 30.25
+    },
+    {
+     "month": "2019-11",
+     "ndvi": 0.491,
+     "anomaly": -0.0096,
+     "lst_c": 25.87
+    },
+    {
+     "month": "2019-12",
+     "ndvi": 0.5765,
+     "anomaly": 0.0049,
+     "lst_c": 18.38
+    },
+    {
+     "month": "2020-01",
+     "ndvi": 0.6271,
+     "anomaly": 0.0007,
+     "lst_c": 15.8
+    },
+    {
+     "month": "2020-02",
+     "ndvi": 0.67,
+     "anomaly": 0.0189,
+     "lst_c": 19.45
+    },
+    {
+     "month": "2020-03",
+     "ndvi": 0.6293,
+     "anomaly": 0.0101,
+     "lst_c": 22.82
+    },
+    {
+     "month": "2020-04",
+     "ndvi": 0.5213,
+     "anomaly": 0.0069,
+     "lst_c": 28.17
+    },
+    {
+     "month": "2020-05",
+     "ndvi": 0.4473,
+     "anomaly": 0.0243,
+     "lst_c": 33.34
+    },
+    {
+     "month": "2020-06",
+     "ndvi": 0.482,
+     "anomaly": -0.0112,
+     "lst_c": 34.39
+    },
+    {
+     "month": "2020-07",
+     "ndvi": 0.6019,
+     "anomaly": 0.0002,
+     "lst_c": 34.68
+    },
+    {
+     "month": "2020-08",
+     "ndvi": 0.6001,
+     "anomaly": 0.0216,
+     "lst_c": 34.32
+    },
+    {
+     "month": "2020-09",
+     "ndvi": 0.4812,
+     "anomaly": 0.0269,
+     "lst_c": 34.4
+    },
+    {
+     "month": "2020-10",
+     "ndvi": 0.4284,
+     "anomaly": -0.0067,
+     "lst_c": 30.4
+    },
+    {
+     "month": "2020-11",
+     "ndvi": 0.5286,
+     "anomaly": 0.028,
+     "lst_c": 22.93
+    },
+    {
+     "month": "2020-12",
+     "ndvi": 0.5444,
+     "anomaly": -0.0271,
+     "lst_c": 20.49
+    },
+    {
+     "month": "2021-01",
+     "ndvi": 0.6278,
+     "anomaly": 0.0014,
+     "lst_c": 18.8
+    },
+    {
+     "month": "2021-02",
+     "ndvi": 0.6226,
+     "anomaly": -0.0285,
+     "lst_c": 20.46
+    },
+    {
+     "month": "2021-03",
+     "ndvi": 0.5872,
+     "anomaly": -0.032,
+     "lst_c": 23.32
+    },
+    {
+     "month": "2021-04",
+     "ndvi": 0.5147,
+     "anomaly": 0.0003,
+     "lst_c": 29.65
+    },
+    {
+     "month": "2021-05",
+     "ndvi": 0.4502,
+     "anomaly": 0.0273,
+     "lst_c": 34.62
+    },
+    {
+     "month": "2021-06",
+     "ndvi": 0.4888,
+     "anomaly": -0.0043,
+     "lst_c": 35.55
+    },
+    {
+     "month": "2021-07",
+     "ndvi": 0.6,
+     "anomaly": -0.0017,
+     "lst_c": 35.65
+    },
+    {
+     "month": "2021-08",
+     "ndvi": 0.5808,
+     "anomaly": 0.0023,
+     "lst_c": 35.0
+    },
+    {
+     "month": "2021-09",
+     "ndvi": 0.4625,
+     "anomaly": 0.0083,
+     "lst_c": 32.11
+    },
+    {
+     "month": "2021-10",
+     "ndvi": 0.4443,
+     "anomaly": 0.0093,
+     "lst_c": 30.05
+    },
+    {
+     "month": "2021-11",
+     "ndvi": 0.5146,
+     "anomaly": 0.014,
+     "lst_c": 26.62
+    },
+    {
+     "month": "2021-12",
+     "ndvi": 0.574,
+     "anomaly": 0.0024,
+     "lst_c": 17.57
+    },
+    {
+     "month": "2022-01",
+     "ndvi": 0.6092,
+     "anomaly": -0.0171,
+     "lst_c": 16.29
+    },
+    {
+     "month": "2022-02",
+     "ndvi": 0.63,
+     "anomaly": -0.0211,
+     "lst_c": 18.9
+    },
+    {
+     "month": "2022-03",
+     "ndvi": 0.5533,
+     "anomaly": -0.0658,
+     "lst_c": 20.03
+    },
+    {
+     "month": "2022-04",
+     "ndvi": 0.5439,
+     "anomaly": 0.0296,
+     "lst_c": 27.64
+    },
+    {
+     "month": "2022-05",
+     "ndvi": 0.4651,
+     "anomaly": 0.0422,
+     "lst_c": 31.55
+    },
+    {
+     "month": "2022-06",
+     "ndvi": 0.4673,
+     "anomaly": -0.0259,
+     "lst_c": 35.65
+    },
+    {
+     "month": "2022-07",
+     "ndvi": 0.5927,
+     "anomaly": -0.009,
+     "lst_c": 35.2
+    },
+    {
+     "month": "2022-08",
+     "ndvi": 0.5942,
+     "anomaly": 0.0156,
+     "lst_c": 32.29
+    },
+    {
+     "month": "2022-09",
+     "ndvi": 0.4815,
+     "anomaly": 0.0272,
+     "lst_c": 32.21
+    },
+    {
+     "month": "2022-10",
+     "ndvi": 0.4435,
+     "anomaly": 0.0085,
+     "lst_c": 28.52
+    },
+    {
+     "month": "2022-11",
+     "ndvi": 0.4857,
+     "anomaly": -0.0149,
+     "lst_c": 24.01
+    },
+    {
+     "month": "2022-12",
+     "ndvi": 0.5767,
+     "anomaly": 0.0052,
+     "lst_c": 21.0
+    },
+    {
+     "month": "2023-01",
+     "ndvi": 0.6466,
+     "anomaly": 0.0202,
+     "lst_c": 18.46
+    },
+    {
+     "month": "2023-02",
+     "ndvi": 0.6443,
+     "anomaly": -0.0068,
+     "lst_c": 17.77
+    },
+    {
+     "month": "2023-03",
+     "ndvi": 0.6668,
+     "anomaly": 0.0477,
+     "lst_c": 24.02
+    },
+    {
+     "month": "2023-04",
+     "ndvi": 0.5249,
+     "anomaly": 0.0106,
+     "lst_c": 27.75
+    },
+    {
+     "month": "2023-05",
+     "ndvi": 0.4253,
+     "anomaly": 0.0024,
+     "lst_c": 31.32
+    },
+    {
+     "month": "2023-06",
+     "ndvi": 0.4866,
+     "anomaly": -0.0065,
+     "lst_c": 33.85
+    },
+    {
+     "month": "2023-07",
+     "ndvi": 0.6227,
+     "anomaly": 0.021,
+     "lst_c": 35.98
+    },
+    {
+     "month": "2023-08",
+     "ndvi": 0.6408,
+     "anomaly": 0.0623,
+     "lst_c": 32.51
+    },
+    {
+     "month": "2023-09",
+     "ndvi": 0.5048,
+     "anomaly": 0.0505,
+     "lst_c": 32.86
+    },
+    {
+     "month": "2023-10",
+     "ndvi": 0.4479,
+     "anomaly": 0.0129,
+     "lst_c": 29.97
+    },
+    {
+     "month": "2023-11",
+     "ndvi": 0.5,
+     "anomaly": -0.0006,
+     "lst_c": 25.74
+    },
+    {
+     "month": "2023-12",
+     "ndvi": 0.5352,
+     "anomaly": -0.0364,
+     "lst_c": 20.39
+    },
+    {
+     "month": "2024-01",
+     "ndvi": 0.6107,
+     "anomaly": -0.0157,
+     "lst_c": 16.37
+    },
+    {
+     "month": "2024-02",
+     "ndvi": 0.6868,
+     "anomaly": 0.0356,
+     "lst_c": 18.99
+    },
+    {
+     "month": "2024-03",
+     "ndvi": 0.6311,
+     "anomaly": 0.0119,
+     "lst_c": 22.38
+    },
+    {
+     "month": "2024-04",
+     "ndvi": 0.555,
+     "anomaly": 0.0407,
+     "lst_c": 28.13
+    },
+    {
+     "month": "2024-05",
+     "ndvi": 0.4228,
+     "anomaly": -0.0001,
+     "lst_c": 31.96
+    },
+    {
+     "month": "2024-06",
+     "ndvi": 0.4705,
+     "anomaly": -0.0227,
+     "lst_c": 36.15
+    },
+    {
+     "month": "2024-07",
+     "ndvi": 0.6422,
+     "anomaly": 0.0405,
+     "lst_c": 34.21
+    },
+    {
+     "month": "2024-08",
+     "ndvi": 0.6443,
+     "anomaly": 0.0658,
+     "lst_c": 32.94
+    },
+    {
+     "month": "2024-09",
+     "ndvi": 0.5025,
+     "anomaly": 0.0483,
+     "lst_c": 31.66
+    },
+    {
+     "month": "2024-10",
+     "ndvi": 0.4672,
+     "anomaly": 0.0321,
+     "lst_c": 27.98
+    },
+    {
+     "month": "2024-11",
+     "ndvi": 0.513,
+     "anomaly": 0.0124,
+     "lst_c": 22.83
+    },
+    {
+     "month": "2024-12",
+     "ndvi": 0.5652,
+     "anomaly": -0.0064,
+     "lst_c": 17.98
+    },
+    {
+     "month": "2025-01",
+     "ndvi": 0.6356,
+     "anomaly": 0.0092,
+     "lst_c": 18.39
+    },
+    {
+     "month": "2025-02",
+     "ndvi": 0.6613,
+     "anomaly": 0.0102,
+     "lst_c": 17.27
+    },
+    {
+     "month": "2025-03",
+     "ndvi": 0.6397,
+     "anomaly": 0.0206,
+     "lst_c": 23.73
+    },
+    {
+     "month": "2025-04",
+     "ndvi": 0.5216,
+     "anomaly": 0.0073,
+     "lst_c": 25.61
+    },
+    {
+     "month": "2025-05",
+     "ndvi": 0.4198,
+     "anomaly": -0.0031,
+     "lst_c": 31.11
+    },
+    {
+     "month": "2025-06",
+     "ndvi": 0.5156,
+     "anomaly": 0.0225,
+     "lst_c": 34.4
+    }
+   ]
+  }
+ }
+}

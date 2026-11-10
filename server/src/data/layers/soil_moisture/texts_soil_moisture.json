@@ -1,0 +1,164 @@
+{
+ "shared": {
+  "confidence_labels": {
+   "satellite": "Model that uses satellite data (SMAP L4)",
+   "model": "Model estimate (POWER)",
+   "no_data": "Not enough data"
+  },
+  "footer": "This tool helps you see the picture. Your own decisions, your knowledge of your land, and local agricultural expertise come first.",
+  "limits": [
+   "Each calendar month has only about 10 values, so the split into drier / about usual / wetter is approximate.",
+   "Baltim and Sidi Salem receive exactly the same POWER model values, because the model's resolution is coarser than the distance between them.",
+   "SMAP here is the L4 version: a land model that assimilates satellite measurements. It is not a direct measurement.",
+   "SMAP values are averages over a box around each center at about 9 km resolution, with no cropland mask.",
+   "The satellite instrument was off in June-July 2019 and August-September 2022, so SMAP values in those periods come from the model alone.",
+   "These numbers describe an area, not a specific field.",
+   "The agreement test is run per center. After correcting for multiple comparisons (3 centers), no center's difference is large enough to rule out chance.",
+   "Excluding the months when the satellite was off changed the agreement by less than 2 percentage points.",
+   "2015 and 2025 are incomplete years (2015 starts in April, 2025 ends in June)."
+  ]
+ },
+ "centers": {
+  "baltim": {
+   "display_name": "Baltim",
+   "card": {
+    "title": "Soil moisture",
+    "last_reading": "Latest reading: June 2025",
+    "satellite_line": "SMAP shows the soil is about usual",
+    "model_line": "The POWER model shows the soil is wetter than usual",
+    "last12_line": "In the last 12 months, SMAP showed 6 months drier than usual, and the POWER model showed 7.",
+    "disagree_note": "The two sources disagree this month. Please check your own soil.",
+    "needle_note": "The needle shows where this month ranks among the same month in past years.",
+    "area_warning": "These numbers describe the whole area, not your field."
+   },
+   "insight1_calendar": {
+    "question": "How was the soil each month?",
+    "answer": "Each square compares that month with the same month in other years. The color shows drier or wetter than usual.",
+    "note": "A grey square means there is no data."
+   },
+   "insight2_typical_year": {
+    "question": "What does a typical year look like?",
+    "answer": "Both sources show wetter soil in winter and drier soil in summer, but the exact driest month differs. SMAP shows the driest soil roughly from June to September and the wettest around January. The POWER model shows the driest soil roughly from July to September and the wettest roughly from January to February.",
+    "note": "The scale runs from 0 to 100 for each source separately; it is not an actual water percentage. Neighboring months differ very little, so the exact month is approximate."
+   },
+   "insight3_years": {
+    "question": "Have the years changed?",
+    "answer": "Among complete years, SMAP showed the most months drier than usual in 2018 (6 of 12 months).",
+    "note": "2015 and 2025 are incomplete years, so they are not directly comparable."
+   },
+   "insight4_satellite_vs_model": {
+    "question": "Do SMAP and the POWER model agree?",
+    "answer": "They agree on the shape of the year, but not always on whether a particular month was drier than usual. Both are model-based products that use satellite data; neither is an instrument measuring in the ground.",
+    "numbers": "They agreed in 52 of 123 months (42%). If each were guessing, they would agree in about 34% of months. Their agreement is a little above guessing, but not enough to rule out chance.",
+    "opposite": "In 19 months they pointed in opposite directions (one drier than usual, the other wetter).",
+    "possible_reason": "One possible reason is the difference in resolution and in how each product is calculated. This is a possibility, not proven.",
+    "you_row": "You: look at your own field and compare it with this card. Your own observation is the ground measurement we do not have.",
+    "level": "weak"
+   },
+   "insight5_root": {
+    "question": "What about deeper in the soil?",
+    "answer": "The POWER model shows the root zone was wetter than usual in June 2025.",
+    "note": "This is a model estimate. It is not compared with surface SMAP because they cover different depths."
+   },
+   "report": {
+    "observed": "In June 2025, SMAP showed the soil was about usual and the POWER model showed it was wetter than usual. Over the last 12 months, SMAP showed 6 months drier than usual and the model showed 7.",
+    "may_mean": "The sources disagree, so we cannot say with confidence whether the soil was drier or wetter than usual.",
+    "to_verify": "Check the soil in your own field, and ask an agricultural extension officer about irrigation and planting dates."
+   }
+  },
+  "desouk": {
+   "display_name": "Desouk",
+   "card": {
+    "title": "Soil moisture",
+    "last_reading": "Latest reading: June 2025",
+    "satellite_line": "SMAP shows the soil is drier than usual",
+    "model_line": "The POWER model shows the soil is wetter than usual",
+    "last12_line": "In the last 12 months, SMAP showed 11 months drier than usual, and the POWER model showed 9.",
+    "disagree_note": "The two sources disagree this month. Please check your own soil.",
+    "needle_note": "The needle shows where this month ranks among the same month in past years.",
+    "area_warning": "These numbers describe the whole area, not your field."
+   },
+   "insight1_calendar": {
+    "question": "How was the soil each month?",
+    "answer": "Each square compares that month with the same month in other years. The color shows drier or wetter than usual.",
+    "note": "A grey square means there is no data."
+   },
+   "insight2_typical_year": {
+    "question": "What does a typical year look like?",
+    "answer": "Both sources show wetter soil in winter and drier soil in summer, but the exact driest month differs. SMAP shows the driest soil around May and the wettest roughly from January to February. The POWER model shows the driest soil roughly from July to September and the wettest roughly from January to February.",
+    "note": "The scale runs from 0 to 100 for each source separately; it is not an actual water percentage. Neighboring months differ very little, so the exact month is approximate."
+   },
+   "insight3_years": {
+    "question": "Have the years changed?",
+    "answer": "Among complete years, SMAP showed the most months drier than usual in 2024 (9 of 12 months).",
+    "note": "2015 and 2025 are incomplete years, so they are not directly comparable."
+   },
+   "insight4_satellite_vs_model": {
+    "question": "Do SMAP and the POWER model agree?",
+    "answer": "They agree on the shape of the year, but not always on whether a particular month was drier than usual. Both are model-based products that use satellite data; neither is an instrument measuring in the ground.",
+    "numbers": "They agreed in 54 of 123 months (44%). If each were guessing, they would agree in about 34% of months. Their agreement is a little above guessing, but not enough to rule out chance.",
+    "opposite": "In 25 months they pointed in opposite directions (one drier than usual, the other wetter).",
+    "possible_reason": "One possible reason is the difference in resolution and in how each product is calculated. This is a possibility, not proven.",
+    "you_row": "You: look at your own field and compare it with this card. Your own observation is the ground measurement we do not have.",
+    "level": "weak"
+   },
+   "insight5_root": {
+    "question": "What about deeper in the soil?",
+    "answer": "The POWER model shows the root zone was wetter than usual in June 2025.",
+    "note": "This is a model estimate. It is not compared with surface SMAP because they cover different depths."
+   },
+   "report": {
+    "observed": "In June 2025, SMAP showed the soil was drier than usual and the POWER model showed it was wetter than usual. Over the last 12 months, SMAP showed 11 months drier than usual and the model showed 9.",
+    "may_mean": "The sources disagree, so we cannot say with confidence whether the soil was drier or wetter than usual.",
+    "to_verify": "Check the soil in your own field, and ask an agricultural extension officer about irrigation and planting dates."
+   }
+  },
+  "sidi_salem": {
+   "display_name": "Sidi Salem",
+   "card": {
+    "title": "Soil moisture",
+    "last_reading": "Latest reading: June 2025",
+    "satellite_line": "SMAP shows the soil is drier than usual",
+    "model_line": "The POWER model shows the soil is wetter than usual",
+    "last12_line": "In the last 12 months, SMAP showed 10 months drier than usual, and the POWER model showed 7.",
+    "disagree_note": "The two sources disagree this month. Please check your own soil.",
+    "needle_note": "The needle shows where this month ranks among the same month in past years.",
+    "area_warning": "These numbers describe the whole area, not your field."
+   },
+   "insight1_calendar": {
+    "question": "How was the soil each month?",
+    "answer": "Each square compares that month with the same month in other years. The color shows drier or wetter than usual.",
+    "note": "A grey square means there is no data."
+   },
+   "insight2_typical_year": {
+    "question": "What does a typical year look like?",
+    "answer": "Both sources show wetter soil in winter and drier soil in summer, but the exact driest month differs. SMAP shows the driest soil around May and August and the wettest roughly from January to February. The POWER model shows the driest soil roughly from July to September and the wettest roughly from January to February.",
+    "note": "The scale runs from 0 to 100 for each source separately; it is not an actual water percentage. Neighboring months differ very little, so the exact month is approximate."
+   },
+   "insight3_years": {
+    "question": "Have the years changed?",
+    "answer": "Among complete years, SMAP showed the most months drier than usual in 2024 (6 of 12 months).",
+    "note": "2015 and 2025 are incomplete years, so they are not directly comparable."
+   },
+   "insight4_satellite_vs_model": {
+    "question": "Do SMAP and the POWER model agree?",
+    "answer": "They agree on the shape of the year, but not always on whether a particular month was drier than usual. Both are model-based products that use satellite data; neither is an instrument measuring in the ground.",
+    "numbers": "They agreed in 42 of 123 months (34%). If each were guessing, they would agree in about 34% of months. Their agreement is about the same as guessing.",
+    "opposite": "In 27 months they pointed in opposite directions (one drier than usual, the other wetter).",
+    "possible_reason": "One possible reason is the difference in resolution and in how each product is calculated. This is a possibility, not proven.",
+    "you_row": "You: look at your own field and compare it with this card. Your own observation is the ground measurement we do not have.",
+    "level": "weak"
+   },
+   "insight5_root": {
+    "question": "What about deeper in the soil?",
+    "answer": "The POWER model shows the root zone was wetter than usual in June 2025.",
+    "note": "This is a model estimate. It is not compared with surface SMAP because they cover different depths."
+   },
+   "report": {
+    "observed": "In June 2025, SMAP showed the soil was drier than usual and the POWER model showed it was wetter than usual. Over the last 12 months, SMAP showed 10 months drier than usual and the model showed 7.",
+    "may_mean": "The sources disagree, so we cannot say with confidence whether the soil was drier or wetter than usual.",
+    "to_verify": "Check the soil in your own field, and ask an agricultural extension officer about irrigation and planting dates."
+   }
+  }
+ }
+}

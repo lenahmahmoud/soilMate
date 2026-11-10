@@ -1,0 +1,332 @@
+[
+ {
+  "center": "baltim",
+  "year": 2015,
+  "months_available": 9,
+  "dry_months_sm": 1,
+  "wet_months_sm": 5,
+  "dry_months_model": 0,
+  "wet_months_model": 4,
+  "partial_year": true
+ },
+ {
+  "center": "baltim",
+  "year": 2016,
+  "months_available": 12,
+  "dry_months_sm": 4,
+  "wet_months_sm": 4,
+  "dry_months_model": 9,
+  "wet_months_model": 2,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2017,
+  "months_available": 12,
+  "dry_months_sm": 2,
+  "wet_months_sm": 3,
+  "dry_months_model": 1,
+  "wet_months_model": 8,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2018,
+  "months_available": 12,
+  "dry_months_sm": 6,
+  "wet_months_sm": 4,
+  "dry_months_model": 2,
+  "wet_months_model": 6,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2019,
+  "months_available": 12,
+  "dry_months_sm": 1,
+  "wet_months_sm": 9,
+  "dry_months_model": 7,
+  "wet_months_model": 0,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2020,
+  "months_available": 12,
+  "dry_months_sm": 0,
+  "wet_months_sm": 9,
+  "dry_months_model": 0,
+  "wet_months_model": 11,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2021,
+  "months_available": 12,
+  "dry_months_sm": 6,
+  "wet_months_sm": 2,
+  "dry_months_model": 6,
+  "wet_months_model": 4,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2022,
+  "months_available": 12,
+  "dry_months_sm": 5,
+  "wet_months_sm": 2,
+  "dry_months_model": 1,
+  "wet_months_model": 7,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2023,
+  "months_available": 12,
+  "dry_months_sm": 5,
+  "wet_months_sm": 4,
+  "dry_months_model": 2,
+  "wet_months_model": 5,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2024,
+  "months_available": 12,
+  "dry_months_sm": 3,
+  "wet_months_sm": 5,
+  "dry_months_model": 4,
+  "wet_months_model": 0,
+  "partial_year": false
+ },
+ {
+  "center": "baltim",
+  "year": 2025,
+  "months_available": 6,
+  "dry_months_sm": 3,
+  "wet_months_sm": 1,
+  "dry_months_model": 4,
+  "wet_months_model": 1,
+  "partial_year": true
+ },
+ {
+  "center": "desouk",
+  "year": 2015,
+  "months_available": 9,
+  "dry_months_sm": 2,
+  "wet_months_sm": 3,
+  "dry_months_model": 0,
+  "wet_months_model": 5,
+  "partial_year": true
+ },
+ {
+  "center": "desouk",
+  "year": 2016,
+  "months_available": 12,
+  "dry_months_sm": 1,
+  "wet_months_sm": 11,
+  "dry_months_model": 7,
+  "wet_months_model": 2,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2017,
+  "months_available": 12,
+  "dry_months_sm": 1,
+  "wet_months_sm": 5,
+  "dry_months_model": 1,
+  "wet_months_model": 10,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2018,
+  "months_available": 12,
+  "dry_months_sm": 5,
+  "wet_months_sm": 6,
+  "dry_months_model": 4,
+  "wet_months_model": 5,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2019,
+  "months_available": 12,
+  "dry_months_sm": 1,
+  "wet_months_sm": 9,
+  "dry_months_model": 6,
+  "wet_months_model": 1,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2020,
+  "months_available": 12,
+  "dry_months_sm": 0,
+  "wet_months_sm": 8,
+  "dry_months_model": 1,
+  "wet_months_model": 9,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2021,
+  "months_available": 12,
+  "dry_months_sm": 3,
+  "wet_months_sm": 0,
+  "dry_months_model": 4,
+  "wet_months_model": 3,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2022,
+  "months_available": 12,
+  "dry_months_sm": 5,
+  "wet_months_sm": 2,
+  "dry_months_model": 1,
+  "wet_months_model": 6,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2023,
+  "months_available": 12,
+  "dry_months_sm": 3,
+  "wet_months_sm": 4,
+  "dry_months_model": 1,
+  "wet_months_model": 6,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2024,
+  "months_available": 12,
+  "dry_months_sm": 9,
+  "wet_months_sm": 0,
+  "dry_months_model": 7,
+  "wet_months_model": 0,
+  "partial_year": false
+ },
+ {
+  "center": "desouk",
+  "year": 2025,
+  "months_available": 6,
+  "dry_months_sm": 6,
+  "wet_months_sm": 0,
+  "dry_months_model": 4,
+  "wet_months_model": 1,
+  "partial_year": true
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2015,
+  "months_available": 9,
+  "dry_months_sm": 1,
+  "wet_months_sm": 4,
+  "dry_months_model": 0,
+  "wet_months_model": 4,
+  "partial_year": true
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2016,
+  "months_available": 12,
+  "dry_months_sm": 1,
+  "wet_months_sm": 9,
+  "dry_months_model": 9,
+  "wet_months_model": 2,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2017,
+  "months_available": 12,
+  "dry_months_sm": 2,
+  "wet_months_sm": 7,
+  "dry_months_model": 1,
+  "wet_months_model": 8,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2018,
+  "months_available": 12,
+  "dry_months_sm": 5,
+  "wet_months_sm": 4,
+  "dry_months_model": 2,
+  "wet_months_model": 6,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2019,
+  "months_available": 12,
+  "dry_months_sm": 1,
+  "wet_months_sm": 9,
+  "dry_months_model": 7,
+  "wet_months_model": 0,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2020,
+  "months_available": 12,
+  "dry_months_sm": 0,
+  "wet_months_sm": 7,
+  "dry_months_model": 0,
+  "wet_months_model": 11,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2021,
+  "months_available": 12,
+  "dry_months_sm": 4,
+  "wet_months_sm": 2,
+  "dry_months_model": 6,
+  "wet_months_model": 4,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2022,
+  "months_available": 12,
+  "dry_months_sm": 6,
+  "wet_months_sm": 0,
+  "dry_months_model": 1,
+  "wet_months_model": 7,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2023,
+  "months_available": 12,
+  "dry_months_sm": 4,
+  "wet_months_sm": 5,
+  "dry_months_model": 2,
+  "wet_months_model": 5,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2024,
+  "months_available": 12,
+  "dry_months_sm": 6,
+  "wet_months_sm": 1,
+  "dry_months_model": 4,
+  "wet_months_model": 0,
+  "partial_year": false
+ },
+ {
+  "center": "sidi_salem",
+  "year": 2025,
+  "months_available": 6,
+  "dry_months_sm": 6,
+  "wet_months_sm": 0,
+  "dry_months_model": 4,
+  "wet_months_model": 1,
+  "partial_year": true
+ }
+]

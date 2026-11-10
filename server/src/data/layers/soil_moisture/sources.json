@@ -1,0 +1,16 @@
+[
+ {
+  "name": "NASA SMAP L4 (SPL4SMGP v007)",
+  "used_for": "Surface soil moisture, 0-5 cm layer (sm_surface)",
+  "type": "Land model that uses satellite data (not a direct measurement)",
+  "period": "April 2015 to June 2025, monthly mean of 3-hourly values",
+  "product_and_unit": "NASA/SMAP/SPL4SMGP/007 on Google Earth Engine; unit m3/m3 (volume fraction); resolution about 9 km"
+ },
+ {
+  "name": "NASA POWER",
+  "used_for": "Surface and root-zone soil wetness (soil_wet_surface, soil_wet_root)",
+  "type": "Model estimate",
+  "period": "January 2015 to December 2025 (daily, aggregated to monthly)",
+  "product_and_unit": "Relative index from 0 to 1 (not an actual water percentage). Most likely GWETTOP for the surface (about 0-5 cm) and GWETROOT for the root zone (about 0-100 cm). Resolution about half a degree"
+ }
+]

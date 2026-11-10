@@ -1,0 +1,44 @@
+[
+ {
+  "center": "baltim",
+  "last_year": 2025,
+  "last_month": 6,
+  "sm_state": "normal",
+  "sm_needle": 36,
+  "model_state": "wet",
+  "model_needle": 100,
+  "root_state": "wet",
+  "root_needle": 100,
+  "dry_months_of_last12_sm": 6,
+  "dry_months_of_last12_model": 7,
+  "months_in_window": 12
+ },
+ {
+  "center": "desouk",
+  "last_year": 2025,
+  "last_month": 6,
+  "sm_state": "dry",
+  "sm_needle": 9,
+  "model_state": "wet",
+  "model_needle": 91,
+  "root_state": "wet",
+  "root_needle": 82,
+  "dry_months_of_last12_sm": 11,
+  "dry_months_of_last12_model": 9,
+  "months_in_window": 12
+ },
+ {
+  "center": "sidi_salem",
+  "last_year": 2025,
+  "last_month": 6,
+  "sm_state": "dry",
+  "sm_needle": 18,
+  "model_state": "wet",
+  "model_needle": 100,
+  "root_state": "wet",
+  "root_needle": 100,
+  "dry_months_of_last12_sm": 10,
+  "dry_months_of_last12_model": 7,
+  "months_in_window": 12
+ }
+]

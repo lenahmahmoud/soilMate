@@ -1,0 +1,47 @@
+[
+ {
+  "term": "Soil moisture",
+  "short": "The amount of water held in the soil.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "Root zone",
+  "short": "The soil layer where plant roots take up water.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "SMAP",
+  "short": "A NASA satellite that measures soil moisture. The version used here (L4) feeds its measurements into a land model.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "POWER model",
+  "short": "Numbers calculated by computer from weather data, not measured by an instrument in your field.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "Drier than usual",
+  "short": "Lower than most values for the same month in past years.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "Usual range",
+  "short": "The range the value normally stays within in this month.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "Ground measurement",
+  "short": "A measurement taken with an instrument, or by hand, in the field itself.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "Agreement by chance",
+  "short": "The share of months the two sources would agree on if each were just guessing.",
+  "game_section": "soil_moisture"
+ },
+ {
+  "term": "Rank of the month",
+  "short": "Where this month sits among the same month in all past years, from lowest to highest.",
+  "game_section": "soil_moisture"
+ }
+]
