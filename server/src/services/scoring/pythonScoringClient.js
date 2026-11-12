@@ -20,6 +20,7 @@ const CROP_FIELDS = [
   'equipment',
   'typicalDays',
 ];
+const CANDIDATE_FIELDS = [...CROP_FIELDS, 'slots'];
 
 const pick = (obj, fields) => Object.fromEntries(fields.map((f) => [f, obj[f]]));
 
@@ -56,6 +57,21 @@ export function createPythonScoringClient({ baseUrl, timeoutMs, fetchImpl = fetc
         centerId,
         farm: pick(farm, FARM_FIELDS),
         sequence: sequence.map(({ slot, crop }) => ({ slot, crop: pick(crop, CROP_FIELDS) })),
+      });
+    },
+
+    async plans({ requestId, centerId, farm, labSequence, candidateCrops }) {
+      return post('/v1/plans', requestId, {
+        requestId,
+        centerId,
+        farm: {
+          ...pick(farm, FARM_FIELDS),
+          currentCrops: (farm.currentCrops ?? []).map((c) => pick(c, CROP_FIELDS)),
+        },
+        labSequence: labSequence
+          ? labSequence.map(({ slot, crop }) => ({ slot, crop: pick(crop, CROP_FIELDS) }))
+          : null,
+        candidateCrops: candidateCrops.map((c) => pick(c, CANDIDATE_FIELDS)),
       });
     },
   };

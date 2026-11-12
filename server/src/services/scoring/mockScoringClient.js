@@ -1,6 +1,8 @@
 import { OPTIONS } from '../../constants/options.js';
 import { levelOf } from '../../constants/levels.js';
-
+import { AppError } from '../../utils/AppError.js';
+import { SLOTS } from '../../constants/soilmateEnums.js';
+import { METRIC_IDS } from '../../constants/metrics.js';
 export const MOCK_MODEL_VERSION = 'mock-0.1';
 
 const NUM = { low: 1, medium: 2, high: 3 };
@@ -154,8 +156,89 @@ export function scoreSequence({ farm, sequence }) {
   };
 }
 
+// ---------------- Mock /v1/plans (guide section 11) ----------------
+
+const MANUAL_PLANS = {
+  keep_routine: {
+    badge: { label: 'Baseline Example', tone: 'neutral' },
+    title: 'Keep My Current Routine',
+    mainBenefit: 'Uses the equipment, seeds, and planting schedule you already have.',
+    watchOut: 'May leave the ground bare between crops and need more bought fertilizer.',
+  },
+  improve_soil: {
+    badge: { label: 'Soil Builder', tone: 'positive' },
+    title: 'Improve My Soil',
+    mainBenefit: 'A nitrogen-fixing crop adds natural plant food while a winter cover protects the soil.',
+    watchOut: 'You will need to manage the cover crop before planting the next crop.',
+  },
+  save_water: {
+    badge: { label: 'Drought & Cost Resilient', tone: 'positive' },
+    title: 'Save Water & Balance Costs',
+    mainBenefit: 'These crops need less water and deep roots help the soil hold moisture.',
+    watchOut: 'Check local market prices and planting windows before choosing.',
+  },
+};
+
+const DEFAULT_IMPROVE_SOIL = ['winter-rye', 'crimson-clover', 'field-corn'];
+const SAVE_WATER_IDS = ['daikon', 'field-peas', 'grain-sorghum'];
+const PLAN_EVIDENCE = 'Sample evidence: replace with real data when the scoring service is live.';
+const PLAN_RISK = 'Review irrigation and planting dates with a local agricultural officer.';
+
+// Pure function. candidateCrops must hold the whole catalog (it is also where slots, names and
+// role tags come from). farm.currentCrops = crop objects in the order the farmer chose them.
+export function buildPlans({ farm, labSequence, candidateCrops }) {
+  const catalog = new Map(candidateCrops.map((c) => [c.id, c]));
+  const full = (c) => catalog.get(c.id) ?? c;
+  const need = (id) => {
+    const crop = catalog.get(id);
+    if (!crop) throw new AppError(500, 'INTERNAL', `Mock plans need the crop "${id}" in the catalog`);
+    return crop;
+  };
+
+  // keep_routine: first current crop allowed in each slot, else fallow
+  const current = (farm.currentCrops ?? []).map(full);
+  const routine = SLOTS.map((slot) => ({
+    slot,
+    crop: current.find((c) => (c.slots ?? []).includes(slot)) ?? need('fallow'),
+  }));
+
+  // improve_soil: the Lab sequence if there is one, else the default
+  const improve = labSequence?.length
+    ? labSequence.map(({ slot, crop }) => ({ slot, crop: full(crop) }))
+    : SLOTS.map((slot, i) => ({ slot, crop: need(DEFAULT_IMPROVE_SOIL[i]) }));
+
+  const saveWater = SLOTS.map((slot, i) => ({ slot, crop: need(SAVE_WATER_IDS[i]) }));
+
+  const sequences = { keep_routine: routine, improve_soil: improve, save_water: saveWater };
+
+  const plans = Object.entries(sequences).map(([planKey, sequence]) => {
+    const scored = scoreSequence({ farm, sequence }); // same function as /v1/score
+    return {
+      planKey,
+      ...MANUAL_PLANS[planKey],
+      sequence: sequence.map(({ slot, crop }) => ({ slot, cropId: crop.id, roleTag: crop.roleTag ?? null })),
+      metrics: Object.fromEntries(
+        METRIC_IDS.map((id) => {
+          const m = scored.metrics[id];
+          return [id, { value: m.value, level: m.level, note: m.text }]; // note = the metric text
+        }),
+      ),
+      seasonDetails: scored.seasonDetails,
+      evidence: [PLAN_EVIDENCE],
+      infoGaps: scored.gaps,
+      risksToReview: [PLAN_RISK],
+      dataConfidence: scored.dataConfidence,
+    };
+  });
+
+  return { status: 'placeholder', modelVersion: MOCK_MODEL_VERSION, plans };
+}
+
 export const mockScoringClient = {
   async score({ farm, sequence }) {
     return scoreSequence({ farm, sequence });
+  },
+  async plans({ farm, labSequence, candidateCrops }) {
+    return buildPlans({ farm, labSequence, candidateCrops });
   },
 };
