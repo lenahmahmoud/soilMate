@@ -14,7 +14,9 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "validate:data": "node src/scripts/validateLayerData.js"
+    "validate:data": "node src/scripts/validateLayerData.js",
+    "seed:crops": "node src/scripts/seedCrops.js",
+    "cleanup:guests": "node src/scripts/cleanupGuests.js"
   },
   "keywords": [],
   "author": "",

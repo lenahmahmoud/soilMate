@@ -1,12 +1,17 @@
 import * as authService from '../services/authService.js';
+import { claimGuestFromRequest } from '../services/guestService.js';
 import { logger } from '../config/logger.js';
 
 export async function signup(req, res) {
-  res.status(201).json(await authService.signup(req.body));
+  const result = await authService.signup(req.body);
+  const guestData = await claimGuestFromRequest(req, result.user.id);
+  res.status(201).json(guestData ? { ...result, guestData } : result);
 }
 
 export async function login(req, res) {
-  res.json(await authService.login(req.body));
+  const result = await authService.login(req.body);
+  const guestData = await claimGuestFromRequest(req, result.user.id);
+  res.json(guestData ? { ...result, guestData } : result);
 }
 
 // Stateless: the frontend deletes its token.
