@@ -1,0 +1,96 @@
+{
+ "version": "v3-rotation-1.0",
+ "disclaimer": "The tool supports farmers' decisions and does not replace a local agricultural expert.",
+ "plan_titles": {
+  "current": "Your current rotation",
+  "water_saving": "Water-saving option",
+  "soil_health": "Soil-health option"
+ },
+ "tags": {
+  "comparison_only": "Shown for comparison",
+  "more_water": "Uses {pct}% more water than your current plan",
+  "current_is_best_compact": "Your current plan is already the best option for this goal."
+ },
+ "display_rules": {
+  "water_round_to_mm": 50,
+  "soil_score_bands": {
+   "low_below": 0.45,
+   "high_from": 0.75
+  },
+  "never_show_numbers": [
+   "salinity_rel_yield",
+   "soil_score",
+   "income_index"
+  ],
+  "render_text_as": "plain text (never HTML)"
+ },
+ "salinity_bands": {
+  "zero": {
+   "label": "Likely not viable if EC is as estimated",
+   "tone": "bad"
+  },
+  "below_0.5": {
+   "label": "Severely reduced yield",
+   "tone": "bad"
+  },
+  "below_0.8": {
+   "label": "Reduced yield",
+   "tone": "warning"
+  },
+  "otherwise": {
+   "label": "Little effect",
+   "tone": "ok"
+  }
+ },
+ "warnings": {
+  "OVERLAP": {
+   "chip": "Crop overlap",
+   "where": "chip on card + full message in details"
+  },
+  "APPROX_DATES": {
+   "chip": "Approximate dates",
+   "where": "chip on card + full message in details"
+  },
+  "SALINITY_RISK": {
+   "chip": "Salinity risk",
+   "where": "chip on card + per-crop salinity rows"
+  },
+  "LONG_BARE_PERIOD": {
+   "chip": "Long bare period",
+   "where": "chip on card (info)"
+  },
+  "WEATHER_COPY": {
+   "chip": "Shared weather data",
+   "where": "banner above cards (Sidi Salem) + chip (info)"
+  }
+ },
+ "center_banners": {
+  "sidi_salem": "Sidi Salem weather is a copy of Baltim's grid cell, not an independent measurement.",
+  "desouk": "Desouk weather looks warmer than satellite surface temperature suggests, so do not compare its water figures with Baltim or Sidi Salem.",
+  "baltim": "Soil salinity here is a class-level estimate; crops marked as likely not viable may not be viable if the estimate is right.",
+  "sidi_salem_salinity": "Soil salinity here is a class-level estimate; crops marked as likely not viable may not be viable if the estimate is right."
+ },
+ "tooltips": {
+  "water": "Net irrigation need = crop water use (ETc) minus 80% of rainfall, averaged over 2016-2025. Use it to compare options, not to plan irrigation volumes. Dataset rainfall is higher than the FAO text, so the need may be underestimated.",
+  "income": "Relative level of net return per feddan for economic year 2022/2023 only. Prices and costs change. Never add the two crops together.",
+  "soil": "Score from nitrogen fixing, family and root diversity and ground cover. Soil carbon comes from a modeled 250 m estimate, not a field measurement.",
+  "salinity": "Class-level estimate of soil salinity (EC); its measurement type is not confirmed. Check the field's EC before deciding.",
+  "overlap": "Days per year when two crops would be in the field together, based on approximate sowing dates.",
+  "bare": "Days per year with no crop, calculated from the crop calendar (not from satellite NDVI)."
+ },
+ "glossary": {
+  "ET0": "Reference evapotranspiration: how much water a standard grass surface would use. Used here only to compare crops.",
+  "ETc": "Crop evapotranspiration: ET0 multiplied by a crop factor (Kc). The water a crop uses.",
+  "Net irrigation need": "ETc minus effective rain (80% of dataset rain).",
+  "NDVI": "A satellite greenness index from 0 to 1. At center level it cannot show individual bare fields.",
+  "EC": "Electrical conductivity, a measure of soil salinity in dS/m.",
+  "Fallow": "A season with no crop planted.",
+  "Overlap": "Days when the end of one crop and the start of the next fall on the same field."
+ },
+ "limitations_to_add_to_meta": [
+  "Some suggested plans include crops (maize, faba bean, rice) whose estimated relative yield at the estimated salinity of Baltim and Sidi Salem is 0%. They may not be viable if the field's salinity is as estimated; the salinity value is a class-level estimate and its measurement type is not confirmed.",
+  "Desouk's weather comes from a NASA POWER grid cell whose temperatures look much higher than satellite surface temperature suggests (about 119 hot days per year versus about 6 on the coast). Desouk's water demand may be overstated, so do not compare Desouk's water figures with Baltim or Sidi Salem.",
+  "Cotton and maize sowing dates are approximate and not Egyptian; they also affect overlap days and the ranking of plans that include these crops.",
+  "Plans are ranked with a salinity adjustment, so a water-saving plan can use more water than the current plan. When this happens, the water change is shown on the plan."
+ ]
+}

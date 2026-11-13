@@ -1,0 +1,63 @@
+{
+ "version": "v3-rotation-1.1",
+ "generated": "2026-11-12",
+ "disclaimer": "The tool supports farmers' decisions and does not replace a local agricultural expert.",
+ "language": "en",
+ "input_rules": {
+  "winter_options": [
+   "wheat",
+   "faba_bean",
+   "berseem",
+   "sugar_beet",
+   "fallow"
+  ],
+  "summer_options": [
+   "cotton",
+   "rice",
+   "maize",
+   "fallow"
+  ],
+  "invalid": [
+   {
+    "winter": "fallow",
+    "summer": "fallow",
+    "message": "Please select at least one crop for your current rotation."
+   }
+  ],
+  "key_format": "center|winter|summer",
+  "valid_combinations_per_center": 19,
+  "total_keys": 57
+ },
+ "plan_selection": {
+  "water_saving": "Lowest net water need (salinity-discounted) with a ranking penalty of 3 mm-equivalent per overlap day. Both seasons are planted unless the farmer's current plan already leaves that season fallow. If no alternative uses less water than the current plan, the current plan is shown in this slot as already the lowest-water option (shown for comparison).",
+  "soil_health": "Highest soil score (nitrogen fixing, family and root diversity, ground cover), with a small ranking penalty for overlap, that uses no more water than the current plan. If none qualifies, the best soil-health option is still shown even though it may use substantially more water (in some cases about 50% more), and the risks say so. If the current plan already has the best soil score, it is shown for comparison.",
+  "diversity_rule": "Water-saving and soil-health plans differ from each other and from the current plan, except when the current plan is already best for that goal; then the current plan is shown in that slot for comparison.",
+  "salinity": "Not a filter: class-level EC estimate gives a half-strength discount in ranking plus a warning."
+ },
+ "data_period": {
+  "weather": "2015-01-01 to 2025-12-31",
+  "satellite": "2015-04 to 2025-06",
+  "full_cycle_years": "2016-2025"
+ },
+ "assumptions": [
+  "Effective rain = 80% of dataset rain.",
+  "Cotton (Pakistan row) and maize (Jordan row) calendars are approximate.",
+  "Economic value is net return (EGP per feddan per year, 2022/2023), shown as a relative level.",
+  "Salinity thresholds checked against FAO Irrigation and Drainage Paper 29 (Table A1.1) / Maas-Hoffman: rice 3.0/12, wheat 6.0/7.1, cotton 7.7/5.2, sugar beet 7.0/5.9, maize 1.7/12, faba bean 1.6/9.6; berseem 1.5 with slope 5.7 derived from the FAO-29 yield-potential table (100% at 1.5, 0% at 19 dS/m). Thresholds are in ECe (saturated paste); the dataset EC measurement type is not confirmed."
+ ],
+ "limitations": [
+  "Salinity values are class-level estimates (Baltim and Sidi Salem identical: 14.0 and 16.8 dS/m).",
+  "Sidi Salem weather is a copy of Baltim's; only two independent weather series exist.",
+  "Dataset rainfall (about 160 mm/yr) is higher than the FAO text (65 mm/yr); net irrigation need may be underestimated.",
+  "ET0 is for comparing crops, not for computing irrigation quantities.",
+  "Satellite ET is a center-wide average, not irrigated fields.",
+  "SOC comes from SoilGrids v2.0 (ISRIC) in dg/kg and is converted to g/kg (divide by 10); it is a modeled 250 m estimate, not a field measurement.",
+  "Income figures are net return in EGP per feddan per year for economic year 2022/2023 only; prices and costs change, so they are shown as a relative level.",
+  "Summer 2025 is not covered by the satellite data.",
+  "Crop calendars for cotton and maize are not Egyptian.",
+  "Some suggested plans include crops (maize, faba bean, rice) whose estimated relative yield at the estimated salinity of Baltim and Sidi Salem is 0%. They may not be viable if the field's salinity is as estimated; the salinity value is a class-level estimate and its measurement type is not confirmed.",
+  "Desouk's weather comes from a NASA POWER grid cell whose temperatures look much higher than satellite surface temperature suggests (about 119 hot days per year versus about 6 on the coast). Desouk's water demand may be overstated, so do not compare Desouk's water figures with Baltim or Sidi Salem.",
+  "Cotton and maize sowing dates are approximate and not Egyptian; they also affect overlap days and the ranking of plans that include these crops.",
+  "Plans are ranked with a salinity adjustment, so a water-saving plan can use more water than the current plan. When this happens, the water change is shown on the plan."
+ ]
+}

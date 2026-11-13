@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import User from "../../src/models/User.js";
 import Farm from "../../src/models/Farm.js";
-import Crop from "../../src/models/Crop.js";
-import PlanSet from "../../src/models/PlanSet.js";
 import ActivePlan from "../../src/models/ActivePlan.js";
 
 let mongod;
@@ -11,9 +9,7 @@ let mongod;
 beforeAll(async () => {
   mongod = await MongoMemoryServer.create();
   await mongoose.connect(mongod.getUri());
-  await Promise.all(
-    [User, Farm, Crop, PlanSet, ActivePlan].map((m) => m.init()),
-  );
+  await Promise.all([User, Farm, ActivePlan].map((m) => m.init()));
 }, 60000);
 
 afterAll(async () => {
@@ -37,51 +33,14 @@ const validUser = (over = {}) => ({
   ...over,
 });
 
-const validCrop = (over = {}) => ({
-  id: "winter-rye",
-  name: "Winter Rye",
-  category: "cover_crop",
-  roleTag: "Cover Crop",
-  description: "Protects topsoil & holds moisture",
-  slots: ["fall_winter"],
-  image: {
-    file: "winter-rye.webp",
-    thumbFile: "winter-rye.webp",
-    alt: "Winter rye field",
-  },
-  attributes: {
-    family: "grass",
-    isLegume: false,
-    waterNeed: "low",
-    groundCover: "high",
-    costLevel: "low",
-    equipment: ["seed_drill_planter"],
-    typicalDays: 150,
-  },
-  ...over,
-});
-
-const validPlanSet = (over = {}) => ({
-  userId: oid(),
-  centerId: "desouk",
-  farmSnapshot: { soilType: "loamy" },
-  status: "placeholder",
-  modelVersion: "mock-0.1",
-  plans: [{ planKey: "my_plan", matchScore: 64, rank: 3 }],
-  ...over,
-});
-
+// C7/C8: the ActivePlan stores the reference to the chosen Rotation Lab plan, not a copy of it.
 const validActivePlan = (over = {}) => ({
   userId: oid(),
-  planSetId: oid(),
-  planKey: "area_plan_a",
-  title: "Improve My Soil",
+  planKey: "soil_health",
+  key: "desouk|wheat|maize",
+  input: { center: "desouk", winter: "wheat", summer: "maize" },
   startDate: new Date("2026-11-15"),
-  status: "placeholder",
-  modelVersion: "mock-0.1",
-  sequence: [
-    { slot: "fall_winter", cropId: "winter-rye", roleTag: "Cover Crop" },
-  ],
+  dataVersion: "v3-rotation-1.1",
   ...over,
 });
 
@@ -165,7 +124,8 @@ describe("Farm", () => {
     expect(f.currentCrops).toHaveLength(0);
     expect(f.equipment).toHaveLength(0);
     expect(f.priorities).toHaveLength(0);
-    expect(f.draftSequence).toHaveLength(0);
+    expect(f.rotationInput.winter).toBeNull();
+    expect(f.rotationInput.summer).toBeNull();
     expect(f.waterSource).toBeNull();
     expect(f.soilType).toBeNull();
     expect(f.seasonsPerYear).toBeNull();
@@ -209,17 +169,20 @@ describe("Farm", () => {
     ).rejects.toThrow(/validation failed/i);
   });
 
-  test("rejects more than 8 current crops and duplicate crops", async () => {
-    const nine = Array.from({ length: 9 }, (_, i) => `crop-${i}`);
+  test("rejects more than 7 current crops and duplicate crops", async () => {
+    const eight = Array.from({ length: 8 }, (_, i) => `crop-${i}`);
     await expect(
-      Farm.create({ userId: oid(), currentCrops: nine }),
+      Farm.create({ userId: oid(), currentCrops: eight }),
+    ).rejects.toThrow(/validation failed/i);
+    await expect(
+      Farm.create({ userId: oid(), currentCrops: ["maize", "maize"] }),
     ).rejects.toThrow(/validation failed/i);
     await expect(
       Farm.create({
         userId: oid(),
-        currentCrops: ["field-corn", "field-corn"],
+        currentCrops: Array.from({ length: 7 }, (_, i) => `crop-${i}`),
       }),
-    ).rejects.toThrow(/validation failed/i);
+    ).resolves.toBeDefined();
   });
 
   test("rejects duplicate equipment and an unknown equipment id", async () => {
@@ -246,119 +209,46 @@ describe("Farm", () => {
     ).resolves.toBeDefined();
   });
 
-  test("seasonsPerYear must be 1, 2 or 3", async () => {
+  test("seasonsPerYear must be 1 or 2", async () => {
     await expect(
       Farm.create({ userId: oid(), seasonsPerYear: 4 }),
     ).rejects.toThrow(/validation failed/i);
+    await expect(
+      Farm.create({ userId: oid(), seasonsPerYear: 3 }),
+    ).rejects.toThrow(/validation failed/i);
+    await expect(
+      Farm.create({ userId: oid(), seasonsPerYear: 1 }),
+    ).resolves.toBeDefined();
     await expect(
       Farm.create({ userId: oid(), seasonsPerYear: 2 }),
     ).resolves.toBeDefined();
   });
 
-  test("draftSequence must have 0 or exactly 3 items", async () => {
-    const item = (slot) => ({ slot, cropId: "winter-rye" });
+  test("rotationInput holds the winter and the summer crop only", async () => {
     await expect(
       Farm.create({
         userId: oid(),
-        draftSequence: [item("fall_winter"), item("spring")],
-      }),
-    ).rejects.toThrow(/validation failed/i);
-    await expect(
-      Farm.create({
-        userId: oid(),
-        draftSequence: [
-          item("fall_winter"),
-          item("spring"),
-          item("summer_fall"),
-        ],
+        rotationInput: { winter: "wheat", summer: "maize" },
       }),
     ).resolves.toBeDefined();
-  });
-});
-
-describe("Crop", () => {
-  test("saves a valid crop with defaults", async () => {
-    const c = await Crop.create(validCrop());
-    expect(c.status).toBe("placeholder");
-    expect(c.selectableAsCurrent).toBe(false);
-    expect(c.benefitTag).toBeNull();
-    expect(c.calendar.plantingLabel).toBeNull();
-  });
-
-  test('keeps the slug in the "id" field', async () => {
-    await Crop.create(validCrop());
-    const plain = await Crop.findOne({ id: "winter-rye" }).lean();
-    expect(plain.id).toBe("winter-rye");
-  });
-
-  test("rejects a duplicate id", async () => {
-    await Crop.create(validCrop());
-    await expect(Crop.create(validCrop())).rejects.toThrow(/E11000/);
-  });
-
-  test("rejects an id that is not a kebab-case slug", async () => {
-    await expect(Crop.create(validCrop({ id: "Winter Rye" }))).rejects.toThrow(
-      /validation failed/i,
-    );
-  });
-
-  test("rejects a crop with no slots and a crop with an unknown slot", async () => {
-    await expect(Crop.create(validCrop({ slots: [] }))).rejects.toThrow(
-      /validation failed/i,
-    );
-    await expect(Crop.create(validCrop({ slots: ["winter"] }))).rejects.toThrow(
-      /validation failed/i,
-    );
-  });
-
-  test("rejects a crop without image files or alt text", async () => {
     await expect(
-      Crop.create(
-        validCrop({ image: { file: "a.webp", thumbFile: "a.webp" } }),
-      ),
-    ).rejects.toThrow(/validation failed/i);
-  });
-
-  test("rejects invalid attribute values", async () => {
-    const attrs = validCrop().attributes;
+      Farm.create({
+        userId: oid(),
+        rotationInput: { winter: "fallow", summer: "fallow" },
+      }),
+    ).resolves.toBeDefined();
     await expect(
-      Crop.create(
-        validCrop({ attributes: { ...attrs, waterNeed: "extreme" } }),
-      ),
+      Farm.create({
+        userId: oid(),
+        rotationInput: { winter: "winter-wheat", summer: "maize" },
+      }),
     ).rejects.toThrow(/validation failed/i);
     await expect(
-      Crop.create(validCrop({ attributes: { ...attrs, typicalDays: 0 } })),
+      Farm.create({
+        userId: oid(),
+        rotationInput: { winter: "maize", summer: "maize" },
+      }),
     ).rejects.toThrow(/validation failed/i);
-  });
-
-  test("rejects an unknown category", async () => {
-    await expect(Crop.create(validCrop({ category: "fruit" }))).rejects.toThrow(
-      /validation failed/i,
-    );
-  });
-});
-
-describe("PlanSet", () => {
-  test("saves a valid plan set; mySequence defaults to null", async () => {
-    const p = await PlanSet.create(validPlanSet());
-    expect(p.mySequence).toBeNull();
-    expect(p.plans[0].matchScore).toBe(64);
-  });
-
-  test("rejects an invalid status and an unknown centerId", async () => {
-    await expect(
-      PlanSet.create(validPlanSet({ status: "draft" })),
-    ).rejects.toThrow(/validation failed/i);
-    await expect(
-      PlanSet.create(validPlanSet({ centerId: "cairo" })),
-    ).rejects.toThrow(/validation failed/i);
-  });
-
-  test("has a 30-day TTL index on createdAt", async () => {
-    const indexes = await PlanSet.collection.indexes();
-    const ttl = indexes.find((i) => i.key.createdAt === 1);
-    expect(ttl).toBeDefined();
-    expect(ttl.expireAfterSeconds).toBe(60 * 60 * 24 * 30);
   });
 });
 
@@ -367,18 +257,47 @@ describe("ActivePlan", () => {
     await ActivePlan.create(validActivePlan());
     const plain = await ActivePlan.findOne().lean();
     expect(plain.archivedAt).toBeNull();
-    expect(plain.evidence).toEqual([]);
-    expect(plain.infoGaps).toEqual([]);
-    expect(plain.risksToReview).toEqual([]);
     expect(plain.chosenAt).toBeInstanceOf(Date);
+    expect(plain.planKey).toBe("soil_health");
+    expect(plain.key).toBe("desouk|wheat|maize");
+    expect(plain.input).toEqual({
+      center: "desouk",
+      winter: "wheat",
+      summer: "maize",
+    });
+    expect(plain.dataVersion).toBe("v3-rotation-1.1");
   });
 
-  test("rejects an unknown planKey and an invalid status", async () => {
+  test("stores the reference only: the plan content is not copied", async () => {
+    await ActivePlan.create(validActivePlan());
+    const plain = await ActivePlan.findOne().lean();
+    expect(plain).not.toHaveProperty("plan");
+    expect(plain).not.toHaveProperty("sequence");
+    expect(plain).not.toHaveProperty("planSetId");
+    expect(plain).not.toHaveProperty("status");
+    expect(plain).not.toHaveProperty("modelVersion");
+  });
+
+  test("rejects an unknown planKey, a missing key and an unknown crop in the input", async () => {
     await expect(
       ActivePlan.create(validActivePlan({ planKey: "plan_9" })),
     ).rejects.toThrow(/validation failed/i);
     await expect(
-      ActivePlan.create(validActivePlan({ status: "draft" })),
+      ActivePlan.create(validActivePlan({ key: undefined })),
+    ).rejects.toThrow(/validation failed/i);
+    await expect(
+      ActivePlan.create(
+        validActivePlan({
+          input: { center: "desouk", winter: "winter-wheat", summer: "maize" },
+        }),
+      ),
+    ).rejects.toThrow(/validation failed/i);
+    await expect(
+      ActivePlan.create(
+        validActivePlan({
+          input: { center: "desouk", winter: "maize", summer: "maize" },
+        }),
+      ),
     ).rejects.toThrow(/validation failed/i);
   });
 

@@ -15,3 +15,6 @@ export async function putFarm(req, res) {
 export async function patchFarm(req, res) {
   res.json(await farmService.patchFarm(req.user.id, req.body));
 }
+export async function putRotation(req, res) {
+  res.json(await farmService.setRotation(req.user.id, req.body));
+}

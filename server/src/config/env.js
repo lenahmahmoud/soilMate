@@ -22,19 +22,9 @@ const schema = z
     JWT_EXPIRES_REMEMBER: z.string().default('30d'),
     BCRYPT_COST: z.coerce.number().int().min(4).max(15).default(12),
     PUBLIC_BASE_URL: z.string().url().optional(),
-    SCORING_MODE: z.enum(['mock', 'python']).default('mock'),
-    PYTHON_URL: z.string().url().optional(),
-    PYTHON_TIMEOUT_MS: z.coerce.number().int().min(100).default(5000),
     LAYER_DATA_DIR: z.string().default('src/data/layers'),
   })
   .superRefine((v, ctx) => {
-    if (v.SCORING_MODE === 'python' && !v.PYTHON_URL) {
-      ctx.addIssue({
-        code: 'custom',
-        path: ['PYTHON_URL'],
-        message: 'required when SCORING_MODE=python',
-      });
-    }
     if (v.NODE_ENV === 'production' && !v.PUBLIC_BASE_URL) {
       ctx.addIssue({
         code: 'custom',

@@ -55,18 +55,13 @@ export const OPTIONS = deepFreeze({
     {
       id: 1,
       label: '1 Season / Year',
-      hint: 'Single cash crop per calendar year with dormant fallow winter periods.',
+      hint: 'One crop per year, with the other season left without a crop.',
     },
     {
       id: 2,
       label: '2 Seasons / Year',
-      hint: 'Main cash crop followed by a winter cover or secondary legume sequence.',
+      hint: 'A winter crop followed by a summer crop.',
       recommended: true,
-    },
-    {
-      id: 3,
-      label: '3 Seasons / Year',
-      hint: 'Intensive multi-crop relay rotation with rapid turnover cycles.',
     },
   ],
   priority: [
@@ -101,10 +96,10 @@ export const OPTIONS = deepFreeze({
       hint: 'Target premium food grades and specialty grain markets.',
     },
   ],
-  slots: [
-    { id: 'fall_winter', label: 'Fall / Winter', order: 1 },
-    { id: 'spring', label: 'Spring', order: 2 },
-    { id: 'summer_fall', label: 'Summer / Fall', order: 3 },
+  // Only the two seasons of the Rotation Lab (C3). The old three-season list (slots) is gone.
+  seasons: [
+    { id: 'winter', label: 'Winter', order: 1 },
+    { id: 'summer', label: 'Summer', order: 2 },
   ],
   areaUnit: ['acres', 'hectares'],
   limits: { maxPriorities: 3 },

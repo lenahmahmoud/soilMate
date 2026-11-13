@@ -24,7 +24,7 @@ const SOILMATE_PREFIXES = [
   "/centers",
   "/map",
   "/glossary",
-  "/rotation",
+  "/rotation-lab", // the Rotation Lab is the only crop source now
   "/plans",
   "/dashboard",
   "/reports",

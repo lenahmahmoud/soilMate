@@ -6,9 +6,9 @@ import {
   EQUIPMENT,
   SEASONS_PER_YEAR,
   PRIORITIES,
-  SLOTS,
   AREA_UNITS,
 } from '../../src/constants/soilmateEnums.js';
+import { SEASONS } from '../../src/constants/rotationLab.js';
 
 const ids = (list) => list.map((o) => o.id);
 
@@ -20,7 +20,7 @@ describe('OPTIONS match the validation enums', () => {
     ['equipment', EQUIPMENT],
     ['seasonsPerYear', SEASONS_PER_YEAR],
     ['priority', PRIORITIES],
-    ['slots', SLOTS],
+    ['seasons', SEASONS],
   ])('%s ids equal the enum, in the same order', (key, enumList) => {
     expect(ids(OPTIONS[key])).toEqual(enumList);
   });
@@ -39,7 +39,7 @@ describe('OPTIONS content', () => {
       'equipment',
       'seasonsPerYear',
       'priority',
-      'slots',
+      'seasons',
     ]) {
       for (const option of OPTIONS[key]) {
         expect(typeof option.label).toBe('string');
@@ -60,9 +60,10 @@ describe('OPTIONS content', () => {
     );
   });
 
-  test('slots are ordered 1, 2, 3 with the contract labels', () => {
-    expect(OPTIONS.slots.map((s) => s.order)).toEqual([1, 2, 3]);
-    expect(OPTIONS.slots.map((s) => s.label)).toEqual(['Fall / Winter', 'Spring', 'Summer / Fall']);
+  test('only the two Rotation Lab seasons are left', () => {
+    expect(OPTIONS.seasons.map((s) => s.order)).toEqual([1, 2]);
+    expect(OPTIONS.seasons.map((s) => s.label)).toEqual(['Winter', 'Summer']);
+    expect(OPTIONS).not.toHaveProperty('slots'); // the old three-season list is gone
   });
 
   test('the "Not Sure" soil hint no longer mentions USDA SSURGO', () => {

@@ -2,11 +2,15 @@ import { env } from "./config/env.js";
 import { connectDB, disconnectDB } from "./config/db.js";
 import { logger } from "./config/logger.js";
 import { initLayerData } from "./data/loadLayerData.js";
+import { initRotationLabData } from "./data/loadRotationLabData.js";
 import app from "./app.js";
 
 await connectDB();
 initLayerData(env.LAYER_DATA_DIR);
 logger.info("Layer data loaded");
+// Fail fast: a bad or inconsistent Rotation Lab / crop file stops the server here (a missing image does not).
+initRotationLabData(undefined, { onWarn: (msg) => logger.warn(msg) });
+logger.info("Rotation Lab data loaded");
 const server = app.listen(env.PORT, () => {
   logger.info(`Server listening on port ${env.PORT}`);
 });

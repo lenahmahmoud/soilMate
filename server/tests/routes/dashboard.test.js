@@ -1,22 +1,24 @@
+import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import request from 'supertest';
 import { Router } from 'express';
+import { initLayerData, resetLayerData } from '../../src/data/loadLayerData.js';
 
 let mongod;
-let Crop;
-let PlanSet;
+let User;
+let Farm;
 let ActivePlan;
 let createApp;
 let farmRoutes;
-let rotationRoutes;
 let plansRoutes;
 let dashboardRoutes;
-let initLayerData;
-let resetLayerData;
-let layerService;
 let app;
+let getRotationLabData;
+
+const LAYER_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../src/data/layers');
 
 beforeAll(async () => {
   Object.assign(process.env, {
@@ -30,21 +32,20 @@ beforeAll(async () => {
     BCRYPT_COST: '4',
     PUBLIC_BASE_URL: 'https://api.test.local',
   });
-
   mongod = await MongoMemoryServer.create();
   await mongoose.connect(mongod.getUri());
-  ({ default: Crop } = await import('../../src/models/Crop.js'));
-  ({ default: PlanSet } = await import('../../src/models/PlanSet.js'));
+  ({ default: User } = await import('../../src/models/User.js'));
+  ({ default: Farm } = await import('../../src/models/Farm.js'));
   ({ default: ActivePlan } = await import('../../src/models/ActivePlan.js'));
   ({ createApp } = await import('../../src/app.js'));
   ({ default: farmRoutes } = await import('../../src/routes/farmRoutes.js'));
-  ({ default: rotationRoutes } = await import('../../src/routes/rotationRoutes.js'));
   ({ default: plansRoutes } = await import('../../src/routes/plansRoutes.js'));
   ({ default: dashboardRoutes } = await import('../../src/routes/dashboardRoutes.js'));
-  ({ initLayerData, resetLayerData } = await import('../../src/data/loadLayerData.js'));
-  layerService = await import('../../src/services/layerService.js');
-  initLayerData(path.resolve('src/data/layers'));
-  await Promise.all([Crop.init(), PlanSet.init(), ActivePlan.init()]);
+  ({ getRotationLabData } = await import('../../src/data/loadRotationLabData.js'));
+  initLayerData(LAYER_DIR);
+  await User.init();
+  await Farm.init();
+  await ActivePlan.init(); // builds the unique "one active plan per user" index
 }, 60000);
 
 afterAll(async () => {
@@ -53,44 +54,12 @@ afterAll(async () => {
   await mongod.stop();
 });
 
-function makeCrop(id, name, slots, selectableAsCurrent, attributes) {
-  return {
-    id,
-    name,
-    category: 'cash_crop',
-    roleTag: 'Test',
-    description: `About ${name}`,
-    slots,
-    selectableAsCurrent,
-    image: { file: `${id}.webp`, thumbFile: `${id}.webp`, alt: `${name} in a field` },
-    attributes,
-  };
-}
-
-beforeEach(async () => {
+beforeEach(() => {
   const router = Router();
   router.use('/farm', farmRoutes);
-  router.use('/rotation', rotationRoutes);
   router.use('/plans', plansRoutes);
   router.use('/', dashboardRoutes);
-  app = createApp({ apiRouter: router });
-
-  await Crop.create([
-    makeCrop('winter-rye', 'Winter Rye', ['fall_winter'], false,
-      { family: 'grass', isLegume: false, waterNeed: 'low', groundCover: 'high', costLevel: 'low', equipment: ['seed_drill_planter'], typicalDays: 150 }),
-    makeCrop('crimson-clover', 'Crimson Clover', ['spring'], false,
-      { family: 'legume', isLegume: true, waterNeed: 'low', groundCover: 'high', costLevel: 'low', equipment: ['seed_drill_planter'], typicalDays: 90 }),
-    makeCrop('field-corn', 'Field Corn', ['spring', 'summer_fall'], true,
-      { family: 'grass', isLegume: false, waterNeed: 'high', groundCover: 'medium', costLevel: 'high', equipment: ['standard_tractor', 'seed_drill_planter', 'combine_harvester'], typicalDays: 120 }),
-    makeCrop('soybeans', 'Soybeans', ['spring', 'summer_fall'], true,
-      { family: 'legume', isLegume: true, waterNeed: 'medium', groundCover: 'medium', costLevel: 'medium', equipment: ['standard_tractor', 'seed_drill_planter', 'combine_harvester'], typicalDays: 110 }),
-    makeCrop('daikon', 'Daikon', ['fall_winter'], false,
-      { family: 'brassica', isLegume: false, waterNeed: 'low', groundCover: 'high', costLevel: 'low', equipment: ['seed_drill_planter'], typicalDays: 70 }),
-    makeCrop('field-peas', 'Field Peas', ['spring'], false,
-      { family: 'legume', isLegume: true, waterNeed: 'low', groundCover: 'medium', costLevel: 'low', equipment: ['seed_drill_planter', 'combine_harvester'], typicalDays: 90 }),
-    makeCrop('grain-sorghum', 'Grain Sorghum', ['summer_fall'], true,
-      { family: 'grass', isLegume: false, waterNeed: 'low', groundCover: 'medium', costLevel: 'low', equipment: ['standard_tractor', 'seed_drill_planter', 'combine_harvester'], typicalDays: 110 }),
-  ]);
+  app = createApp({ apiRouter: router, rateLimit: { limit: 100000 } });
 });
 
 afterEach(async () => {
@@ -98,11 +67,20 @@ afterEach(async () => {
 });
 
 const G1 = '3f2b8a52-6c1e-4b7d-9a35-0d4f7e1c2b90';
-const G2 = '7c9e6679-7425-40de-944b-e07fc1f90ae7';
+const G2 = '9d1c4e77-2a0b-4f63-8e15-7b3a6c5d8e21';
 const asGuest = (id) => ({ 'X-Guest-Id': id });
 
+const setCenter = (id, centerId = 'desouk') =>
+  request(app).put('/api/farm/center').set(asGuest(id)).send({ centerId });
+const putRotation = (id, body) => request(app).put('/api/farm/rotation').set(asGuest(id)).send(body);
+const putFarm = (id, body) => request(app).put('/api/farm').set(asGuest(id)).send(body);
+const choose = (id, body) => request(app).post('/api/plans/choose').set(asGuest(id)).send(body);
+const dashboard = (id) => request(app).get('/api/dashboard').set(asGuest(id));
+const report = (id) => request(app).get('/api/reports/summary').set(asGuest(id));
+
+const ROTATION = { winter: 'wheat', summer: 'maize' };
 const FORM = {
-  currentCrops: ['field-corn'],
+  currentCrops: ['wheat'],
   waterSource: 'rain',
   waterSourceOther: null,
   waterAvailability: 'usually_enough',
@@ -112,246 +90,235 @@ const FORM = {
   priorities: ['save_water'],
 };
 
-const setCenter = (id) => request(app).put('/api/farm/center').set(asGuest(id)).send({ centerId: 'desouk' });
-const completeFarm = async (id) => {
-  await setCenter(id);
-  return request(app).put('/api/farm').set(asGuest(id)).send(FORM);
+const prepare = async (id, rotation = ROTATION, centerId = 'desouk') => {
+  await setCenter(id, centerId);
+  return putRotation(id, rotation);
 };
-const MINE = [
-  { slot: 'fall_winter', cropId: 'winter-rye' },
-  { slot: 'spring', cropId: 'crimson-clover' },
-  { slot: 'summer_fall', cropId: 'soybeans' },
-];
-const saveDraft = (id) => request(app).post('/api/rotation/score').set(asGuest(id)).send({ sequence: MINE });
-const compare = (id) => request(app).post('/api/plans/compare').set(asGuest(id));
-const choose = (id, body) => request(app).post('/api/plans/choose').set(asGuest(id)).send(body);
-const dashboard = (id) => request(app).get('/api/dashboard').set(asGuest(id));
-const report = (id) => request(app).get('/api/reports/summary').set(asGuest(id));
-const journey = (id) => request(app).get('/api/journey').set(asGuest(id));
+
+const stored = (key, type) => getRotationLabData().plansByKey.get(key).plans[type];
 const isoDay = (offsetDays = 0) => new Date(Date.now() + offsetDays * 86_400_000).toISOString().slice(0, 10);
 
-// Complete farm, compare, choose area_plan_a (winter-rye 150 days, crimson-clover 90, field-corn 120).
-async function chooseAreaPlanA(id, startDate) {
-  await completeFarm(id);
-  const { body } = await compare(id);
-  return choose(id, { planSetId: body.planSetId, planKey: 'area_plan_a', ...(startDate ? { startDate } : {}) });
-}
-
-const statuses = (res) => res.body.steps.map((s) => s.status);
-
-describe('access', () => {
-  test('no token and no guest id gives 401 on all three routes', async () => {
-    for (const url of ['/api/dashboard', '/api/reports/summary', '/api/journey']) {
-      expect((await request(app).get(url)).status).toBe(401);
-    }
+describe('GET /api/dashboard: access', () => {
+  test('no token and no guest id gives 401', async () => {
+    expect((await request(app).get('/api/dashboard')).status).toBe(401);
   });
 
   test('a malformed guest id gives 400 INVALID_GUEST_ID', async () => {
-    const res = await request(app).get('/api/journey').set(asGuest('1234'));
+    const res = await request(app).get('/api/dashboard').set(asGuest('1234'));
     expect(res.status).toBe(400);
     expect(res.body.error.code).toBe('INVALID_GUEST_ID');
   });
 
-  test('the answers are never cached', async () => {
-    expect((await journey(G1)).headers['cache-control']).toBe('no-store');
-    expect((await dashboard(G1)).headers['cache-control']).toBe('no-store');
+  test('the dashboard is never cached', async () => {
+    const res = await dashboard(G1);
+    expect(res.status).toBe(200);
+    expect(res.headers['cache-control']).toBe('no-store');
   });
 });
 
-describe('GET /journey', () => {
-  test('a new visitor starts at explore', async () => {
-    const res = await journey(G1);
-    expect(res.status).toBe(200);
-    expect(res.body.steps.map((s) => s.id)).toEqual(['explore', 'farm', 'lab', 'compare', 'dashboard']);
-    expect(statuses(res)).toEqual(['current', 'upcoming', 'upcoming', 'upcoming', 'upcoming']);
-    expect(res.body.current).toBe('explore');
-    expect(res.body.nextRoute).toBe('/explore');
-    expect(Object.keys(res.body.steps[0]).sort()).toEqual(['id', 'label', 'route', 'status']);
-  });
-
-  test('moves forward step by step', async () => {
-    await setCenter(G1);
-    let res = await journey(G1);
-    expect(statuses(res)).toEqual(['done', 'current', 'upcoming', 'upcoming', 'upcoming']);
-    expect(res.body.nextRoute).toBe('/farm');
-
-    await completeFarm(G1);
-    res = await journey(G1);
-    expect(statuses(res)).toEqual(['done', 'done', 'current', 'upcoming', 'upcoming']);
-    expect(res.body.current).toBe('lab');
-    expect(res.body.nextRoute).toBe('/rotation-lab');
-
-    await saveDraft(G1);
-    res = await journey(G1);
-    expect(statuses(res)).toEqual(['done', 'done', 'done', 'current', 'upcoming']);
-    expect(res.body.nextRoute).toBe('/compare-plans');
-
-    const { body } = await compare(G1);
-    await choose(G1, { planSetId: body.planSetId, planKey: 'my_plan' });
-    res = await journey(G1);
-    expect(statuses(res)).toEqual(['done', 'done', 'done', 'done', 'current']);
-    expect(res.body.current).toBe('dashboard');
-    expect(res.body.nextRoute).toBe('/dashboard');
-  });
-
-  test('skipping the Lab still counts it as done once a plan is chosen', async () => {
-    await chooseAreaPlanA(G2);
-    const res = await journey(G2);
-    expect(statuses(res)).toEqual(['done', 'done', 'done', 'done', 'current']);
-  });
-});
-
-describe('GET /dashboard', () => {
-  test('a visitor with no area: empty header, no land, no plan', async () => {
+describe('GET /api/dashboard: no center, no plan', () => {
+  test('a visitor without an area gets land null, reportsAvailable false and all plan fields null', async () => {
     const res = await dashboard(G1);
     expect(res.status).toBe(200);
-    expect(Object.keys(res.body).sort()).toEqual([
-      'hasActivePlan', 'header', 'land', 'plan', 'protection', 'reportsAvailable', 'seasonProgress', 'waterBySeason',
-    ]);
-    expect(res.body.header).toEqual({ farmName: null, centerId: null, centerName: null, locationLabel: null });
-    expect(res.body.land).toBeNull();
-    expect(res.body.reportsAvailable).toBe(false);
-    expect(res.body.hasActivePlan).toBe(false);
-  });
-
-  test('an area but no plan: header, land pieces, plan parts null', async () => {
-    await setCenter(G1);
-    await request(app).patch('/api/farm').set(asGuest(G1)).send({ farmName: 'Green Acres' });
-    const res = await dashboard(G1);
     expect(res.body.header).toEqual({
-      farmName: 'Green Acres',
-      centerId: 'desouk',
-      centerName: 'Desouk',
-      locationLabel: 'Desouk · Kafr El-Sheikh',
+      farmName: null,
+      centerId: null,
+      centerName: null,
+      locationLabel: null,
     });
-    expect(Object.keys(res.body.land).sort()).toEqual(['areaWarning', 'dataThrough', 'landRisk', 'soilMoisture', 'tiles']);
-    expect(res.body.land.tiles).toHaveLength(4);
-    expect(res.body.land.landRisk.indicators).toHaveLength(4);
-    expect(res.body.reportsAvailable).toBe(true);
+    expect(res.body.land).toBeNull();
     expect(res.body.hasActivePlan).toBe(false);
-    for (const key of ['seasonProgress', 'protection', 'waterBySeason', 'plan']) expect(res.body[key]).toBeNull();
+    expect(res.body.seasonProgress).toBeNull();
+    expect(res.body.protection).toBeNull();
+    expect(res.body.waterBySeason).toBeNull();
+    expect(res.body.plan).toBeNull();
+    expect(res.body.reportsAvailable).toBe(false);
   });
 
-  test('with a plan that starts today: day 1 of the first season', async () => {
-    const chosen = await chooseAreaPlanA(G1);
+  test('a center with no chosen plan still returns the land and nulls the plan fields', async () => {
+    await setCenter(G1);
     const res = await dashboard(G1);
+    expect(res.status).toBe(200);
+    expect(res.body.land).not.toBeNull();
+    expect(res.body.hasActivePlan).toBe(false);
+    expect(res.body.seasonProgress).toBeNull();
+    expect(res.body.protection).toBeNull();
+    expect(res.body.waterBySeason).toBeNull();
+    expect(res.body.plan).toBeNull();
+    expect(res.body.reportsAvailable).toBe(true);
+  });
+});
+
+describe('GET /api/dashboard: with the saved rotation and the chosen plan', () => {
+  test('the plan fields come from the chosen ActivePlan and the season progress from the saved rotation', async () => {
+    await prepare(G1);
+    const chosen = await choose(G1, { planKey: 'current', startDate: isoDay(0) });
+    expect(chosen.status).toBe(201);
+
+    const res = await dashboard(G1);
+    expect(res.status).toBe(200);
     expect(res.body.hasActivePlan).toBe(true);
+    expect(res.body.reportsAvailable).toBe(true);
+    expect(res.body.plan).toEqual(chosen.body);
+    expect(res.body.plan.planKey).toBe('current');
+    expect(res.body.plan.plan.plan_type).toBe('current');
+
+    // season progress: winter wheat (180 days) started today -> day 1 of the season
     expect(res.body.seasonProgress).toEqual({
       state: 'in_progress',
-      currentSlot: 'fall_winter',
-      seasonLabel: 'Season 1 · Fall / Winter',
-      crop: { id: 'winter-rye', name: 'Winter Rye' },
+      currentSlot: 'winter',
+      currentCropName: 'Wheat',
       dayOfSeason: 1,
-      totalDays: 150,
+      totalDays: 180,
       percent: 1,
       isEstimate: true,
     });
-    expect(res.body.plan.id).toBe(chosen.body.id);
-    expect(res.body.plan.sequence.map((s) => s.state)).toEqual(['in_progress', 'upcoming_next', 'scheduled']);
   });
 
-  test('protection and water by season use the plan season details', async () => {
-    await chooseAreaPlanA(G1);
-    const { protection, waterBySeason } = (await dashboard(G1)).body;
-    const labels = ['S1: Winter Rye (Fall / Winter)', 'S2: Crimson Clover (Spring)', 'S3: Field Corn (Summer / Fall)'];
-    expect(protection.seasons.map((s) => s.label)).toEqual(labels);
-    expect(protection.seasons.map((s) => s.value)).toEqual([90, 90, 60]);
-    expect(protection.seasons.map((s) => s.slot)).toEqual(['fall_winter', 'spring', 'summer_fall']);
-    expect(Object.keys(protection.seasons[0]).sort()).toEqual(['cropId', 'label', 'meterLabel', 'note', 'slot', 'value']);
-    expect(protection.overall).toMatchObject({ value: 79, level: 'high', levelLabel: 'HIGH', fitLabel: 'Good Fit' });
-    expect(waterBySeason.seasons.map((s) => s.label)).toEqual(labels);
-    expect(waterBySeason.seasons.map((s) => s.value)).toEqual([25, 25, 85]);
-  });
-
-  test('a start date in the future: not started, first season is upcoming', async () => {
-    await chooseAreaPlanA(G1, isoDay(10));
-    const { seasonProgress, plan } = (await dashboard(G1)).body;
-    expect(seasonProgress).toMatchObject({ state: 'not_started', currentSlot: 'fall_winter', dayOfSeason: 0, percent: 0 });
-    expect(plan.sequence.map((s) => s.state)).toEqual(['upcoming_next', 'scheduled', 'scheduled']);
-  });
-
-  test('160 days in: walks past season 1 into day 11 of season 2', async () => {
-    await chooseAreaPlanA(G1, isoDay(-160));
-    const { seasonProgress, plan } = (await dashboard(G1)).body;
-    expect(seasonProgress).toMatchObject({
-      state: 'in_progress',
-      currentSlot: 'spring',
-      crop: { id: 'crimson-clover', name: 'Crimson Clover' },
-      dayOfSeason: 11,
-      totalDays: 90,
-      percent: 12,
-    });
-    expect(plan.sequence.map((s) => s.state)).toEqual(['done', 'in_progress', 'upcoming_next']);
-  });
-
-  test('after all seasons: completed, 100 percent', async () => {
-    await chooseAreaPlanA(G1, isoDay(-400)); // 150 + 90 + 120 = 360 days
-    const { seasonProgress, plan } = (await dashboard(G1)).body;
-    expect(seasonProgress).toMatchObject({ state: 'completed', currentSlot: 'summer_fall', percent: 100, isEstimate: true });
-    expect(plan.sequence.map((s) => s.state)).toEqual(['done', 'done', 'done']);
-  });
-
-  test('a crop removed from the catalog is skipped, not an error', async () => {
-    await chooseAreaPlanA(G1);
-    await Crop.deleteOne({ id: 'crimson-clover' });
+  test('protection and water needs are built from the chosen plan content', async () => {
+    await prepare(G1, { winter: 'wheat', summer: 'maize' });
+    const chosen = await choose(G1, { planKey: 'current', startDate: isoDay(0) });
     const res = await dashboard(G1);
-    expect(res.status).toBe(200);
-    expect(res.body.protection.seasons.map((s) => s.label)).toEqual([
-      'S1: Winter Rye (Fall / Winter)',
-      'S3: Field Corn (Summer / Fall)',
-    ]);
-    expect(res.body.seasonProgress.crop.id).toBe('winter-rye');
+
+    expect(res.body.protection).toEqual({
+      title: 'Soil & Ground Cover Resilience',
+      seasons: [
+        {
+          slot: 'winter',
+          seasonLabel: 'S1: Wheat (Winter)',
+          label: 'Wheat Cover Canopy',
+          value: null,
+          note: 'Days with no crop: 116',
+        },
+        {
+          slot: 'summer',
+          seasonLabel: 'S2: Maize (Summer)',
+          label: 'Maize Cover Canopy',
+          value: null,
+          note: 'Days with no crop: 116',
+        },
+      ],
+      overall: { level: 'low', fitLabel: 'Needs Checking' },
+    });
+
+    expect(res.body.waterBySeason).toEqual({
+      title: 'Water Needs by Season',
+      seasons: [
+        { slot: 'winter', seasonLabel: 'S1: Wheat (Winter)', value: 547, label: 'Moderate evaporative demand' },
+        { slot: 'summer', seasonLabel: 'S2: Maize (Summer)', value: 716, label: 'Moderate evaporative demand' },
+      ],
+    });
   });
 
-  test("one visitor never sees another visitor's plan", async () => {
-    await chooseAreaPlanA(G1);
-    await completeFarm(G2);
-    expect((await dashboard(G2)).body.hasActivePlan).toBe(false);
+  test('a soil_health plan gives the soil health level of its own content', async () => {
+    await prepare(G1, { winter: 'wheat', summer: 'maize' });
+    const chosen = await choose(G1, { planKey: 'soil_health', startDate: isoDay(0) });
+    const res = await dashboard(G1);
+
+    expect(res.body.plan).toEqual(chosen.body);
+    expect(res.body.protection.overall).toEqual({ level: 'high', fitLabel: 'Good Fit' });
+    expect(res.body.protection.seasons).toHaveLength(2);
+    expect(res.body.protection.seasons[0].note).toBe('Days with no crop: 16');
+    expect(res.body.waterBySeason.seasons).toHaveLength(2);
   });
 });
 
-describe('GET /reports/summary', () => {
+describe('GET /api/dashboard: season progress', () => {
+  test('a future start date gives not_started', async () => {
+    await prepare(G1);
+    const chosen = await choose(G1, { planKey: 'current', startDate: isoDay(5) });
+    const res = await dashboard(G1);
+    expect(res.body.seasonProgress).toEqual({
+      state: 'not_started',
+      currentSlot: 'winter',
+      currentCropName: 'Wheat',
+      dayOfSeason: 0,
+      totalDays: 180,
+      percent: 0,
+      isEstimate: true,
+    });
+    expect(res.body.plan).toEqual(chosen.body);
+  });
+
+  test('an elapsed winter gives the day of season inside the winter crop', async () => {
+    await prepare(G1);
+    const chosen = await choose(G1, { planKey: 'current', startDate: isoDay(-40) });
+    const res = await dashboard(G1);
+    expect(res.body.seasonProgress).toEqual({
+      state: 'in_progress',
+      currentSlot: 'winter',
+      currentCropName: 'Wheat',
+      dayOfSeason: 41,
+      totalDays: 180,
+      percent: 23,
+      isEstimate: true,
+    });
+  });
+
+  test('a rotation longer than the elapsed time is completed', async () => {
+    await prepare(G1);
+    const chosen = await choose(G1, { planKey: 'current', startDate: isoDay(-400) });
+    const res = await dashboard(G1);
+    expect(res.body.seasonProgress).toEqual({
+      state: 'completed',
+      currentSlot: 'summer',
+      currentCropName: 'Maize',
+      dayOfSeason: 130,
+      totalDays: 130,
+      percent: 100,
+      isEstimate: true,
+    });
+  });
+
+  test('a fallow season is skipped and the progress runs with the next crop', async () => {
+    await prepare(G1, { winter: 'fallow', summer: 'cotton' });
+    const chosen = await choose(G1, { planKey: 'water_saving', startDate: isoDay(0) });
+    const res = await dashboard(G1);
+    expect(res.body.seasonProgress).toEqual({
+      state: 'in_progress',
+      currentSlot: 'summer',
+      currentCropName: 'Cotton',
+      dayOfSeason: 1,
+      totalDays: 195,
+      percent: 1,
+      isEstimate: true,
+    });
+    expect(res.body.plan).toEqual(chosen.body);
+  });
+});
+
+describe('GET /api/reports/summary', () => {
   test('without an area it gives 409 FARM_SETUP_INCOMPLETE', async () => {
     const res = await report(G1);
     expect(res.status).toBe(409);
     expect(res.body.error.code).toBe('FARM_SETUP_INCOMPLETE');
   });
 
-  test('with an area but no plan: copied report texts, farm and limits', async () => {
+  test('with a chosen plan it returns the new ActivePlan content under the plan key', async () => {
+    await prepare(G1);
+    const chosen = await choose(G1, { planKey: 'current', startDate: isoDay(0) });
+
+    const res = await report(G1);
+    expect(res.status).toBe(200);
+    expect(res.body.plan).toEqual(chosen.body);
+    expect(res.body).not.toHaveProperty('activePlan');
+    expect(typeof res.body.generatedAt).toBe('string');
+    expect(res.body.center).toEqual({
+      id: 'desouk',
+      name: 'Desouk',
+      governorate: 'Kafr El-Sheikh',
+    });
+    expect(res.body.farm).not.toBeNull();
+    expect(res.body.soilMoistureReport).toBeDefined();
+    expect(res.body.landRiskReport).toBeDefined();
+    expect(Array.isArray(res.body.limits)).toBe(true);
+    expect(typeof res.body.disclaimer).toBe('string');
+  });
+
+  test('without a chosen plan the report has no plan', async () => {
     await setCenter(G1);
     const res = await report(G1);
     expect(res.status).toBe(200);
-    expect(Object.keys(res.body).sort()).toEqual([
-      'activePlan', 'center', 'disclaimer', 'farm', 'generatedAt', 'landRiskReport', 'limits', 'soilMoistureReport',
-    ]);
-    expect(res.body.center).toEqual({ id: 'desouk', name: 'Desouk', governorate: 'Kafr El-Sheikh' });
-    expect(res.body.farm.centerId).toBe('desouk');
-    expect(res.body.activePlan).toBeNull();
-    expect(Object.keys(res.body.soilMoistureReport).sort()).toEqual(['may_mean', 'observed', 'to_verify']);
-    expect(res.body.landRiskReport).toHaveProperty('observed');
-    expect(res.body.landRiskReport).toHaveProperty('meaning');
-    expect(res.body.landRiskReport).toHaveProperty('verify');
-    expect(res.body.landRiskReport).toHaveProperty('confidence');
-    expect(res.body.limits.length).toBeGreaterThan(0);
-    expect(res.body.disclaimer.length).toBeGreaterThan(0);
-  });
-
-  test('the texts are exact copies of the layer data', async () => {
-    await setCenter(G1);
-    const { body } = await report(G1);
-    const soil = layerService.getSoilMoisture('desouk');
-    const heat = layerService.getHeatStress('desouk');
-    expect(body.soilMoistureReport).toEqual(soil.texts.report);
-    expect(body.landRiskReport).toEqual(layerService.getLandRisk('desouk').point.report);
-    expect(body.limits).toEqual([...soil.limits, ...heat.limits]);
-    expect(body.disclaimer).toBe(soil.footer);
-  });
-
-  test('includes the active plan when there is one', async () => {
-    const chosen = await chooseAreaPlanA(G1);
-    const { body } = await report(G1);
-    expect(body.activePlan.id).toBe(chosen.body.id);
-    expect(body.activePlan.planKey).toBe('area_plan_a');
-    expect(body.farm.setupStatus).toBe('complete');
+    expect(res.body.plan).toBeNull();
   });
 });

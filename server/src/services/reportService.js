@@ -20,7 +20,7 @@ export async function getReportSummary(userId) {
     generatedAt: new Date().toISOString(),
     center: { id: center.id, name: center.name, governorate: center.governorate },
     farm,
-    activePlan,
+    plan: activePlan,
     soilMoistureReport: soil.texts.report, // { observed, may_mean, to_verify }, as the data team wrote them
     landRiskReport: risk.point.report, // atlas report, unchanged
     limits: [...soil.limits, ...heat.limits],

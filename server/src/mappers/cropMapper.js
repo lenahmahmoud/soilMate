@@ -1,29 +1,23 @@
-import { publicBaseUrl } from '../utils/publicUrl.js';
+import { publicBaseUrl } from "../utils/publicUrl.js";
 
+// C2/C5: the JSON has `image: null`, so the URLs are BUILT from the crop id.
+// The file may not exist yet (4 crops wait for images): the frontend shows a placeholder.
 export function toImageDto(crop, baseUrl = publicBaseUrl()) {
   return {
-    url: `${baseUrl}/static/crops/${crop.image.file}`,
-    thumbUrl: `${baseUrl}/static/crops/thumb/${crop.image.thumbFile}`,
-    alt: crop.image.alt,
+    url: `${baseUrl}/static/crops/${crop.id}.webp`,
+    thumbUrl: `${baseUrl}/static/crops/thumb/${crop.id}.webp`,
+    alt: crop.name,
   };
 }
 
-// Whitelist: `attributes` (internal scoring data) can never leave through this function.
+// Whitelist: the traits from crops.json (and the old appId) can never leave through this function.
 export function toCropDto(crop, baseUrl = publicBaseUrl()) {
   return {
     id: crop.id,
     name: crop.name,
-    subtitle: crop.subtitle ?? '',
-    category: crop.category,
-    roleTag: crop.roleTag,
-    benefitTag: crop.benefitTag ?? null,
+    season: crop.season,
+    roleTags: [...crop.roleTags],
     description: crop.description,
-    slots: crop.slots,
-    selectableAsCurrent: Boolean(crop.selectableAsCurrent),
     image: toImageDto(crop, baseUrl),
-    calendar: {
-      plantingLabel: crop.calendar?.plantingLabel ?? null,
-      harvestLabel: crop.calendar?.harvestLabel ?? null,
-    },
   };
 }

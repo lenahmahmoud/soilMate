@@ -1,13 +1,12 @@
 import User from '../models/User.js';
 import Farm from '../models/Farm.js';
-import PlanSet from '../models/PlanSet.js';
 import ActivePlan from '../models/ActivePlan.js';
 import { logger } from '../config/logger.js';
 import { GUEST_ID_RE, GUEST_HEADER } from '../constants/guest.js';
 
 const TOUCH_EVERY_MS = 60 * 60 * 1000; // lastSeenAt is refreshed at most once an hour
 
-// A guest is a User document with isGuest = true. Farm, PlanSet and ActivePlan are keyed by
+// A guest is a User document with isGuest = true. Farm and ActivePlan are keyed by
 // userId, so a guest uses exactly the same code as a real account. The e-mail is made up and
 // the password hash is not a valid hash, so nobody can ever log in as a guest.
 async function createGuest(guestId) {
@@ -54,14 +53,12 @@ export async function claimGuestData(rawGuestId, userId) {
   let outcome = 'none';
   if (guestFarm) {
     if (!userFarm || userFarm.setupStatus === 'none') {
-      // the account's farm is empty: replace it with the guest's
+      // the account's farm is empty: replace it with the guest's (farm + plans only)
       await Promise.all([
         Farm.deleteMany({ userId }),
-        PlanSet.deleteMany({ userId }),
         ActivePlan.deleteMany({ userId }),
       ]);
       await Farm.updateOne({ _id: guestFarm._id }, { $set: { userId } });
-      await PlanSet.updateMany({ userId: guest._id }, { $set: { userId } });
       await ActivePlan.updateMany({ userId: guest._id }, { $set: { userId } });
       outcome = 'adopted';
     } else {
@@ -72,13 +69,11 @@ export async function claimGuestData(rawGuestId, userId) {
   // whatever the guest still owns is removed, then the guest itself
   await Promise.all([
     Farm.deleteMany({ userId: guest._id }),
-    PlanSet.deleteMany({ userId: guest._id }),
     ActivePlan.deleteMany({ userId: guest._id }),
   ]);
   await User.deleteOne({ _id: guest._id });
   return outcome;
 }
-
 // Never lets a problem with the guest data break a login or signup.
 export async function claimGuestFromRequest(req, userId) {
   const raw = req.get(GUEST_HEADER);

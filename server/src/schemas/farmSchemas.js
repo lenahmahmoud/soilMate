@@ -8,7 +8,7 @@ import {
   PRIORITIES,
   AREA_UNITS,
 } from '../constants/soilmateEnums.js';
-
+import { rotationChoiceShape } from './rotationLabSchemas.js';
 const unique = (arr) => new Set(arr).size === arr.length;
 
 const cropId = z.string().trim().min(1).max(60);
@@ -16,7 +16,7 @@ const cropId = z.string().trim().min(1).max(60);
 const currentCrops = z
   .array(cropId)
   .min(1, 'Pick at least 1 crop')
-  .max(8, 'Pick at most 8 crops')
+  .max(7, 'Pick at most 7 crops') // was 8
   .refine(unique, { message: 'Crops must be unique' });
 
 const equipment = z
@@ -30,8 +30,8 @@ const priorities = z
   .max(3, 'Pick at most 3 priorities')
   .refine(unique, { message: 'Priorities must be unique' });
 
-const seasonsPerYear = z.union([z.literal(1), z.literal(2), z.literal(3)], {
-  error: 'Must be 1, 2 or 3',
+const seasonsPerYear = z.union([z.literal(1), z.literal(2)], {
+  error: 'Must be 1 or 2',
 });
 
 const waterSource = z.enum(WATER_SOURCES);
@@ -63,7 +63,8 @@ export const putFarmBody = z.strictObject({
   seasonsPerYear,
   priorities,
 });
-
+// PUT /farm/rotation (C6): same rules as GET /rotation-lab/plans. Missing, null or "" = fallow.
+export const rotationBody = z.strictObject({ ...rotationChoiceShape });
 // PATCH /farm: same rules, every field optional, unknown keys rejected, at least one key.
 export const patchFarmBody = z
   .strictObject({

@@ -6,11 +6,12 @@ import { Router } from 'express';
 let mongod;
 let User;
 let Farm;
-let Crop;
+let ActivePlan;
 let createApp;
 let createAuthRouter;
 let createMeRouter;
 let farmRoutes;
+let plansRoutes;
 let app;
 
 beforeAll(async () => {
@@ -32,14 +33,15 @@ beforeAll(async () => {
   await mongoose.connect(mongod.getUri());
   ({ default: User } = await import('../../src/models/User.js'));
   ({ default: Farm } = await import('../../src/models/Farm.js'));
-  ({ default: Crop } = await import('../../src/models/Crop.js'));
+  ({ default: ActivePlan } = await import('../../src/models/ActivePlan.js'));
   ({ createApp } = await import('../../src/app.js'));
   ({ createAuthRouter } = await import('../../src/routes/authRoutes.js'));
   ({ createMeRouter } = await import('../../src/routes/meRoutes.js'));
   ({ default: farmRoutes } = await import('../../src/routes/farmRoutes.js'));
+  ({ default: plansRoutes } = await import('../../src/routes/plansRoutes.js'));
   await User.init();
   await Farm.init();
-  await Crop.init();
+  await ActivePlan.init();
 }, 60000);
 
 afterAll(async () => {
@@ -47,17 +49,13 @@ afterAll(async () => {
   await mongod.stop();
 });
 
-beforeEach(async () => {
+beforeEach(() => {
   const router = Router();
   router.use('/auth', createAuthRouter({ limits: null }));
   router.use('/me', createMeRouter({ limits: null }));
   router.use('/farm', farmRoutes);
+  router.use('/plans', plansRoutes);
   app = createApp({ apiRouter: router });
-
-  await Crop.create([
-    makeCrop('field-corn', 'Field Corn'),
-    makeCrop('soybeans', 'Soybeans'),
-  ]);
 });
 
 afterEach(async () => {
@@ -66,30 +64,13 @@ afterEach(async () => {
   );
 });
 
-function makeCrop(id, name) {
-  return {
-    id,
-    name,
-    category: 'cash_crop',
-    roleTag: 'Test',
-    description: 'Test crop',
-    slots: ['spring'],
-    selectableAsCurrent: true,
-    image: { file: `${id}.webp`, thumbFile: `${id}.webp`, alt: `${name} in a field` },
-    attributes: {
-      family: 'grass', isLegume: false, waterNeed: 'low', groundCover: 'low',
-      costLevel: 'low', equipment: [], typicalDays: 100,
-    },
-  };
-}
-
 const G1 = '3f2b8a52-6c1e-4b7d-9a35-0d4f7e1c2b90';
 const G2 = '9d1c4e77-2a0b-4f63-8e15-7b3a6c5d8e21';
 const G3 = 'b7e0a1c9-5d24-4a8f-9c63-1e2f3a4b5c6d';
 const PASSWORD = 'Str0ngPass1';
 
 const FORM = {
-  currentCrops: ['field-corn'],
+  currentCrops: ['wheat'],
   waterSource: 'rain',
   waterSourceOther: null,
   waterAvailability: 'usually_enough',
@@ -99,12 +80,21 @@ const FORM = {
   priorities: ['save_water'],
 };
 
+const ROTATION = { winter: 'wheat', summer: 'maize' };
+
 const asGuest = (id) => ({ 'X-Guest-Id': id });
 const asUser = (token) => ({ Authorization: `Bearer ${token}` });
 
-const guestFarm = async (id, crops = ['field-corn']) => {
+const guestFarm = async (id, crops = ['wheat']) => {
   await request(app).put('/api/farm/center').set(asGuest(id)).send({ centerId: 'desouk' });
   return request(app).put('/api/farm').set(asGuest(id)).send({ ...FORM, currentCrops: crops });
+};
+
+// farm + saved rotation + chosen plan, all as a guest
+const guestPlan = async (id) => {
+  await guestFarm(id);
+  await request(app).put('/api/farm/rotation').set(asGuest(id)).send(ROTATION);
+  return request(app).post('/api/plans/choose').set(asGuest(id)).send({ planKey: 'current' });
 };
 
 const signup = (email = 'alex@example.com', headers = {}) =>
@@ -165,7 +155,7 @@ describe('using /farm as a guest', () => {
     expect(res.status).toBe(200);
     expect(res.body.setupStatus).toBe('complete');
     const again = await request(app).get('/api/farm').set(asGuest(G1));
-    expect(again.body.currentCrops).toEqual(['field-corn']);
+    expect(again.body.currentCrops).toEqual(['wheat']);
   });
 
   test("guests never see each other's farm", async () => {
@@ -204,7 +194,7 @@ describe('using /farm as a guest', () => {
 
 describe('moving the guest farm into an account (signup / login with X-Guest-Id)', () => {
   test('signup adopts the guest farm', async () => {
-    await guestFarm(G1, ['field-corn']);
+    await guestFarm(G1, ['wheat']);
     const res = await signup('alex@example.com', asGuest(G1));
     expect(res.status).toBe(201);
     expect(res.body.guestData).toBe('adopted');
@@ -212,38 +202,73 @@ describe('moving the guest farm into an account (signup / login with X-Guest-Id)
     const farm = await request(app).get('/api/farm').set(asUser(res.body.token));
     expect(farm.body.setupStatus).toBe('complete');
     expect(farm.body.centerId).toBe('desouk');
-    expect(farm.body.currentCrops).toEqual(['field-corn']);
+    expect(farm.body.currentCrops).toEqual(['wheat']);
 
     expect(await User.countDocuments({ isGuest: true })).toBe(0);
     expect(await Farm.countDocuments()).toBe(1);
   });
 
+  test('signup adopts the guest farm, rotation and active plan', async () => {
+    const chosen = await guestPlan(G1);
+    expect([200, 201]).toContain(chosen.status);
+
+    const res = await signup('alex@example.com', asGuest(G1));
+    expect(res.body.guestData).toBe('adopted');
+
+    const farm = await request(app).get('/api/farm').set(asUser(res.body.token));
+    expect(farm.body.rotationInput).toEqual(ROTATION);
+
+    const active = await request(app).get('/api/plans/active').set(asUser(res.body.token));
+    expect(active.status).toBe(200);
+    expect(active.body.activePlan).not.toBeNull();
+    expect(active.body.activePlan.planKey).toBe('current');
+    expect(active.body.activePlan.input).toEqual({ center: 'desouk', ...ROTATION });
+
+    expect(await ActivePlan.countDocuments({ archivedAt: null })).toBe(1);
+    expect(await User.countDocuments({ isGuest: true })).toBe(0);
+  });
+
   test('login adopts the guest farm when the account has no farm yet', async () => {
     await signup(); // account without a farm
-    await guestFarm(G1, ['soybeans']);
+    await guestFarm(G1, ['maize']);
     const res = await login('alex@example.com', asGuest(G1));
     expect(res.status).toBe(200);
     expect(res.body.guestData).toBe('adopted');
 
     const farm = await request(app).get('/api/farm').set(asUser(res.body.token));
-    expect(farm.body.currentCrops).toEqual(['soybeans']);
+    expect(farm.body.currentCrops).toEqual(['maize']);
     expect(await Farm.countDocuments()).toBe(1);
   });
 
   test('an account that already has a farm keeps it; the guest data is discarded', async () => {
     const acc = await signup();
     await request(app).put('/api/farm/center').set(asUser(acc.body.token)).send({ centerId: 'baltim' });
-    await request(app).put('/api/farm').set(asUser(acc.body.token)).send({ ...FORM, currentCrops: ['soybeans'] });
-    await guestFarm(G1, ['field-corn']);
+    await request(app).put('/api/farm').set(asUser(acc.body.token)).send({ ...FORM, currentCrops: ['maize'] });
+    await guestFarm(G1, ['wheat']);
 
     const res = await login('alex@example.com', asGuest(G1));
     expect(res.body.guestData).toBe('discarded');
 
     const farm = await request(app).get('/api/farm').set(asUser(res.body.token));
     expect(farm.body.centerId).toBe('baltim');
-    expect(farm.body.currentCrops).toEqual(['soybeans']);
+    expect(farm.body.currentCrops).toEqual(['maize']);
     expect(await User.countDocuments({ isGuest: true })).toBe(0);
     expect(await Farm.countDocuments()).toBe(1);
+  });
+
+  test('a discarded guest also loses its active plan', async () => {
+    const acc = await signup();
+    await request(app).put('/api/farm/center').set(asUser(acc.body.token)).send({ centerId: 'baltim' });
+    await request(app).put('/api/farm').set(asUser(acc.body.token)).send({ ...FORM, currentCrops: ['maize'] });
+    await guestPlan(G1);
+    expect(await ActivePlan.countDocuments()).toBe(1);
+
+    const res = await login('alex@example.com', asGuest(G1));
+    expect(res.body.guestData).toBe('discarded');
+
+    const active = await request(app).get('/api/plans/active').set(asUser(res.body.token));
+    expect(active.body.activePlan).toBeNull();
+    expect(await ActivePlan.countDocuments()).toBe(0);
   });
 
   test('an unknown guest id gives guestData "none"', async () => {

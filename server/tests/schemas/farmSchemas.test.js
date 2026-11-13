@@ -1,7 +1,7 @@
 import { centerBody, putFarmBody, patchFarmBody } from '../../src/schemas/farmSchemas.js';
 
 const valid = {
-  currentCrops: ['field-corn', 'soybeans'],
+  currentCrops: ['maize', 'wheat'],
   waterSource: 'mixed',
   waterSourceOther: null,
   waterAvailability: 'sometimes_limited',
@@ -40,11 +40,11 @@ describe('putFarmBody', () => {
     },
   );
 
-  test('currentCrops: 1 to 8 unique', () => {
+  test('currentCrops: 1 to 7 unique', () => {
     expect(ok(putFarmBody, { ...valid, currentCrops: [] })).toBe(false);
     expect(ok(putFarmBody, { ...valid, currentCrops: ['a', 'a'] })).toBe(false);
-    expect(ok(putFarmBody, { ...valid, currentCrops: Array.from({ length: 9 }, (_, i) => `c${i}`) })).toBe(false);
-    expect(ok(putFarmBody, { ...valid, currentCrops: Array.from({ length: 8 }, (_, i) => `c${i}`) })).toBe(true);
+    expect(ok(putFarmBody, { ...valid, currentCrops: Array.from({ length: 8 }, (_, i) => `c${i}`) })).toBe(false);
+    expect(ok(putFarmBody, { ...valid, currentCrops: Array.from({ length: 7 }, (_, i) => `c${i}`) })).toBe(true);
   });
 
   test('equipment: max 6, unique, known values', () => {
@@ -58,10 +58,12 @@ describe('putFarmBody', () => {
     expect(ok(putFarmBody, { ...valid, priorities: ['save_water', 'save_water'] })).toBe(false);
   });
 
-  test('seasonsPerYear must be 1, 2 or 3', () => {
+  test('seasonsPerYear must be 1 or 2 (only winter and summer are left)', () => {
     expect(ok(putFarmBody, { ...valid, seasonsPerYear: 4 })).toBe(false);
     expect(ok(putFarmBody, { ...valid, seasonsPerYear: '2' })).toBe(false);
-    expect(ok(putFarmBody, { ...valid, seasonsPerYear: 3 })).toBe(true);
+    expect(ok(putFarmBody, { ...valid, seasonsPerYear: 3 })).toBe(false);
+    expect(ok(putFarmBody, { ...valid, seasonsPerYear: 1 })).toBe(true);
+    expect(ok(putFarmBody, { ...valid, seasonsPerYear: 2 })).toBe(true);
   });
 
   test('waterSourceOther max 60 characters', () => {
@@ -86,7 +88,8 @@ describe('patchFarmBody', () => {
   test('empty body and unknown keys are rejected', () => {
     expect(ok(patchFarmBody, {})).toBe(false);
     expect(ok(patchFarmBody, { setupStatus: 'complete' })).toBe(false);
-    expect(ok(patchFarmBody, { draftSequence: [] })).toBe(false);
+    // the rotation is saved only by PUT /farm/rotation
+    expect(ok(patchFarmBody, { rotationInput: { winter: 'wheat', summer: 'maize' } })).toBe(false);
   });
 
   test('same limits as PUT', () => {

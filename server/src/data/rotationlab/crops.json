@@ -1,0 +1,212 @@
+[
+ {
+  "id": "wheat",
+  "name": "Wheat",
+  "season": "winter",
+  "family": "cereal",
+  "nitrogen_fixing": false,
+  "root_depth": "medium",
+  "heat_tolerance": "low",
+  "drought_tolerance": "medium",
+  "salinity_tolerance": "medium",
+  "forage_value": "medium",
+  "relative_income_level": "low",
+  "income_note": "Relative level from CAPMAS 2022/2023 net return (EGP per feddan per year).",
+  "economic_value_type": "net_return",
+  "economic_value_egp_per_feddan_year": 14959,
+  "sowing": {
+   "month": 11,
+   "day": 15
+  },
+  "season_length_days": 180,
+  "kc": {
+   "ini": 0.4,
+   "mid": 1.15,
+   "end": 0.4
+  },
+  "mean_etc_mm": 547.0,
+  "water_need_class": "medium",
+  "calendar_basis": "Egypt FAO Delta row / analyst-reconciled",
+  "calendar_is_approximate": false
+ },
+ {
+  "id": "faba_bean",
+  "name": "Faba bean",
+  "season": "winter",
+  "family": "legume",
+  "nitrogen_fixing": true,
+  "root_depth": "medium",
+  "heat_tolerance": "low",
+  "drought_tolerance": "medium",
+  "salinity_tolerance": "low",
+  "forage_value": "medium",
+  "relative_income_level": "low",
+  "income_note": "Relative level from CAPMAS 2022/2023 net return (EGP per feddan per year).",
+  "economic_value_type": "net_return",
+  "economic_value_egp_per_feddan_year": 10300,
+  "sowing": {
+   "month": 11,
+   "day": 1
+  },
+  "season_length_days": 180,
+  "kc": {
+   "ini": 0.5,
+   "mid": 1.15,
+   "end": 0.3
+  },
+  "mean_etc_mm": 425.0,
+  "water_need_class": "low",
+  "calendar_basis": "Egypt FAO Delta row / analyst-reconciled",
+  "calendar_is_approximate": false
+ },
+ {
+  "id": "berseem",
+  "name": "Berseem clover",
+  "season": "winter",
+  "family": "legume",
+  "nitrogen_fixing": true,
+  "root_depth": "medium",
+  "heat_tolerance": "low",
+  "drought_tolerance": "low",
+  "salinity_tolerance": "medium",
+  "forage_value": "high",
+  "relative_income_level": "low",
+  "income_note": "Relative level from CAPMAS 2022/2023 net return (EGP per feddan per year).",
+  "economic_value_type": "net_return",
+  "economic_value_egp_per_feddan_year": 12300,
+  "sowing": {
+   "month": 11,
+   "day": 1
+  },
+  "season_length_days": 195,
+  "kc": {
+   "ini": 0.4,
+   "mid": 0.9,
+   "end": 0.85
+  },
+  "mean_etc_mm": 543.0,
+  "water_need_class": "low",
+  "calendar_basis": "Egypt FAO Delta row / analyst-reconciled",
+  "calendar_is_approximate": false
+ },
+ {
+  "id": "sugar_beet",
+  "name": "Sugar beet",
+  "season": "winter",
+  "family": "root",
+  "nitrogen_fixing": false,
+  "root_depth": "deep",
+  "heat_tolerance": "low",
+  "drought_tolerance": "medium",
+  "salinity_tolerance": "high",
+  "forage_value": "medium",
+  "relative_income_level": "low",
+  "income_note": "Relative level from CAPMAS 2022/2023 net return (EGP per feddan per year).",
+  "economic_value_type": "net_return",
+  "economic_value_egp_per_feddan_year": 17400,
+  "sowing": {
+   "month": 10,
+   "day": 1
+  },
+  "season_length_days": 195,
+  "kc": {
+   "ini": 0.35,
+   "mid": 1.2,
+   "end": 0.7
+  },
+  "mean_etc_mm": 526.0,
+  "water_need_class": "low",
+  "calendar_basis": "Egypt FAO Delta row / analyst-reconciled",
+  "calendar_is_approximate": false
+ },
+ {
+  "id": "cotton",
+  "name": "Cotton",
+  "season": "summer",
+  "family": "fiber",
+  "nitrogen_fixing": false,
+  "root_depth": "deep",
+  "heat_tolerance": "high",
+  "drought_tolerance": "medium",
+  "salinity_tolerance": "medium",
+  "forage_value": "medium",
+  "relative_income_level": "medium",
+  "income_note": "Relative level from CAPMAS 2022/2023 net return (EGP per feddan per year).",
+  "economic_value_type": "net_return",
+  "economic_value_egp_per_feddan_year": 27000,
+  "sowing": {
+   "month": 5,
+   "day": 30
+  },
+  "season_length_days": 195,
+  "kc": {
+   "ini": 0.35,
+   "mid": 1.2,
+   "end": 0.7
+  },
+  "mean_etc_mm": 948.0,
+  "water_need_class": "high",
+  "calendar_basis": "approximate - FAO calendar file row (Pakistan), not Egyptian",
+  "calendar_is_approximate": true
+ },
+ {
+  "id": "rice",
+  "name": "Rice",
+  "season": "summer",
+  "family": "cereal",
+  "nitrogen_fixing": false,
+  "root_depth": "shallow",
+  "heat_tolerance": "high",
+  "drought_tolerance": "low",
+  "salinity_tolerance": "low",
+  "forage_value": "low",
+  "relative_income_level": "high",
+  "income_note": "Relative level from CAPMAS 2022/2023 net return (EGP per feddan per year).",
+  "economic_value_type": "net_return",
+  "economic_value_egp_per_feddan_year": 50000,
+  "sowing": {
+   "month": 5,
+   "day": 1
+  },
+  "season_length_days": 150,
+  "kc": {
+   "ini": 1.05,
+   "mid": 1.2,
+   "end": 0.9
+  },
+  "mean_etc_mm": 1145.0,
+  "water_need_class": "high",
+  "calendar_basis": "Egypt FAO Delta row / analyst-reconciled",
+  "calendar_is_approximate": false
+ },
+ {
+  "id": "maize",
+  "name": "Maize",
+  "season": "summer",
+  "family": "cereal",
+  "nitrogen_fixing": false,
+  "root_depth": "medium",
+  "heat_tolerance": "high",
+  "drought_tolerance": "medium",
+  "salinity_tolerance": "medium",
+  "forage_value": "high",
+  "relative_income_level": "medium",
+  "income_note": "Relative level from CAPMAS 2022/2023 net return (EGP per feddan per year).",
+  "economic_value_type": "net_return",
+  "economic_value_egp_per_feddan_year": 27000,
+  "sowing": {
+   "month": 3,
+   "day": 15
+  },
+  "season_length_days": 130,
+  "kc": {
+   "ini": 0.3,
+   "mid": 1.2,
+   "end": 0.6
+  },
+  "mean_etc_mm": 716.0,
+  "water_need_class": "medium",
+  "calendar_basis": "approximate - FAO calendar file row (Jordan), not Egyptian",
+  "calendar_is_approximate": true
+ }
+]

@@ -15,8 +15,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "validate:data": "node src/scripts/validateLayerData.js",
-    "seed:crops": "node src/scripts/seedCrops.js",
-    "cleanup:guests": "node src/scripts/cleanupGuests.js"
+    "cleanup:guests": "node src/scripts/cleanupGuests.js",
+    "validate:rotationlab": "node src/scripts/validateRotationLabData.js"
   },
   "keywords": [],
   "author": "",

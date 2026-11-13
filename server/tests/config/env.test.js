@@ -61,26 +61,14 @@ describe('parseEnv', () => {
       expect(env.JWT_EXPIRES_DEFAULT).toBe('1d');
       expect(env.JWT_EXPIRES_REMEMBER).toBe('30d');
       expect(env.BCRYPT_COST).toBe(12);
-      expect(env.SCORING_MODE).toBe('mock');
-      expect(env.PYTHON_TIMEOUT_MS).toBe(5000);
       expect(env.LAYER_DATA_DIR).toBe('src/data/layers');
     });
 
-    test('SCORING_MODE=python without PYTHON_URL throws', () => {
-      expect(() => parseEnv({ ...valid, SCORING_MODE: 'python' })).toThrow(/PYTHON_URL/);
-    });
-
-    test('SCORING_MODE=python with PYTHON_URL is accepted', () => {
-      const env = parseEnv({
-        ...valid,
-        SCORING_MODE: 'python',
-        PYTHON_URL: 'http://localhost:8000',
-      });
-      expect(env.SCORING_MODE).toBe('python');
-    });
-
-    test('an unknown SCORING_MODE throws', () => {
-      expect(() => parseEnv({ ...valid, SCORING_MODE: 'fake' })).toThrow(/SCORING_MODE/);
+    test('the retired Python scoring variables are gone', () => {
+      const parsed = parseEnv(valid);
+      expect(parsed).not.toHaveProperty('SCORING_MODE');
+      expect(parsed).not.toHaveProperty('PYTHON_URL');
+      expect(parsed).not.toHaveProperty('PYTHON_TIMEOUT_MS');
     });
 
     test('PUBLIC_BASE_URL is required in production', () => {

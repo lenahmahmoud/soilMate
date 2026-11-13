@@ -1,0 +1,91 @@
+{
+ "note": "Descriptions and role tags use only the traits in crops.json. Images are to be supplied by the design team. Cover crops (winter rye, crimson clover, daikon, field peas) are not in the data. app_id is the id of the same crop in the existing Crop catalog (null = no equivalent); it lets the frontend reuse existing images for wheat, maize and cotton.",
+ "crops": [
+  {
+   "id": "wheat",
+   "name": "Wheat",
+   "season": "winter",
+   "role_tags": [
+    "cereal"
+   ],
+   "description": "Winter cereal sown in mid-November. Medium water need and medium salt tolerance.",
+   "image": null,
+   "app_id": "winter-wheat"
+  },
+  {
+   "id": "faba_bean",
+   "name": "Faba bean",
+   "season": "winter",
+   "role_tags": [
+    "legume",
+    "nitrogen_fixer"
+   ],
+   "description": "Winter legume that fixes nitrogen in the soil. Low water need, but low tolerance to salinity and heat.",
+   "image": null,
+   "app_id": null
+  },
+  {
+   "id": "berseem",
+   "name": "Berseem clover",
+   "season": "winter",
+   "role_tags": [
+    "legume",
+    "nitrogen_fixer",
+    "high_forage"
+   ],
+   "description": "Winter forage legume that fixes nitrogen and has a high forage value. Needs regular irrigation (low drought tolerance).",
+   "image": null,
+   "app_id": null
+  },
+  {
+   "id": "sugar_beet",
+   "name": "Sugar beet",
+   "season": "winter",
+   "role_tags": [
+    "root_crop",
+    "deep_rooted",
+    "salt_tolerant"
+   ],
+   "description": "Winter root crop with deep roots and the highest salt tolerance of the seven crops.",
+   "image": null,
+   "app_id": null
+  },
+  {
+   "id": "cotton",
+   "name": "Cotton",
+   "season": "summer",
+   "role_tags": [
+    "fiber",
+    "deep_rooted",
+    "high_water_use"
+   ],
+   "description": "Summer fiber crop with deep roots and a high water need. Medium salt tolerance.",
+   "image": null,
+   "app_id": "cotton"
+  },
+  {
+   "id": "rice",
+   "name": "Rice",
+   "season": "summer",
+   "role_tags": [
+    "cereal",
+    "high_water_use"
+   ],
+   "description": "Summer cereal grown in flooded fields, with the highest water need of the seven crops and low salt tolerance.",
+   "image": null,
+   "app_id": null
+  },
+  {
+   "id": "maize",
+   "name": "Maize",
+   "season": "summer",
+   "role_tags": [
+    "cereal",
+    "high_forage"
+   ],
+   "description": "Summer cereal with a high forage value and a medium water need.",
+   "image": null,
+   "app_id": "field-corn"
+  }
+ ]
+}

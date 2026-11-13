@@ -107,4 +107,22 @@ describe('createApp', () => {
     expect(res.headers['access-control-allow-origin']).toBe(ORIGIN);
     expect(res.headers['access-control-expose-headers']).toMatch(/X-Player-Id/i);
   });
+
+  test('the SoilMate routes never create a game player', async () => {
+    const { default: rotationLabRoutes } = await import('../../src/routes/rotationLabRoutes.js');
+    const { default: cropsRoutes } = await import('../../src/routes/cropsRoutes.js');
+    const { default: metaRoutes } = await import('../../src/routes/metaRoutes.js');
+    const router = express.Router();
+    router.use('/rotation-lab', rotationLabRoutes);
+    router.use('/crops', cropsRoutes);
+    router.use('/meta', metaRoutes);
+    const app = createApp({ apiRouter: router });
+
+    await request(app).get('/api/rotation-lab/options');
+    await request(app).get('/api/rotation-lab/meta');
+    await request(app).get('/api/crops');
+    await request(app).get('/api/meta/options');
+
+    expect(await Player.countDocuments()).toBe(0);
+  });
 });

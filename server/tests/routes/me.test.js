@@ -6,7 +6,6 @@ import { Router } from "express";
 let mongod;
 let User;
 let Farm;
-let PlanSet;
 let ActivePlan;
 let createApp;
 let createAuthRouter;
@@ -30,7 +29,6 @@ beforeAll(async () => {
   await mongoose.connect(mongod.getUri());
   ({ default: User } = await import("../../src/models/User.js"));
   ({ default: Farm } = await import("../../src/models/Farm.js"));
-  ({ default: PlanSet } = await import("../../src/models/PlanSet.js"));
   ({ default: ActivePlan } = await import("../../src/models/ActivePlan.js"));
   ({ createApp } = await import("../../src/app.js"));
   ({ createAuthRouter } = await import("../../src/routes/authRoutes.js"));
@@ -356,23 +354,13 @@ describe("POST /api/me/password", () => {
 describe("DELETE /api/me", () => {
   const seedData = async (userId) => {
     await Farm.create({ userId });
-    await PlanSet.create({
-      userId,
-      centerId: "desouk",
-      farmSnapshot: { a: 1 },
-      status: "placeholder",
-      modelVersion: "mock-0.1",
-      plans: [{ a: 1 }],
-    });
     await ActivePlan.create({
       userId,
-      planSetId: oid(),
-      planKey: "area_plan_a",
-      title: "Improve My Soil",
+      planKey: "soil_health",
+      key: "desouk|wheat|maize",
+      input: { center: "desouk", winter: "wheat", summer: "maize" },
       startDate: new Date("2026-11-15"),
-      status: "placeholder",
-      modelVersion: "mock-0.1",
-      sequence: [{ slot: "fall_winter", cropId: "winter-rye" }],
+      dataVersion: "v3-rotation-1.1",
     });
   };
 
@@ -409,7 +397,6 @@ describe("DELETE /api/me", () => {
     expect(res.status).toBe(204);
     expect(await User.countDocuments()).toBe(0);
     expect(await Farm.countDocuments()).toBe(0);
-    expect(await PlanSet.countDocuments()).toBe(0);
     expect(await ActivePlan.countDocuments()).toBe(0);
   });
 
@@ -425,7 +412,6 @@ describe("DELETE /api/me", () => {
       .send({ confirmEmail: "a@example.com" });
     expect(await User.countDocuments()).toBe(1);
     expect(await Farm.countDocuments({ userId: b.user.id })).toBe(1);
-    expect(await PlanSet.countDocuments({ userId: b.user.id })).toBe(1);
     expect(await ActivePlan.countDocuments({ userId: b.user.id })).toBe(1);
     const stillB = await request(app).get("/api/me").set(auth(b.token));
     expect(stillB.status).toBe(200);

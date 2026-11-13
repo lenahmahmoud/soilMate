@@ -1,12 +1,12 @@
-import { toImageDto } from './cropMapper.js';
-import { publicBaseUrl } from '../utils/publicUrl.js';
+import { toImageDto } from "./cropMapper.js";
+import { publicBaseUrl } from "../utils/publicUrl.js";
 
-// Whitelist: only the contract's Farm object leaves the server (no draftSequence, userId, __v).
-// `crops` are the Crop documents for farm.currentCrops (one $in query done by the service).
+// Whitelist: only the Farm object of the contract leaves the server (no userId, __v).
+// `crops` are the in-memory crop records for farm.currentCrops (from cropService.getCropsByIds).
 export function toFarmDto(farm, crops = [], baseUrl = publicBaseUrl()) {
   const byId = new Map(crops.map((c) => [c.id, c]));
   const currentCropsDetail = (farm.currentCrops ?? [])
-    .filter((id) => byId.has(id)) // a crop removed from the catalog is skipped, not an error
+    .filter((id) => byId.has(id)) // an id that is no longer a crop is skipped, not an error
     .map((id) => {
       const crop = byId.get(id);
       const { thumbUrl, alt } = toImageDto(crop, baseUrl);
@@ -32,6 +32,10 @@ export function toFarmDto(farm, crops = [], baseUrl = publicBaseUrl()) {
     equipment: farm.equipment ?? [],
     seasonsPerYear: farm.seasonsPerYear ?? null,
     priorities: farm.priorities ?? [],
+    rotationInput: {
+      winter: farm.rotationInput?.winter ?? null,
+      summer: farm.rotationInput?.summer ?? null,
+    },
     updatedAt: farm.updatedAt,
   };
 }

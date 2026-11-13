@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 import {
   CENTER_IDS,
-  SLOTS,
   WATER_SOURCES,
   WATER_AVAILABILITY,
   SOIL_TYPES,
@@ -10,7 +9,8 @@ import {
   PRIORITIES,
   AREA_UNITS,
   SETUP_STATUSES,
-} from '../constants/soilmateEnums.js';
+} from "../constants/soilmateEnums.js";
+import { SUMMER_OPTIONS, WINTER_OPTIONS } from "../constants/rotationLab.js";
 
 const { Schema } = mongoose;
 
@@ -19,19 +19,11 @@ const uniqueMax = (max) => ({
   message: `must be unique and have at most ${max} items`,
 });
 
-const draftItemSchema = new Schema(
-  {
-    slot: { type: String, enum: SLOTS, required: true },
-    cropId: { type: String, required: true },
-  },
-  { _id: false },
-);
-
 const farmSchema = new Schema(
   {
-    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, unique: true },
+    userId: { type: Schema.Types.ObjectId, ref: "User", required: true, unique: true },
     centerId: { type: String, enum: [...CENTER_IDS, null], default: null },
-    setupStatus: { type: String, enum: SETUP_STATUSES, default: 'none' },
+    setupStatus: { type: String, enum: SETUP_STATUSES, default: "none" },
     farmName: { type: String, trim: true, maxlength: 80, default: null },
     farmLocationText: { type: String, trim: true, maxlength: 120, default: null },
     landArea: {
@@ -40,12 +32,13 @@ const farmSchema = new Schema(
         default: null,
         validate: {
           validator: (v) => v == null || (v > 0 && v <= 100000),
-          message: 'must be greater than 0 and at most 100000',
+          message: "must be greater than 0 and at most 100000",
         },
       },
-      unit: { type: String, enum: AREA_UNITS, default: 'hectares' },
+      unit: { type: String, enum: AREA_UNITS, default: "hectares" },
     },
-    currentCrops: { type: [String], default: [], validate: uniqueMax(8) },
+    // Data crop ids (wheat, maize ...). 1-7 when complete (C4). Checked against the in-memory crop source by farmService.
+    currentCrops: { type: [String], default: [], validate: uniqueMax(7) },
     waterSource: { type: String, enum: [...WATER_SOURCES, null], default: null },
     waterSourceOther: { type: String, trim: true, maxlength: 60, default: null },
     waterAvailability: { type: String, enum: [...WATER_AVAILABILITY, null], default: null },
@@ -60,7 +53,7 @@ const farmSchema = new Schema(
       default: null,
       validate: {
         validator: (v) => v == null || SEASONS_PER_YEAR.includes(v),
-        message: 'must be 1, 2 or 3',
+        message: "must be 1, 2 ",
       },
     },
     priorities: {
@@ -68,16 +61,14 @@ const farmSchema = new Schema(
       default: [],
       validate: uniqueMax(3),
     },
-    draftSequence: {
-      type: [draftItemSchema],
-      default: [],
-      validate: {
-        validator: (arr) => arr.length === 0 || arr.length === 3,
-        message: 'must have 0 or exactly 3 items',
-      },
+    // C4/C6: replaces draftSequence. null = "not chosen yet"; "fallow" = no crop that season.
+    // Written by PUT /farm/rotation (Phase 2).
+    rotationInput: {
+      winter: { type: String, enum: [...WINTER_OPTIONS, null], default: null },
+      summer: { type: String, enum: [...SUMMER_OPTIONS, null], default: null },
     },
   },
   { timestamps: true },
 );
 
-export default mongoose.model('Farm', farmSchema);
+export default mongoose.model("Farm", farmSchema);

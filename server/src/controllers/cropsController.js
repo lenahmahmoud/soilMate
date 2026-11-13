@@ -1,5 +1,5 @@
-import * as cropService from '../services/cropService.js';
+import * as cropService from "../services/cropService.js";
 
-export async function listCrops(req, res) {
-  res.json(await cropService.listCrops(req.query));
+export function listCrops(req, res) {
+  res.json(cropService.listCrops(req.query));
 }

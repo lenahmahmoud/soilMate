@@ -1,41 +1,30 @@
 import mongoose from 'mongoose';
-import { SLOTS, PLAN_KEYS, DATA_STATUSES } from '../constants/soilmateEnums.js';
+import { CENTER_IDS } from '../constants/centers.js';
+import { PLAN_TYPES, SUMMER_OPTIONS, WINTER_OPTIONS } from '../constants/rotationLab.js';
 
 const { Schema } = mongoose;
 
-const sequenceItemSchema = new Schema(
-  {
-    slot: { type: String, enum: SLOTS, required: true },
-    cropId: { type: String, required: true },
-    roleTag: { type: String, default: null },
-  },
-  { _id: false },
-);
-
+// C8: the plan content is NOT copied here. We keep the key and the input, and the mapper
+// loads the plan from the in-memory Rotation Lab data.
 const activePlanSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    planSetId: { type: Schema.Types.ObjectId, ref: 'PlanSet', required: true },
-    planKey: { type: String, enum: PLAN_KEYS, required: true },
-    title: { type: String, required: true },
+    planKey: { type: String, enum: PLAN_TYPES, required: true },
+    key: { type: String, required: true }, // "center|winter|summer"
+    input: {
+      center: { type: String, enum: CENTER_IDS, required: true },
+      winter: { type: String, enum: WINTER_OPTIONS, required: true },
+      summer: { type: String, enum: SUMMER_OPTIONS, required: true },
+    },
     startDate: { type: Date, required: true },
     chosenAt: { type: Date, default: Date.now },
-    status: { type: String, enum: DATA_STATUSES, required: true },
-    modelVersion: { type: String, required: true },
-    sequence: { type: [sequenceItemSchema], required: true },
-    fit: { type: [Schema.Types.Mixed], default: [] },
-    seasonDetails: { type: [Schema.Types.Mixed], default: [] },
-    evidence: { type: [String], default: [] },
-    infoGaps: { type: [String], default: [] },
-    risksToReview: { type: [String], default: [] },
-    dataConfidence: { type: Schema.Types.Mixed, default: null },
+    dataVersion: { type: String, required: true }, // meta.version when it was chosen
     archivedAt: { type: Date, default: null },
   },
   { timestamps: true },
 );
 
-// Only one NOT-archived plan per user. Archived plans fall outside this index.
-// archivedAt must always be stored as null (never missing); the default above does that.
+// Only one NOT-archived plan per user. archivedAt must always be stored as null (never missing).
 activePlanSchema.index(
   { userId: 1 },
   { unique: true, partialFilterExpression: { archivedAt: { $type: 'null' } } },

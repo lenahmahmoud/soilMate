@@ -8,9 +8,10 @@ import metaRoutes from "./metaRoutes.js";
 import cropsRoutes from "./cropsRoutes.js";
 import exploreRoutes from "./exploreRoutes.js";
 import farmRoutes from "./farmRoutes.js";
-import rotationRoutes from "./rotationRoutes.js"; // next to the other imports
 import dashboardRoutes from "./dashboardRoutes.js";
-import plansRoutes from "./plansRoutes.js"; // next to the other imports
+import plansRoutes from "./plansRoutes.js";
+import rotationLabRoutes from "./rotationLabRoutes.js";
+
 const router = Router();
 
 router.get("/health", (req, res) => res.json({ status: "ok" }));
@@ -22,8 +23,8 @@ router.use("/me", meRoutes);
 router.use("/meta", metaRoutes);
 router.use("/crops", cropsRoutes);
 router.use("/farm", farmRoutes);
-router.use("/rotation", rotationRoutes); 
-router.use("/plans", plansRoutes); 
+router.use("/rotation-lab", rotationLabRoutes);
+router.use("/plans", plansRoutes);
 
 router.use("/", dashboardRoutes); 
 

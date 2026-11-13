@@ -1,7 +1,6 @@
 import { connectDB, disconnectDB } from '../config/db.js';
 import User from '../models/User.js';
 import Farm from '../models/Farm.js';
-import PlanSet from '../models/PlanSet.js';
 import ActivePlan from '../models/ActivePlan.js';
 import { GUEST_TTL_DAYS } from '../constants/guest.js';
 
@@ -20,7 +19,6 @@ async function main() {
     if (ids.length) {
       await Promise.all([
         Farm.deleteMany({ userId: { $in: ids } }),
-        PlanSet.deleteMany({ userId: { $in: ids } }),
         ActivePlan.deleteMany({ userId: { $in: ids } }),
       ]);
       await User.deleteMany({ _id: { $in: ids } });
