@@ -1,17 +1,20 @@
+
 import { z } from 'zod';
 import { SLOTS } from '../constants/soilmateEnums.js';
 
-const item = z.strictObject({
+const item = z.object({
   slot: z.enum(SLOTS),
-  cropId: z.string().trim().min(1).max(60),
-});
+  cropId: z.string().trim().min(1),
+}).strict();
 
-// POST /rotation/score: exactly 3 items, one per slot, in order (guide 10.3 step 1).
-export const scoreBody = z.strictObject({
+export const scoreBodySchema = z.object({
   sequence: z
     .array(item)
-    .length(3, 'Send exactly 3 items, one per season')
-    .refine((seq) => seq.every((it, i) => it.slot === SLOTS[i]), {
-      message: 'Slots must be fall_winter, spring, summer_fall, in this order',
-    }),
-});
+    .length(3)
+    .refine(
+      (seq) => seq.every((it, i) => it.slot === SLOTS[i]),
+      {
+        message: 'Slots must be fall_winter, spring, summer_fall, in this order',
+      }
+    ),
+}).strict();

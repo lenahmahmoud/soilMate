@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { METRIC_IDS } from '../../constants/metrics.js';
 import { LEVELS } from '../../constants/levels.js';
-import { SLOTS, PLAN_KEYS } from '../../constants/soilmateEnums.js';
+import { SLOTS, AREA_PLAN_KEYS } from '../../constants/soilmateEnums.js';
 
 const score = z.number().int().min(0).max(100);
 const label = z.string().min(1);
@@ -24,7 +24,7 @@ const seasonDetails = z
   )
   .length(3);
 
-// ---------- POST /v1/score (contract section 11). Unknown keys are stripped. ----------
+// ---------- POST /v1/score. Unknown keys are stripped. ----------
 const metric = z.object({
   value: score,
   level: z.enum(LEVELS).optional(), // if present it must be high | moderate | low (guide 10.5)
@@ -33,17 +33,27 @@ const metric = z.object({
   reasons: z.array(z.string()).default([]),
 });
 
+// The plan block that goes with a scored rotation (the farmer's own plan on the compare page).
+const planBlock = z.object({
+  mainBenefit: label,
+  watchOut: label,
+  evidence: z.array(z.string()),
+  infoGaps: z.array(z.string()),
+  risksToReview: z.array(z.string()),
+});
+
 export const scoreResultSchema = z.object({
   status: z.enum(['placeholder', 'final']),
   modelVersion: label,
   metrics: z.object(Object.fromEntries(METRIC_IDS.map((id) => [id, metric]))),
+  plan: planBlock, // required by the compare page, which checks it
   seasonDetails,
   dataConfidence,
   gaps: z.array(z.string()),
   notices: z.array(z.string()),
 });
 
-// ---------- POST /v1/plans (contract section 11). Python does NOT rank; Node does. ----------
+// ---------- POST /v1/plans: the 2 FIXED plans of the area. Python does NOT rank; Node does. ----------
 const planMetric = z.object({
   value: score,
   level: z.enum(LEVELS).optional(),
@@ -57,7 +67,7 @@ const planItem = z.object({
 });
 
 const plan = z.object({
-  planKey: z.enum(PLAN_KEYS),
+  planKey: z.enum(AREA_PLAN_KEYS),
   badge: z.object({ label, tone: z.enum(['neutral', 'positive']) }),
   title: label,
   mainBenefit: label,
@@ -81,8 +91,8 @@ export const plansResultSchema = z.object({
   modelVersion: label,
   plans: z
     .array(plan)
-    .length(3)
-    .refine((plans) => new Set(plans.map((p) => p.planKey)).size === 3, {
-      message: 'Exactly one plan per planKey is required',
+    .length(2)
+    .refine((plans) => new Set(plans.map((p) => p.planKey)).size === 2, {
+      message: 'Exactly one plan per planKey (area_plan_a, area_plan_b) is required',
     }),
 });

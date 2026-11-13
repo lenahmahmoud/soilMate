@@ -12,6 +12,8 @@ let Crop;
 let createApp;
 let farmRoutes;
 let rotationRoutes;
+let mockScoringClient;
+let AppError;
 let app;
 
 beforeAll(async () => {
@@ -39,6 +41,8 @@ beforeAll(async () => {
   ({ createApp } = await import('../../src/app.js'));
   ({ default: farmRoutes } = await import('../../src/routes/farmRoutes.js'));
   ({ default: rotationRoutes } = await import('../../src/routes/rotationRoutes.js'));
+  ({ mockScoringClient } = await import('../../src/services/scoring/mockScoringClient.js'));
+  ({ AppError } = await import('../../src/utils/AppError.js'));
   await Farm.init();
   await Crop.init();
 }, 60000);
@@ -54,22 +58,23 @@ beforeEach(async () => {
   router.use('/rotation', rotationRoutes);
   app = createApp({ apiRouter: router });
   await Crop.create([
-    makeCrop('winter-rye', 'Winter Rye', ['fall_winter'], 'fall_winter', false,
+    makeCrop('winter-rye', 'Winter Rye', ['fall_winter'], false,
       { family: 'grass', isLegume: false, waterNeed: 'low', groundCover: 'high', costLevel: 'low', equipment: ['seed_drill_planter'], typicalDays: 150 }),
-    makeCrop('crimson-clover', 'Crimson Clover', ['spring'], 'spring', false,
+    makeCrop('crimson-clover', 'Crimson Clover', ['spring'], false,
       { family: 'legume', isLegume: true, waterNeed: 'low', groundCover: 'high', costLevel: 'low', equipment: ['seed_drill_planter'], typicalDays: 90 }),
-    makeCrop('field-corn', 'Field Corn', ['spring', 'summer_fall'], 'summer_fall', true,
+    makeCrop('field-corn', 'Field Corn', ['spring', 'summer_fall'], true,
       { family: 'grass', isLegume: false, waterNeed: 'high', groundCover: 'medium', costLevel: 'high', equipment: ['standard_tractor', 'seed_drill_planter', 'combine_harvester'], typicalDays: 120 }),
-    makeCrop('soybeans', 'Soybeans', ['spring', 'summer_fall'], null, true,
+    makeCrop('soybeans', 'Soybeans', ['spring', 'summer_fall'], true,
       { family: 'legume', isLegume: true, waterNeed: 'medium', groundCover: 'medium', costLevel: 'medium', equipment: ['standard_tractor', 'seed_drill_planter', 'combine_harvester'], typicalDays: 110 }),
   ]);
 });
 
 afterEach(async () => {
+  jest.restoreAllMocks();
   await Promise.all(Object.values(mongoose.connection.collections).map((c) => c.deleteMany({})));
 });
 
-function makeCrop(id, name, slots, defaultForSlot, selectableAsCurrent, attributes) {
+function makeCrop(id, name, slots, selectableAsCurrent, attributes) {
   return {
     id,
     name,
@@ -77,7 +82,6 @@ function makeCrop(id, name, slots, defaultForSlot, selectableAsCurrent, attribut
     roleTag: 'Test',
     description: `About ${name}`,
     slots,
-    defaultForSlot,
     selectableAsCurrent,
     image: { file: `${id}.webp`, thumbFile: `${id}.webp`, alt: `${name} in a field` },
     attributes,
@@ -140,34 +144,19 @@ describe('access and guard', () => {
 });
 
 describe('GET /rotation/draft', () => {
-  test('returns the default sequence when nothing is saved', async () => {
+  test('a new farm gets three empty slots and no crop is preselected', async () => {
     await completeFarm(G1);
     const res = await draft(G1);
     expect(res.status).toBe(200);
-    expect(res.body.source).toBe('default');
+    expect(res.body.source).toBe('empty');
     expect(res.body.cycleLabel).toBe('18-Month Cycle');
     expect(res.body.goals).toEqual([{ id: 'save_water', label: 'Save Water' }]);
     expect(res.body.field).toEqual({ centerId: 'desouk', name: 'Desouk', bbox: BBOX, areaLabel: null });
-    expect(res.body.sequence.map((s) => [s.slot, s.crop.id])).toEqual([
-      ['fall_winter', 'winter-rye'],
-      ['spring', 'crimson-clover'],
-      ['summer_fall', 'field-corn'],
+    expect(res.body.sequence).toEqual([
+      { slot: 'fall_winter', slotLabel: 'Season 1 · Fall / Winter', crop: null },
+      { slot: 'spring', slotLabel: 'Season 2 · Spring', crop: null },
+      { slot: 'summer_fall', slotLabel: 'Season 3 · Summer / Fall', crop: null },
     ]);
-    expect(res.body.sequence.map((s) => s.slotLabel)).toEqual([
-      'Season 1 · Fall / Winter',
-      'Season 2 · Spring',
-      'Season 3 · Summer / Fall',
-    ]);
-  });
-
-  test('each crop has exactly id, name, description and a thumb image', async () => {
-    await completeFarm(G1);
-    const { crop } = (await draft(G1)).body.sequence[0];
-    expect(Object.keys(crop).sort()).toEqual(['description', 'id', 'image', 'name']);
-    expect(crop.image).toEqual({
-      thumbUrl: 'https://api.test.local/static/crops/thumb/winter-rye.webp',
-      alt: 'Winter Rye in a field',
-    });
   });
 
   test('areaLabel comes from the land area', async () => {
@@ -176,28 +165,40 @@ describe('GET /rotation/draft', () => {
     expect((await draft(G1)).body.field.areaLabel).toBe('42.5 Acres');
   });
 
-  test('a saved draft is returned as "saved"', async () => {
+  test('a saved draft is returned as "saved" with expanded crops', async () => {
     await completeFarm(G1);
     await score(G1, SEQ('winter-rye', 'crimson-clover', 'soybeans'));
     const res = await draft(G1);
     expect(res.body.source).toBe('saved');
     expect(res.body.sequence.map((s) => s.crop.id)).toEqual(['winter-rye', 'crimson-clover', 'soybeans']);
+    expect(res.body.sequence.map((s) => s.slotLabel)).toEqual([
+      'Season 1 · Fall / Winter',
+      'Season 2 · Spring',
+      'Season 3 · Summer / Fall',
+    ]);
+    const { crop } = res.body.sequence[0];
+    expect(Object.keys(crop).sort()).toEqual(['description', 'id', 'image', 'name']);
+    expect(crop.image).toEqual({
+      thumbUrl: 'https://api.test.local/static/crops/thumb/winter-rye.webp',
+      alt: 'Winter Rye in a field',
+    });
   });
 
-  test('a saved draft whose crop no longer exists falls back to the default', async () => {
+  test('a saved draft whose crop no longer exists falls back to empty slots', async () => {
     await completeFarm(G1);
     await score(G1, SEQ('winter-rye', 'crimson-clover', 'soybeans'));
     await Crop.deleteOne({ id: 'soybeans' });
     const res = await draft(G1);
-    expect(res.body.source).toBe('default');
-    expect(res.body.sequence[2].crop.id).toBe('field-corn');
+    expect(res.status).toBe(200);
+    expect(res.body.source).toBe('empty');
+    expect(res.body.sequence.every((s) => s.crop === null)).toBe(true);
   });
 
   test("guests never see each other's draft", async () => {
     await completeFarm(G1);
     await completeFarm(G2);
     await score(G1, SEQ('winter-rye', 'crimson-clover', 'soybeans'));
-    expect((await draft(G2)).body.source).toBe('default');
+    expect((await draft(G2)).body.source).toBe('empty');
   });
 });
 
@@ -227,6 +228,15 @@ describe('POST /rotation/score', () => {
     }
     expect(metrics[0].title).toBe('Water Suitability');
     expect(metrics[2].title).toBe('Erosion & Ground Protection');
+  });
+
+  test('returns the plan block for this order (V2)', async () => {
+    await completeFarm(G1);
+    const { plan } = (await score(G1)).body;
+    expect(Object.keys(plan).sort()).toEqual(['evidence', 'infoGaps', 'mainBenefit', 'risksToReview', 'watchOut']);
+    // highest metric = soil (95), lowest = economy (68)
+    expect(plan.mainBenefit).toBe('Crimson Clover adds natural nitrogen before Field Corn.');
+    expect(plan.watchOut).toBe('A legume before Field Corn can reduce the amount of fertilizer you need to buy.');
   });
 
   test('returns the sequence, 3 season details, confidence, gaps and notices', async () => {
@@ -274,24 +284,54 @@ describe('POST /rotation/score', () => {
     const res = await score(G1, SEQ('winter-rye', 'winter-rye', 'field-corn'));
     expect(res.status).toBe(422);
     expect(res.body.error.code).toBe('CROP_NOT_ALLOWED_IN_SLOT');
-    expect((await draft(G1)).body.source).toBe('default');
+    expect((await draft(G1)).body.source).toBe('empty');
   });
 
   test('rejects a bad body with 400 VALIDATION_ERROR', async () => {
     await completeFarm(G1);
-    const tooShort = await score(G1, { sequence: SEQ().sequence.slice(0, 2) });
-    const wrongOrder = await score(G1, {
-      sequence: [SEQ().sequence[1], SEQ().sequence[0], SEQ().sequence[2]],
-    });
-    const extraKey = await score(G1, { sequence: SEQ().sequence, farm: {} });
-    const extraItemKey = await score(G1, {
-      sequence: SEQ().sequence.map((s) => ({ ...s, note: 'x' })),
-    });
-    for (const res of [tooShort, wrongOrder, extraKey, extraItemKey]) {
+    const seq = SEQ().sequence;
+    const tooShort = await score(G1, { sequence: seq.slice(0, 2) });
+    const wrongOrder = await score(G1, { sequence: [seq[1], seq[0], seq[2]] });
+    const extraKey = await score(G1, { sequence: seq, farm: {} });
+    const extraItemKey = await score(G1, { sequence: seq.map((s) => ({ ...s, note: 'x' })) });
+    const nullCrop = await score(G1, { sequence: [seq[0], { slot: 'spring', cropId: null }, seq[2]] });
+    const missingCrop = await score(G1, { sequence: [seq[0], { slot: 'spring' }, seq[2]] });
+    for (const res of [tooShort, wrongOrder, extraKey, extraItemKey, nullCrop, missingCrop]) {
       expect(res.status).toBe(400);
       expect(res.body.error.code).toBe('VALIDATION_ERROR');
     }
     expect(tooShort.body.error.details.issues.some((i) => i.path === 'body.sequence')).toBe(true);
     expect(wrongOrder.body.error.details.issues.some((i) => i.path === 'body.sequence')).toBe(true);
+    expect((await draft(G1)).body.source).toBe('empty'); // nothing was saved
+  });
+
+  test('scoring service down gives 502 SCORING_UNAVAILABLE and the draft stays saved', async () => {
+    await completeFarm(G1);
+    jest
+      .spyOn(mockScoringClient, 'score')
+      .mockRejectedValueOnce(new AppError(502, 'SCORING_UNAVAILABLE', 'The scoring service is unavailable'));
+    const res = await score(G1);
+    expect(res.status).toBe(502);
+    expect(res.body.error.code).toBe('SCORING_UNAVAILABLE');
+    const after = await draft(G1);
+    expect(after.body.source).toBe('saved');
+    expect(after.body.sequence.map((s) => s.crop.id)).toEqual(['winter-rye', 'crimson-clover', 'field-corn']);
+  });
+
+  test('an invalid scoring answer gives 502 SCORING_INVALID_RESPONSE', async () => {
+    await completeFarm(G1);
+    jest.spyOn(mockScoringClient, 'score').mockResolvedValueOnce({ status: 'placeholder' });
+    const res = await score(G1);
+    expect(res.status).toBe(502);
+    expect(res.body.error.code).toBe('SCORING_INVALID_RESPONSE');
+  });
+
+  test('the scoring call carries no user identifiers', async () => {
+    await completeFarm(G1);
+    await request(app).patch('/api/farm').set(asGuest(G1)).send({ farmName: 'Secret Farm' });
+    const spy = jest.spyOn(mockScoringClient, 'score');
+    await score(G1);
+    const sent = JSON.stringify(spy.mock.calls[0][0]);
+    expect(sent).not.toMatch(new RegExp(`${G1}|Secret Farm|userId|isGuest|farmName`));
   });
 });

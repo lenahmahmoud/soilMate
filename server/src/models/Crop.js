@@ -23,7 +23,6 @@ const cropSchema = new Schema(
       validate: { validator: (arr) => arr.length >= 1, message: 'needs at least one slot' },
     },
     selectableAsCurrent: { type: Boolean, default: false },
-    defaultForSlot: { type: String, enum: [...SLOTS, null], default: null },
     image: {
       file: { type: String, required: true },
       thumbFile: { type: String, required: true },

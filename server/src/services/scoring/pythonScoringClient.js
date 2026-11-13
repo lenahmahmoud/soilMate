@@ -60,17 +60,12 @@ export function createPythonScoringClient({ baseUrl, timeoutMs, fetchImpl = fetc
       });
     },
 
-    async plans({ requestId, centerId, farm, labSequence, candidateCrops }) {
+       // V2 contract: the farm answers plus the area. No labSequence and no currentCrops (guide 20.2).
+    async plans({ requestId, centerId, farm, candidateCrops }) {
       return post('/v1/plans', requestId, {
         requestId,
         centerId,
-        farm: {
-          ...pick(farm, FARM_FIELDS),
-          currentCrops: (farm.currentCrops ?? []).map((c) => pick(c, CROP_FIELDS)),
-        },
-        labSequence: labSequence
-          ? labSequence.map(({ slot, crop }) => ({ slot, crop: pick(crop, CROP_FIELDS) }))
-          : null,
+        farm: pick(farm, FARM_FIELDS),
         candidateCrops: candidateCrops.map((c) => pick(c, CANDIDATE_FIELDS)),
       });
     },

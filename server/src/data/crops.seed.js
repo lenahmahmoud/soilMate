@@ -10,7 +10,7 @@ const COMBINE = 'combine_harvester';
 const crop = ({ imageAlt, ...c }) => ({
   subtitle: '',
   benefitTag: null,
-  defaultForSlot: null,
+  // defaultForSlot: null,
   status: 'placeholder',
   ...c,
   // files: public/crops/<id>.webp and public/crops/thumb/<id>.webp
@@ -21,7 +21,7 @@ export const CROPS = [
   crop({
     id: 'winter-rye', name: 'Winter Rye', category: 'cover_crop', roleTag: 'Cover Crop',
     description: 'Protects topsoil & holds moisture',
-    slots: ['fall_winter'], selectableAsCurrent: false, defaultForSlot: 'fall_winter',
+    slots: ['fall_winter'], selectableAsCurrent: false,
     imageAlt: 'Green winter rye growing in a field',
     calendar: { plantingLabel: 'Late Sep - Oct', harvestLabel: 'Apr - May' },
     attributes: { family: 'grass', isLegume: false, waterNeed: 'low', groundCover: 'high', costLevel: 'low', equipment: [SEED_EQ], typicalDays: 150 },
@@ -29,7 +29,7 @@ export const CROPS = [
   crop({
     id: 'crimson-clover', name: 'Crimson Clover', category: 'cover_crop', roleTag: 'Nitrogen Fixer',
     description: 'Adds natural nitrogen to the soil',
-    slots: ['spring'], selectableAsCurrent: false, defaultForSlot: 'spring',
+    slots: ['spring'], selectableAsCurrent: false,
     imageAlt: 'Crimson clover with red flowers',
     calendar: { plantingLabel: 'Sep - Oct', harvestLabel: 'Apr - May' },
     attributes: { family: 'legume', isLegume: true, waterNeed: 'low', groundCover: 'high', costLevel: 'low', equipment: [SEED_EQ], typicalDays: 90 },
@@ -37,7 +37,7 @@ export const CROPS = [
   crop({
     id: 'field-corn', name: 'Field Corn', category: 'cash_crop', roleTag: 'Main Cash Crop',
     description: 'Main cash crop harvest',
-    slots: ['spring', 'summer_fall'], selectableAsCurrent: true, defaultForSlot: 'summer_fall',
+    slots: ['spring', 'summer_fall'], selectableAsCurrent: true, 
     imageAlt: 'Rows of field corn ready for harvest',
     calendar: { plantingLabel: 'Mar - May', harvestLabel: 'Aug - Sep' },
     attributes: { family: 'grass', isLegume: false, waterNeed: 'high', groundCover: 'medium', costLevel: 'high', equipment: [TRACTOR, SEED_EQ, COMBINE], typicalDays: 120 },

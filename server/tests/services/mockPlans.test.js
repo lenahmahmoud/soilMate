@@ -15,7 +15,6 @@ const CATALOG = [
   crop('field-peas', 'Field Peas', 'Low-Water Crop', ['spring'], 'legume', true, 'low', 'medium', 'low', ['seed_drill_planter', 'combine_harvester'], 90),
   crop('grain-sorghum', 'Grain Sorghum', 'Drought-Hardy', ['summer_fall'], 'grass', false, 'low', 'medium', 'low', ALL, 110),
 ];
-const byId = (id) => CATALOG.find((c) => c.id === id);
 
 const farm = {
   waterSource: 'mixed',
@@ -25,63 +24,57 @@ const farm = {
   seasonsPerYear: 2,
   priorities: ['save_water'],
   landArea: null,
-  currentCrops: [byId('field-corn'), byId('soybeans')],
 };
 
 const ORDER = ['water', 'soil', 'erosion', 'practicality', 'economy'];
 const values = (plan) => ORDER.map((id) => plan.metrics[id].value);
 const ids = (plan) => plan.sequence.map((s) => s.cropId);
-const run = (over = {}) => buildPlans({ farm, labSequence: null, candidateCrops: CATALOG, ...over });
+const run = (over = {}) => buildPlans({ centerId: 'desouk', farm, candidateCrops: CATALOG, ...over });
 const plan = (result, key) => result.plans.find((p) => p.planKey === key);
 
-describe('mock plans (guide section 11)', () => {
-  test('returns 3 plans in order, placeholder, and passes the plans schema', () => {
+describe('mock plans: the 2 fixed plans of an area (guide section 11)', () => {
+  test('returns exactly 2 plans in order, placeholder, and passes the plans schema', () => {
     const r = run();
     expect(r.status).toBe('placeholder');
     expect(r.modelVersion).toBe('mock-0.1');
-    expect(r.plans.map((p) => p.planKey)).toEqual(['keep_routine', 'improve_soil', 'save_water']);
+    expect(r.plans.map((p) => p.planKey)).toEqual(['area_plan_a', 'area_plan_b']);
     expect(() => plansResultSchema.parse(r)).not.toThrow();
   });
 
-  test('keep_routine uses the first allowed current crop per slot, else fallow', () => {
-    const p = plan(run(), 'keep_routine');
-    expect(ids(p)).toEqual(['fallow', 'field-corn', 'field-corn']);
-    expect(p.sequence.map((s) => s.roleTag)).toEqual(['Bare Ground', 'Main Cash Crop', 'Main Cash Crop']);
-    expect(values(p)).toEqual([56, 50, 55, 100, 50]);
-    expect(p.title).toBe('Keep My Current Routine');
-    expect(p.badge).toEqual({ label: 'Baseline Example', tone: 'neutral' });
-  });
-
-  test('improve_soil defaults to rye, clover, corn', () => {
-    const p = plan(run(), 'improve_soil');
+  test('desouk area_plan_a is rye, clover, corn', () => {
+    const p = plan(run(), 'area_plan_a');
     expect(ids(p)).toEqual(['winter-rye', 'crimson-clover', 'field-corn']);
+    expect(p.sequence.map((s) => s.roleTag)).toEqual(['Cover Crop', 'Nitrogen Fixer', 'Main Cash Crop']);
     expect(values(p)).toEqual([72, 95, 79, 100, 68]);
+    expect(p.title).toBe('Build the Soil');
     expect(p.badge).toEqual({ label: 'Soil Builder', tone: 'positive' });
+    expect(p.metrics.soil.note).toBe('Crimson Clover adds natural nitrogen before Field Corn.');
   });
 
-  test('a Lab sequence replaces improve_soil only', () => {
-    const labSequence = [
-      { slot: 'fall_winter', crop: byId('winter-rye') },
-      { slot: 'spring', crop: byId('crimson-clover') },
-      { slot: 'summer_fall', crop: byId('soybeans') },
-    ];
-    const r = run({ labSequence });
-    expect(ids(plan(r, 'improve_soil'))).toEqual(['winter-rye', 'crimson-clover', 'soybeans']);
-    expect(ids(plan(r, 'save_water'))).toEqual(['daikon', 'field-peas', 'grain-sorghum']);
-    expect(ids(plan(r, 'keep_routine'))).toEqual(['fallow', 'field-corn', 'field-corn']);
-  });
-
-  test('save_water is daikon, field peas, grain sorghum', () => {
-    const p = plan(run(), 'save_water');
+  test('desouk area_plan_b is daikon, field peas, grain sorghum', () => {
+    const p = plan(run(), 'area_plan_b');
     expect(ids(p)).toEqual(['daikon', 'field-peas', 'grain-sorghum']);
     expect(values(p)).toEqual([88, 100, 71, 100, 70]);
+    expect(p.title).toBe('Save Water & Balance Costs');
+    expect(p.badge).toEqual({ label: 'Drought & Cost Resilient', tone: 'positive' });
     expect(p.metrics.soil.note).toBe('Field Peas adds natural nitrogen before Grain Sorghum.');
-    expect(p.badge.tone).toBe('positive');
   });
 
-  test('no current crops gives fallow in every slot', () => {
-    const p = plan(run({ farm: { ...farm, currentCrops: [] } }), 'keep_routine');
-    expect(ids(p)).toEqual(['fallow', 'fallow', 'fallow']);
+  test('the old plans and the farmer inputs no longer matter', () => {
+    const base = run();
+    const keys = base.plans.map((p) => p.planKey);
+    expect(keys).not.toContain('keep_routine');
+    expect(keys).not.toContain('improve_soil');
+    expect(keys).not.toContain('save_water');
+    const other = run({
+      farm: { ...farm, currentCrops: [] },
+      labSequence: [
+        { slot: 'fall_winter', crop: CATALOG[0] },
+        { slot: 'spring', crop: CATALOG[1] },
+        { slot: 'summer_fall', crop: CATALOG[3] },
+      ],
+    });
+    expect(other).toEqual(base);
   });
 
   test('each plan has note = metric text, sample evidence, gaps, risks and low confidence', () => {

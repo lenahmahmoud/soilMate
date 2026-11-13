@@ -18,7 +18,7 @@ const planSetSchema = new Schema(
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true },
     centerId: { type: String, enum: CENTER_IDS, required: true },
     farmSnapshot: { type: Schema.Types.Mixed, required: true },
-    labSequence: { type: [labItemSchema], default: null },
+    mySequence: { type: [labItemSchema], default: null },
     status: { type: String, enum: DATA_STATUSES, required: true },
     modelVersion: { type: String, required: true },
     // Full plan objects exactly as returned to the client (including matchScore and rank).
