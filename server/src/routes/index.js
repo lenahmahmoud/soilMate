@@ -9,10 +9,10 @@ import cropsRoutes from "./cropsRoutes.js";
 import exploreRoutes from "./exploreRoutes.js";
 import farmRoutes from "./farmRoutes.js";
 import rotationRoutes from "./rotationRoutes.js"; // next to the other imports
+import dashboardRoutes from "./dashboardRoutes.js";
 import plansRoutes from "./plansRoutes.js"; // next to the other imports
 const router = Router();
-router.use("/rotation", rotationRoutes); // after router.use('/farm', farmRoutes);
-router.use("/", exploreRoutes);
+
 router.get("/health", (req, res) => res.json({ status: "ok" }));
 router.use("/games", gamesRoutes);
 router.use("/attempts", attemptsRoutes);
@@ -22,5 +22,11 @@ router.use("/me", meRoutes);
 router.use("/meta", metaRoutes);
 router.use("/crops", cropsRoutes);
 router.use("/farm", farmRoutes);
-router.use("/plans", plansRoutes); // right after router.use("/rotation", rotationRoutes), before router.use("/", exploreRoutes)
+router.use("/rotation", rotationRoutes); 
+router.use("/plans", plansRoutes); 
+
+router.use("/", dashboardRoutes); 
+
+router.use("/", exploreRoutes); 
+
 export default router;
